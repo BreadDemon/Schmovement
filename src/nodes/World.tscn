@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dutgm5ow7vvg"]
+[gd_scene load_steps=10 format=3 uid="uid://dutgm5ow7vvg"]
 
-[ext_resource type="Texture2D" uid="uid://b4t4l7qmtsq3f" path="res://assets/PrototypeTexture/PNG/Dark/texture_13.png" id="1_qrlrw"]
+[ext_resource type="Texture2D" uid="uid://xhpf67anjb8h" path="res://assets/PrototypeTexture/PNG/Dark/texture_13.png" id="1_7mya1"]
 [ext_resource type="PackedScene" uid="uid://bfxb4m00vbwv7" path="res://nodes/CharacterController.tscn" id="2_td74k"]
+[ext_resource type="PackedScene" uid="uid://2ai78bdom44v" path="res://nodes/cube.tscn" id="3_xjvym"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_twd8w"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,9 +17,9 @@ sky = SubResource("Sky_o04he")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01sq8"]
-albedo_texture = ExtResource("1_qrlrw")
-uv1_scale = Vector3(10, 10, 10)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_75jou"]
+albedo_texture = ExtResource("1_7mya1")
+uv1_scale = Vector3(20, 20, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6jrfj"]
 size = Vector2(20, 20)
@@ -37,7 +38,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_01sq8")
+material_override = SubResource("StandardMaterial3D_75jou")
 mesh = SubResource("PlaneMesh_6jrfj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
@@ -46,3 +47,6 @@ mesh = SubResource("PlaneMesh_6jrfj")
 shape = SubResource("ConcavePolygonShape3D_uepw3")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_td74k")]
+
+[node name="Cube" parent="." instance=ExtResource("3_xjvym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.236326, 0.465788, -2.95638)
