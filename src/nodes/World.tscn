@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://dutgm5ow7vvg"]
+
+[ext_resource type="Texture2D" uid="uid://b4t4l7qmtsq3f" path="res://assets/PrototypeTexture/PNG/Dark/texture_13.png" id="1_qrlrw"]
+[ext_resource type="PackedScene" uid="uid://bfxb4m00vbwv7" path="res://nodes/CharacterController.tscn" id="2_td74k"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_twd8w"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_o04he"]
+sky_material = SubResource("ProceduralSkyMaterial_twd8w")
+
+[sub_resource type="Environment" id="Environment_2ygqw"]
+background_mode = 2
+sky = SubResource("Sky_o04he")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01sq8"]
+albedo_texture = ExtResource("1_qrlrw")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6jrfj"]
+size = Vector2(20, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_uepw3"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.411, -1.42665, 14.717)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2ygqw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_01sq8")
+mesh = SubResource("PlaneMesh_6jrfj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_uepw3")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_td74k")]
