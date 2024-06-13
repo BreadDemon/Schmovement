@@ -1,12 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://2ai78bdom44v"]
+[gd_scene load_steps=5 format=3 uid="uid://bvxchrpc37fyo"]
 
-[ext_resource type="Texture2D" uid="uid://cpcky58kp3tu5" path="res://assets/PrototypeTexture/PNG/Orange/texture_09.png" id="1_a5vu5"]
+[ext_resource type="Texture2D" uid="uid://bu1el4t2ocxx1" path="res://assets/PrototypeTexture/PNG/Orange/texture_01.png" id="1_soudl"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cp380"]
-albedo_texture = ExtResource("1_a5vu5")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trh07"]
+albedo_texture = ExtResource("1_soudl")
 
-[sub_resource type="BoxMesh" id="BoxMesh_ask8i"]
+[sub_resource type="BoxMesh" id="BoxMesh_8a0pp"]
 
-[node name="Cube" type="MeshInstance3D"]
-material_override = SubResource("StandardMaterial3D_cp380")
-mesh = SubResource("BoxMesh_ask8i")
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6kq0v"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="Cube" type="Node3D"]
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_trh07")
+mesh = SubResource("BoxMesh_8a0pp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="mesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mesh/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_6kq0v")

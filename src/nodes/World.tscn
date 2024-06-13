@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dutgm5ow7vvg"]
+[gd_scene load_steps=12 format=3 uid="uid://c2xfwmustlnp5"]
 
 [ext_resource type="Texture2D" uid="uid://xhpf67anjb8h" path="res://assets/PrototypeTexture/PNG/Dark/texture_13.png" id="1_7mya1"]
-[ext_resource type="PackedScene" uid="uid://bfxb4m00vbwv7" path="res://nodes/CharacterController.tscn" id="2_td74k"]
-[ext_resource type="PackedScene" uid="uid://2ai78bdom44v" path="res://nodes/cube.tscn" id="3_xjvym"]
+[ext_resource type="PackedScene" uid="uid://dem1v18u02ngc" path="res://nodes/CharacterController.tscn" id="2_td74k"]
+[ext_resource type="PackedScene" uid="uid://bvxchrpc37fyo" path="res://nodes/cube.tscn" id="3_xjvym"]
+[ext_resource type="PackedScene" uid="uid://qg4u00qfqsy7" path="res://nodes/ramp.tscn" id="4_e36ik"]
+[ext_resource type="PackedScene" uid="uid://bt4o8jqmtib6b" path="res://nodes/sphere.tscn" id="5_48q3d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_twd8w"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -50,3 +52,9 @@ shape = SubResource("ConcavePolygonShape3D_uepw3")
 
 [node name="Cube" parent="." instance=ExtResource("3_xjvym")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.236326, 0.465788, -2.95638)
+
+[node name="ramp" parent="." instance=ExtResource("4_e36ik")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.771332, 0.470553, -2.96029)
+
+[node name="sphere" parent="." instance=ExtResource("5_48q3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.95997, 0.776982, -3.18163)
