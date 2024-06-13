@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://rkwqb85fyt33"]
+
+[ext_resource type="Script" path="res://scripts/Control.gd" id="1_d72yk"]
+
+[sub_resource type="GDScript" id="GDScript_nu2g8"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="GameMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d72yk")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 218.0
+theme_override_font_sizes/font_size = 68
+text = "Schmovement"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.007
+anchor_bottom = 0.037
+offset_left = 464.0
+offset_top = 280.0
+offset_right = 682.936
+offset_bottom = 312.024
+text = "Play"
+script = SubResource("GDScript_nu2g8")
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.007
+anchor_bottom = 0.037
+offset_left = 465.0
+offset_top = 353.0
+offset_right = 683.936
+offset_bottom = 385.024
+text = "Exit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 503.0
+offset_top = 619.0
+offset_right = 673.0
+offset_bottom = 642.0
+text = "I Love my girlfriend s2
+"
