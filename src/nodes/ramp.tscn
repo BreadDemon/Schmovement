@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpj4pvy2wd08i"]
+
+[ext_resource type="Texture2D" uid="uid://blcbfouhuu7v2" path="res://assets/PrototypeTexture/PNG/Red/texture_09.png" id="1_vsmff"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pid7q"]
+albedo_texture = ExtResource("1_vsmff")
+
+[sub_resource type="PrismMesh" id="PrismMesh_k3e0e"]
+left_to_right = 1.0
+
+[node name="Ramp" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_pid7q")
+mesh = SubResource("PrismMesh_k3e0e")
