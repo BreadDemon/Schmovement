@@ -1,13 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpj4pvy2wd08i"]
+[gd_scene load_steps=5 format=3 uid="uid://qg4u00qfqsy7"]
 
-[ext_resource type="Texture2D" uid="uid://71wdbr8jdvmr" path="res://assets/PrototypeTexture/PNG/Red/texture_09.png" id="1_vsmff"]
+[ext_resource type="Texture2D" uid="uid://bsrl8ky78o5ou" path="res://assets/PrototypeTexture/PNG/Red/texture_01.png" id="1_y305h"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pid7q"]
-albedo_texture = ExtResource("1_vsmff")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24jkv"]
+albedo_texture = ExtResource("1_y305h")
 
-[sub_resource type="PrismMesh" id="PrismMesh_k3e0e"]
+[sub_resource type="PrismMesh" id="PrismMesh_klhcy"]
 left_to_right = 1.0
 
-[node name="Ramp" type="MeshInstance3D"]
-material_override = SubResource("StandardMaterial3D_pid7q")
-mesh = SubResource("PrismMesh_k3e0e")
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_eafmo"]
+data = PackedVector3Array(0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="ramp" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_24jkv")
+mesh = SubResource("PrismMesh_klhcy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_eafmo")
