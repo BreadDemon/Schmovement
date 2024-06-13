@@ -1,0 +1,152 @@
+[gd_scene load_steps=13 format=3 uid="uid://d5vvfyaajm6"]
+
+[ext_resource type="Texture2D" uid="uid://xhpf67anjb8h" path="res://assets/PrototypeTexture/PNG/Dark/texture_13.png" id="1_40wpw"]
+[ext_resource type="PackedScene" uid="uid://deoawyiq5adrh" path="res://nodes/escada.tscn" id="2_ymuml"]
+[ext_resource type="Texture2D" uid="uid://bsrl8ky78o5ou" path="res://assets/PrototypeTexture/PNG/Red/texture_01.png" id="3_1bn56"]
+[ext_resource type="PackedScene" uid="uid://dem1v18u02ngc" path="res://nodes/CharacterController.tscn" id="4_su4wl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0ce5s"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_nrjb1"]
+sky_material = SubResource("ProceduralSkyMaterial_0ce5s")
+
+[sub_resource type="Environment" id="Environment_cbnk1"]
+background_mode = 2
+sky = SubResource("Sky_nrjb1")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3guu8"]
+albedo_texture = ExtResource("1_40wpw")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmbav"]
+albedo_texture = ExtResource("1_40wpw")
+uv1_offset = Vector3(1, 1, 0)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tpnlo"]
+albedo_texture = ExtResource("3_1bn56")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y1grx"]
+albedo_texture = ExtResource("3_1bn56")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghlx6"]
+albedo_texture = ExtResource("3_1bn56")
+
+[node name="Playgroung" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cbnk1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, -3.89575, 0)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="Chao" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 3)
+size = Vector3(105, 1, 107)
+material = SubResource("StandardMaterial3D_3guu8")
+
+[node name="Rampas" type="Node3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0, -13)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSGCombiner3D/Rampas"]
+use_collision = true
+
+[node name="Rampa_1" type="CSGPolygon3D" parent="CSGCombiner3D/Rampas/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 3.5, 0.5)
+material_override = SubResource("StandardMaterial3D_3guu8")
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 1, 9, -3, 5, -3, 0, -3)
+material = SubResource("StandardMaterial3D_qmbav")
+
+[node name="Rampa_2" type="CSGPolygon3D" parent="CSGCombiner3D/Rampas/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 3.5, 1.5)
+material_override = SubResource("StandardMaterial3D_3guu8")
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 1, 8, -3, 5, -3, 0, -3)
+material = SubResource("StandardMaterial3D_qmbav")
+
+[node name="Rampa_3" type="CSGPolygon3D" parent="CSGCombiner3D/Rampas/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 3.5, 2.5)
+material_override = SubResource("StandardMaterial3D_3guu8")
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 1, 7, -3, 5, -3, 0, -3)
+material = SubResource("StandardMaterial3D_qmbav")
+
+[node name="Rampa_4" type="CSGPolygon3D" parent="CSGCombiner3D/Rampas/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 3.5, 3.5)
+material_override = SubResource("StandardMaterial3D_3guu8")
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 1, 6, -3, 5, -3, 0, -3)
+material = SubResource("StandardMaterial3D_qmbav")
+
+[node name="Rampa_5" type="CSGPolygon3D" parent="CSGCombiner3D/Rampas/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 3.5, 4.5)
+material_override = SubResource("StandardMaterial3D_3guu8")
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 1, 5, -3, 5, -3, 0, -3)
+material = SubResource("StandardMaterial3D_qmbav")
+
+[node name="Rampa_6" type="CSGPolygon3D" parent="CSGCombiner3D/Rampas/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 3.5, 5.5)
+material_override = SubResource("StandardMaterial3D_3guu8")
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 1, 4, -3, 4, -3, 0, -3)
+material = SubResource("StandardMaterial3D_qmbav")
+
+[node name="Rampa_7" type="CSGPolygon3D" parent="CSGCombiner3D/Rampas/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 3.5, 6.5)
+material_override = SubResource("StandardMaterial3D_3guu8")
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 1, 3, -3, 3, -3, 0, -3)
+material = SubResource("StandardMaterial3D_qmbav")
+
+[node name="Rampa_8" type="CSGPolygon3D" parent="CSGCombiner3D/Rampas/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 3.5, 7.5)
+material_override = SubResource("StandardMaterial3D_3guu8")
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 1, 2, -3, 2, -3, 0, -3)
+material = SubResource("StandardMaterial3D_qmbav")
+
+[node name="Rampa_9" type="CSGPolygon3D" parent="CSGCombiner3D/Rampas/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 3.5, 8.5)
+material_override = SubResource("StandardMaterial3D_3guu8")
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 1, 1, -3, 1, -3, 0, -3)
+material = SubResource("StandardMaterial3D_qmbav")
+
+[node name="Escadas" type="Node3D" parent="CSGCombiner3D"]
+
+[node name="Escada" parent="CSGCombiner3D/Escadas" instance=ExtResource("2_ymuml")]
+transform = Transform3D(1, 0, 0, 0, 0.05, 0, 0, 0, 1, -32, 0.514313, -1)
+
+[node name="Escada2" parent="CSGCombiner3D/Escadas" instance=ExtResource("2_ymuml")]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -32, 0.55, 0)
+
+[node name="Escada3" parent="CSGCombiner3D/Escadas" instance=ExtResource("2_ymuml")]
+transform = Transform3D(1, 0, 0, 0, 0.15, 0, 0, 0, 1, -32, 0.55, 1)
+
+[node name="Escada4" parent="CSGCombiner3D/Escadas" instance=ExtResource("2_ymuml")]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, -32, 0.58294, 2)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, 11)
+radius = 1.0
+radial_segments = 36
+rings = 36
+material = SubResource("StandardMaterial3D_tpnlo")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -1, 15)
+radius = 2.0
+radial_segments = 36
+rings = 36
+material = SubResource("StandardMaterial3D_y1grx")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -2, 20)
+radius = 3.0
+radial_segments = 36
+rings = 36
+material = SubResource("StandardMaterial3D_ghlx6")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("4_su4wl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.42973, 4.51086, 7.06247)
