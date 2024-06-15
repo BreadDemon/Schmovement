@@ -1,13 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://d5vvfyaajm6"]
+[gd_scene load_steps=13 format=3 uid="uid://d5vvfyaajm6"]
 
 [ext_resource type="Texture2D" uid="uid://xhpf67anjb8h" path="res://assets/PrototypeTexture/PNG/Dark/texture_13.png" id="1_40wpw"]
-[ext_resource type="Texture2D" uid="uid://c7ax5ssske6bn" path="res://assets/HDRI/kloppenheim_06_puresky_8k.hdr" id="1_wovi2"]
 [ext_resource type="PackedScene" uid="uid://deoawyiq5adrh" path="res://nodes/escada.tscn" id="2_ymuml"]
 [ext_resource type="Texture2D" uid="uid://bsrl8ky78o5ou" path="res://assets/PrototypeTexture/PNG/Red/texture_01.png" id="3_1bn56"]
 [ext_resource type="PackedScene" uid="uid://dem1v18u02ngc" path="res://nodes/CharacterController.tscn" id="4_su4wl"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_54ayb"]
-panorama = ExtResource("1_wovi2")
 
 [sub_resource type="Sky" id="Sky_b47sw"]
 sky_material = SubResource("PanoramaSkyMaterial_54ayb")
