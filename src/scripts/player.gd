@@ -14,6 +14,16 @@ var current_speed = 5.0
 
 @export var mouse_sensitivity = 0.1
 
+var walking_state = false
+var crouching_state = false
+var running_state = false
+var sliding_state = false
+
+var sliding_timer = 0.0
+var sliding_timer_max = 1.0
+var slide_vector = Vector2.ZERO
+var slide_speed = 5
+
 @export var crouching_depth = -0.75
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -37,29 +47,56 @@ func _input(event):
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
-			neck.rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
-			camera.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90)) 
+				neck.rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
+				camera.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
+				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90)) 
 
 func _physics_process(delta):
-	if Input.is_action_pressed("Crouch") and is_on_floor():
+	var input_dir = Input.get_vector("left", "right", "forward", "back")
+	
+	if Input.is_action_pressed("Crouch") or sliding_state and is_on_floor():
 		current_speed = crouched_speed
 		neck.position.y = lerp(neck.position.y, 0.65 + crouching_depth, delta * crouch_lerp)
-		standing.disabled = true;
-		crouching.disabled = false;
+		standing.disabled = true
+		crouching.disabled = false
+		crouching_state = true
+		if running_state and input_dir != Vector2.ZERO:
+			sliding_state = true
+			sliding_timer = sliding_timer_max
+			slide_vector = input_dir
+			print("Slide begin")
+		walking_state = false
+		running_state = false
 	elif Input.is_action_pressed("Crouch"):
 		neck.position.y = lerp(neck.position.y, 0.65 + crouching_depth, delta * crouch_lerp)
 		standing.disabled = true;
 		crouching.disabled = false;
+		crouching_state = true
+		walking_state = false
+		running_state = false
 	elif !ray_cast_3d.is_colliding():
 		standing.disabled = false;
 		crouching.disabled = true;
 		neck.position.y = lerp(neck.position.y, 0.65, delta * crouch_lerp)
 		if Input.is_action_pressed("Sprint") and is_on_floor() and not Input.is_action_pressed("back"):
 			current_speed = sprinting_speed
-		else:
+			crouching_state = false
+			walking_state = false
+			running_state = true
+		else: 
 			current_speed = walking_speed
-		
+			crouching_state = false
+			walking_state = true
+			running_state = false
+
+	if sliding_state:
+		sliding_timer -= delta
+		camera.rotation.z = lerp(camera.rotation.z, -deg_to_rad(3.0), delta * lerp_accel)
+		if sliding_timer <= 0:
+			camera.rotation.z = lerp(camera.rotation.z, -deg_to_rad(-9.0), delta * lerp_accel)
+			sliding_state = false
+			print("Slide end")
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -68,15 +105,22 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = jump_velocity
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("left", "right", "forward", "back")
 	direction = lerp(direction, (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta * lerp_accel)
-	if direction:
-		velocity.x = direction.x * current_speed
-		velocity.z = direction.z * current_speed
+	
+	if sliding_state:
+		direction = (neck.transform.basis * Vector3(slide_vector.x, 0, slide_vector.y)).normalized()
+	
+	if is_on_floor():
+		if direction:
+			velocity.x = direction.x * current_speed
+			velocity.z = direction.z * current_speed
+			if sliding_state:
+				velocity.x = direction.x * (sliding_timer+1) * slide_speed
+				velocity.z = direction.z * (sliding_timer+1) * slide_speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, current_speed)
+			velocity.z = move_toward(velocity.z, 0, current_speed)
 	else:
-		velocity.x = move_toward(velocity.x, 0, current_speed)
-		velocity.z = move_toward(velocity.z, 0, current_speed)
-
+		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 2.0)
+		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 2.0)
 	move_and_slide()
