@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0ewixu7mpcfw"]
+
+[ext_resource type="Texture2D" uid="uid://lyntfo2h4m1i" path="res://assets/PrototypeTexture/PNG/Purple/texture_01.png" id="1_g7mb2"]
+[ext_resource type="Material" uid="uid://dcjhiqjvhgema" path="res://TextureFloor.tres" id="2_rwftr"]
+[ext_resource type="PackedScene" uid="uid://dem1v18u02ngc" path="res://nodes/CharacterController.tscn" id="3_qo24n"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nmmka"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_tseop"]
+sky_material = SubResource("ProceduralSkyMaterial_nmmka")
+
+[sub_resource type="Environment" id="Environment_8s6kf"]
+background_mode = 2
+sky = SubResource("Sky_tseop")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1sbf"]
+albedo_texture = ExtResource("1_g7mb2")
+
+[node name="FaseTeste" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0245442, 4.76837e-07, 0.0120277)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8s6kf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00580883, 0.0692183, -0.00434566)
+material_override = SubResource("StandardMaterial3D_n1sbf")
+size = Vector3(16.4033, 1, 14.1643)
+material = ExtResource("2_rwftr")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00566864, 0.311494, -0.11929)
+operation = 2
+size = Vector3(14.4, 1, 12.1)
+material = ExtResource("2_rwftr")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0145488, 0.0244503, -0.0333705)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_qo24n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0345922, 1.71889, -0.0608964)
