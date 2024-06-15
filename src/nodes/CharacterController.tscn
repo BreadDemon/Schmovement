@@ -2,24 +2,28 @@
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0u46p"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xvrp8"]
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cnaj6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_20j8w"]
+height = 1.00593
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03225, 0)
 script = ExtResource("1_0u46p")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00390697, -0.00682402, 0.0075767)
-visible = false
-mesh = SubResource("CapsuleMesh_xvrp8")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Standing" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
 shape = SubResource("CapsuleShape3D_cnaj6")
 
+[node name="Crouching" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.487455, 0)
+shape = SubResource("CapsuleShape3D_20j8w")
+
 [node name="Neck" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.620509, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+target_position = Vector3(0, 2, 0)
