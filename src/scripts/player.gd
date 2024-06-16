@@ -1,40 +1,44 @@
 extends CharacterBody3D
 
+# Gravity
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+# Player Objects
 @onready var standing = $Standing
 @onready var crouching = $Crouching
 @onready var ray_cast_3d = $RayCast3D
+@onready var neck := $Neck
+@onready var camera := $Neck/Camera3D
 
+# Speed vars
 var current_speed = 5.0
-
 @export var walking_speed = 5.0
 @export var sprinting_speed = 7.0
 @export var crouched_speed = 3.0
-
 @export var jump_velocity = 4.5
 
-@export var mouse_sensitivity = 0.1
-
+# State vars
 var walking_state = false
 var crouching_state = false
 var running_state = false
 var sliding_state = false
 
+# Slide vars
 var sliding_timer = 0.0
 var sliding_timer_max = 1.0
 var slide_vector = Vector2.ZERO
 var slide_speed = 5
 
+# Crouch vars
 @export var crouching_depth = -0.75
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
-@onready var neck := $Neck
-@onready var camera := $Neck/Camera3D
-
 @export var crouch_lerp = 8.0
 @export var lerp_accel = 15.0
+
+# Direction
 var direction = Vector3.ZERO
+
+# Mouse vars
+@export var mouse_sensitivity = 0.1
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -53,27 +57,24 @@ func _input(event):
 
 func _physics_process(delta):
 	var input_dir = Input.get_vector("left", "right", "forward", "back")
-	
-	if Input.is_action_pressed("Crouch") or sliding_state and is_on_floor():
-		current_speed = crouched_speed
+
+	if Input.is_action_pressed("Crouch") or sliding_state:
 		neck.position.y = lerp(neck.position.y, 0.65 + crouching_depth, delta * crouch_lerp)
 		standing.disabled = true
 		crouching.disabled = false
 		crouching_state = true
-		if running_state and input_dir != Vector2.ZERO:
-			sliding_state = true
-			sliding_timer = sliding_timer_max
-			slide_vector = input_dir
-			print("Slide begin")
 		walking_state = false
-		running_state = false
-	elif Input.is_action_pressed("Crouch"):
-		neck.position.y = lerp(neck.position.y, 0.65 + crouching_depth, delta * crouch_lerp)
-		standing.disabled = true;
-		crouching.disabled = false;
-		crouching_state = true
-		walking_state = false
-		running_state = false
+		if is_on_floor():
+			if running_state and input_dir != Vector2.ZERO:
+				running_state = false
+				sliding_state = true
+				sliding_timer = sliding_timer_max
+				slide_vector = input_dir
+				print("Slide begin")
+			else:
+				running_state = false
+				current_speed = crouched_speed
+	# If not inside an object else keep last state
 	elif !ray_cast_3d.is_colliding():
 		standing.disabled = false;
 		crouching.disabled = true;
@@ -89,38 +90,38 @@ func _physics_process(delta):
 			walking_state = true
 			running_state = false
 
+	# Handle jump.
+	if Input.is_action_just_pressed("Jump") and is_on_floor():
+		velocity.y = jump_velocity
+
+	# Handle slide timer and camera tilt
 	if sliding_state:
 		sliding_timer -= delta
 		camera.rotation.z = lerp(camera.rotation.z, -deg_to_rad(3.0), delta * lerp_accel)
+		direction = (neck.transform.basis * Vector3(slide_vector.x, 0, slide_vector.y)).normalized()
+		current_speed = (sliding_timer+1) * slide_speed
 		if sliding_timer <= 0:
 			camera.rotation.z = lerp(camera.rotation.z, -deg_to_rad(-9.0), delta * lerp_accel)
 			sliding_state = false
 			print("Slide end")
 
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = jump_velocity
-
+	# Make movement direction the direction the player is looking at
 	direction = lerp(direction, (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta * lerp_accel)
 	
-	if sliding_state:
-		direction = (neck.transform.basis * Vector3(slide_vector.x, 0, slide_vector.y)).normalized()
-	
+	# Check if the player is on ground and applies the movement speed
+	# if not moving it slows down to a stop gradually
+	# if on air applies a lerp for inertia
 	if is_on_floor():
 		if direction:
 			velocity.x = direction.x * current_speed
 			velocity.z = direction.z * current_speed
-			if sliding_state:
-				velocity.x = direction.x * (sliding_timer+1) * slide_speed
-				velocity.z = direction.z * (sliding_timer+1) * slide_speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
 			velocity.z = move_toward(velocity.z, 0, current_speed)
 	else:
+		velocity.y -= gravity * delta
 		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 2.0)
 		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 2.0)
+
+	# Moves
 	move_and_slide()
