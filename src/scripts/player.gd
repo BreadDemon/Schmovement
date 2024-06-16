@@ -9,6 +9,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var ray_cast_3d = $RayCast3D
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
+@onready var menu := $PauseMenu
 
 # Speed vars
 var current_speed = 5.0
@@ -16,6 +17,16 @@ var current_speed = 5.0
 @export var sprinting_speed = 7.0
 @export var crouched_speed = 3.0
 @export var jump_velocity = 4.5
+
+# States
+enum states {
+	WALKING,
+	RUNNING,
+	CROUCHING,
+	SLIDING,
+}
+var curr_state = states.WALKING
+var prev_state = states.WALKING
 
 # State vars
 var walking_state = false
@@ -27,6 +38,7 @@ var sliding_state = false
 var sliding_timer = 0.0
 var sliding_timer_max = 1.0
 var slide_vector = Vector2.ZERO
+var slide_direction = Vector3.ZERO
 var slide_speed = 5
 
 # Crouch vars
@@ -42,12 +54,14 @@ var direction = Vector3.ZERO
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	standing.disabled = false
+	crouching.disabled = true
 
 func _input(event):
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	elif event.is_action_pressed("ui_cancel"):
-		$PauseMenu.pause()
+		menu.pause()
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
@@ -58,26 +72,24 @@ func _input(event):
 func _physics_process(delta):
 	var input_dir = Input.get_vector("left", "right", "forward", "back")
 
-	if Input.is_action_pressed("Crouch") or sliding_state:
+	if Input.is_action_pressed("Crouch"):
 		neck.position.y = lerp(neck.position.y, 0.65 + crouching_depth, delta * crouch_lerp)
-		standing.disabled = true
-		crouching.disabled = false
+		swap_collision_shape()
 		crouching_state = true
 		walking_state = false
 		if is_on_floor():
-			if running_state and input_dir != Vector2.ZERO:
-				running_state = false
+			if running_state and input_dir != Vector2.ZERO and !sliding_state:
 				sliding_state = true
 				sliding_timer = sliding_timer_max
 				slide_vector = input_dir
+				slide_direction = neck.transform.basis
 				print("Slide begin")
 			else:
-				running_state = false
 				current_speed = crouched_speed
+			running_state = false
 	# If not inside an object else keep last state
 	elif !ray_cast_3d.is_colliding():
-		standing.disabled = false;
-		crouching.disabled = true;
+		swap_collision_shape()
 		neck.position.y = lerp(neck.position.y, 0.65, delta * crouch_lerp)
 		if Input.is_action_pressed("Sprint") and is_on_floor() and not Input.is_action_pressed("back"):
 			current_speed = sprinting_speed
@@ -93,17 +105,9 @@ func _physics_process(delta):
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = jump_velocity
+		sliding_state = false
 
-	# Handle slide timer and camera tilt
-	if sliding_state:
-		sliding_timer -= delta
-		camera.rotation.z = lerp(camera.rotation.z, -deg_to_rad(3.0), delta * lerp_accel)
-		direction = (neck.transform.basis * Vector3(slide_vector.x, 0, slide_vector.y)).normalized()
-		current_speed = (sliding_timer+1) * slide_speed
-		if sliding_timer <= 0:
-			camera.rotation.z = lerp(camera.rotation.z, -deg_to_rad(-9.0), delta * lerp_accel)
-			sliding_state = false
-			print("Slide end")
+	handle_sliding(delta)
 
 	# Make movement direction the direction the player is looking at
 	direction = lerp(direction, (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta * lerp_accel)
@@ -122,6 +126,19 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 2.0)
 		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 2.0)
-
 	# Moves
 	move_and_slide()
+
+func swap_collision_shape():
+	standing.disabled = !standing.disabled
+	crouching.disabled = !crouching.disabled
+
+# Handle slide timer and camera tilt
+func handle_sliding(delta):
+	if sliding_timer > 0:
+		sliding_timer -= delta
+		direction = (slide_direction * Vector3(slide_vector.x, 0, slide_vector.y)).normalized()
+		current_speed = (sliding_timer+1) * slide_speed
+		if sliding_timer <= 0:
+			sliding_state = false
+			print("Slide end")
