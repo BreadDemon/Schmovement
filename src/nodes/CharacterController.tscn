@@ -30,3 +30,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 target_position = Vector3(0, 2, 0)
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_aatc2")]
+
+[node name="RayCast3D_teleporter" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+target_position = Vector3(0, 2, 0)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
