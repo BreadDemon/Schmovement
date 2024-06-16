@@ -48,6 +48,7 @@ var slide_speed = 5
 
 # Direction
 var direction = Vector3.ZERO
+var input_dir = Vector2.ZERO
 
 # Mouse vars
 @export var mouse_sensitivity = 0.1
@@ -70,26 +71,27 @@ func _input(event):
 				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90)) 
 
 func _physics_process(delta):
-	var input_dir = Input.get_vector("left", "right", "forward", "back")
+	input_dir = Input.get_vector("left", "right", "forward", "back")
 
-	if Input.is_action_pressed("Crouch"):
-		neck.position.y = lerp(neck.position.y, 0.65 + crouching_depth, delta * crouch_lerp)
-		swap_collision_shape()
-		crouching_state = true
-		walking_state = false
-		if is_on_floor():
-			if running_state and input_dir != Vector2.ZERO and !sliding_state:
-				sliding_state = true
-				sliding_timer = sliding_timer_max
-				slide_vector = input_dir
-				slide_direction = neck.transform.basis
-				print("Slide begin")
-			else:
-				current_speed = crouched_speed
-			running_state = false
-	# If not inside an object else keep last state
-	elif !ray_cast_3d.is_colliding():
-		swap_collision_shape()
+	handle_crouch(delta)
+	handle_standing(delta)
+	handle_jump()
+	handle_sliding(delta)
+	handle_moving(delta)
+	move_and_slide()
+
+func set_standing():
+	standing.disabled = false
+	crouching.disabled = true
+	
+func set_crouching():
+	standing.disabled = true
+	crouching.disabled = false
+
+# Handles standing
+func handle_standing(delta):
+	if !ray_cast_3d.is_colliding():
+		set_standing()
 		neck.position.y = lerp(neck.position.y, 0.65, delta * crouch_lerp)
 		if Input.is_action_pressed("Sprint") and is_on_floor() and not Input.is_action_pressed("back"):
 			current_speed = sprinting_speed
@@ -102,19 +104,46 @@ func _physics_process(delta):
 			walking_state = true
 			running_state = false
 
-	# Handle jump.
+# Handles crouching logic
+func handle_crouch(delta):
+	if Input.is_action_pressed("Crouch"):
+		neck.position.y = lerp(neck.position.y, 0.65 + crouching_depth, delta * crouch_lerp)
+		set_crouching()
+		crouching_state = true
+		walking_state = false
+		if is_on_floor():
+			if running_state and input_dir != Vector2.ZERO and !sliding_state:
+				sliding_state = true
+				sliding_timer = sliding_timer_max
+				slide_vector = input_dir
+				slide_direction = neck.transform.basis
+				print("Slide begin")
+			else:
+				current_speed = crouched_speed
+			running_state = false
+
+# Handle jump, disables a slide so you can instantly slide once landing
+func handle_jump():
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = jump_velocity
 		sliding_state = false
 
-	handle_sliding(delta)
+# Handle slide timer and camera tilt
+func handle_sliding(delta):
+	if sliding_timer > 0:
+		sliding_timer -= delta
+		direction = (slide_direction * Vector3(slide_vector.x, 0, slide_vector.y)).normalized()
+		current_speed = (sliding_timer+1) * slide_speed
+		if sliding_timer <= 0:
+			sliding_state = false
+			print("Slide end")
 
+# Check if the player is on ground and applies the movement speed
+# if not moving it slows down to a stop gradually
+# if on air applies a lerp for inertia
+func handle_moving(delta):
 	# Make movement direction the direction the player is looking at
 	direction = lerp(direction, (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta * lerp_accel)
-	
-	# Check if the player is on ground and applies the movement speed
-	# if not moving it slows down to a stop gradually
-	# if on air applies a lerp for inertia
 	if is_on_floor():
 		if direction:
 			velocity.x = direction.x * current_speed
@@ -126,19 +155,3 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 2.0)
 		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 2.0)
-	# Moves
-	move_and_slide()
-
-func swap_collision_shape():
-	standing.disabled = !standing.disabled
-	crouching.disabled = !crouching.disabled
-
-# Handle slide timer and camera tilt
-func handle_sliding(delta):
-	if sliding_timer > 0:
-		sliding_timer -= delta
-		direction = (slide_direction * Vector3(slide_vector.x, 0, slide_vector.y)).normalized()
-		current_speed = (sliding_timer+1) * slide_speed
-		if sliding_timer <= 0:
-			sliding_state = false
-			print("Slide end")
