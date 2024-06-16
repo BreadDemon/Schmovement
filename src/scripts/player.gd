@@ -7,6 +7,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var standing = $Standing
 @onready var crouching = $Crouching
 @onready var ray_cast_3d = $RayCast3D
+@onready var ray_cast_teleporter = $RayCast3D_teleporter
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
 @onready var menu := $PauseMenu
@@ -78,6 +79,7 @@ func _physics_process(delta):
 	handle_jump()
 	handle_sliding(delta)
 	handle_moving(delta)
+	handle_teleporter_collision()
 	move_and_slide()
 
 func set_standing():
@@ -155,3 +157,9 @@ func handle_moving(delta):
 		velocity.y -= gravity * delta
 		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 2.0)
 		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 2.0)
+	
+func handle_teleporter_collision():
+	if ray_cast_teleporter.is_colliding():
+		var target = ray_cast_teleporter.get_collider()
+		print("Colided!!!!!!")
+
