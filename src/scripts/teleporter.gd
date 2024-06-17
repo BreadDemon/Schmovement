@@ -1,3 +1,8 @@
 extends Node3D
 
-@export var tp = Vector3(0, 0, 0) 
+@export var receptor: Receptor
+
+func _on_character_body_3d_teleport(player, teleporter):
+	var result = teleporter.get_parent().receptor
+	player.transform.origin = result.transform.origin
+	print("Teleported!!!!")

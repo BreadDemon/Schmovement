@@ -153,9 +153,13 @@ func handle_moving(delta):
 		velocity.y -= gravity * delta
 		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 2.0)
 		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 2.0)
-	
+
+signal teleport
+
 func handle_teleporter_collision():
 	if ray_cast_teleporter.is_colliding():
 		var target = ray_cast_teleporter.get_collider()
 		print("Colided!!!!!!")
+		emit_signal("teleport", self, target)
+		
 
