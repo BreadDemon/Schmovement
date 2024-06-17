@@ -74,40 +74,10 @@ func _input(event):
 func _physics_process(delta):
 	input_dir = Input.get_vector("left", "right", "forward", "back")
 
-	handle_crouch(delta)
-	handle_standing(delta)
-	handle_jump()
-	handle_sliding(delta)
-	handle_moving(delta)
-	handle_teleporter_collision()
+	handle_movement(delta)
 	move_and_slide()
 
-func set_standing():
-	standing.disabled = false
-	crouching.disabled = true
-	
-func set_crouching():
-	standing.disabled = true
-	crouching.disabled = false
-
-# Handles standing
-func handle_standing(delta):
-	if !ray_cast_3d.is_colliding():
-		set_standing()
-		neck.position.y = lerp(neck.position.y, 0.65, delta * crouch_lerp)
-		if Input.is_action_pressed("Sprint") and is_on_floor() and not Input.is_action_pressed("back"):
-			current_speed = sprinting_speed
-			crouching_state = false
-			walking_state = false
-			running_state = true
-		else: 
-			current_speed = walking_speed
-			crouching_state = false
-			walking_state = true
-			running_state = false
-
-# Handles crouching logic
-func handle_crouch(delta):
+func handle_movement(delta):
 	if Input.is_action_pressed("Crouch"):
 		neck.position.y = lerp(neck.position.y, 0.65 + crouching_depth, delta * crouch_lerp)
 		set_crouching()
@@ -123,6 +93,32 @@ func handle_crouch(delta):
 			else:
 				current_speed = crouched_speed
 			running_state = false
+	elif !ray_cast_3d.is_colliding():
+		set_standing()
+		neck.position.y = lerp(neck.position.y, 0.65, delta * crouch_lerp)
+		if Input.is_action_pressed("Sprint") and is_on_floor() and not Input.is_action_pressed("back"):
+			current_speed = sprinting_speed
+			crouching_state = false
+			walking_state = false
+			running_state = true
+		else: 
+			current_speed = walking_speed
+			crouching_state = false
+			walking_state = true
+			running_state = false
+			
+	handle_jump()
+	handle_sliding(delta)
+	handle_moving(delta)
+	handle_teleporter_collision()
+
+func set_standing():
+	standing.disabled = false
+	crouching.disabled = true
+	
+func set_crouching():
+	standing.disabled = true
+	crouching.disabled = false
 
 # Handle jump, disables a slide so you can instantly slide once landing
 func handle_jump():
