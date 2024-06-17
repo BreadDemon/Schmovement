@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://scripts/teleporter.gd" id="1_npgjq"]
 [ext_resource type="Texture2D" uid="uid://lyntfo2h4m1i" path="res://assets/PrototypeTexture/PNG/Purple/texture_01.png" id="1_q4gdi"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8ds0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ovnux"]
 albedo_texture = ExtResource("1_q4gdi")
 
-[sub_resource type="BoxMesh" id="BoxMesh_emqp4"]
-material = SubResource("StandardMaterial3D_a8ds0")
+[sub_resource type="BoxMesh" id="BoxMesh_bykc3"]
+material = SubResource("StandardMaterial3D_ovnux")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_itxb7"]
 
@@ -15,7 +15,7 @@ material = SubResource("StandardMaterial3D_a8ds0")
 script = ExtResource("1_npgjq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_emqp4")
+mesh = SubResource("BoxMesh_bykc3")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2
