@@ -110,7 +110,7 @@ func handle_movement(delta):
 	handle_jump()
 	handle_sliding(delta)
 	handle_moving(delta)
-	handle_teleporter_collision()
+	handle_collisions()
 
 func set_standing():
 	standing.disabled = false
@@ -155,11 +155,14 @@ func handle_moving(delta):
 		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 2.0)
 
 signal teleport
+signal loadzone
 
-func handle_teleporter_collision():
+func handle_collisions():
 	if ray_cast_teleporter.is_colliding():
 		var target = ray_cast_teleporter.get_collider()
 		print("Colided!!!!!!")
-		emit_signal("teleport", self, target)
-		
+		if target.name == "TeleportArea":
+			emit_signal("teleport", self, target)
+		elif target.name == "LoadZoneArea":
+			emit_signal("loadzone")	
 

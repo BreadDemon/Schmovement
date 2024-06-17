@@ -1,4 +1,5 @@
 extends Node3D
+class_name Teleporter
 
 @export var receptor: Receptor
 
