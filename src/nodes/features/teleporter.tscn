@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://po75jr6axkjl"]
+
+[ext_resource type="Script" path="res://scripts/teleporter.gd" id="1_npgjq"]
+[ext_resource type="Texture2D" uid="uid://lyntfo2h4m1i" path="res://assets/PrototypeTexture/PNG/Purple/texture_01.png" id="1_q4gdi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uuait"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xehc"]
+albedo_texture = ExtResource("1_q4gdi")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_b0cv6"]
+material = SubResource("StandardMaterial3D_1xehc")
+
+[node name="Teleporter" type="Area3D"]
+script = ExtResource("1_npgjq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_uuait")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_b0cv6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpk6w56a4l3uy"]
+
+[ext_resource type="Script" path="res://scripts/jumpPad.gd" id="1_0c388"]
+[ext_resource type="Texture2D" uid="uid://di6xa5f71edlx" path="res://assets/PrototypeTexture/PNG/Green/texture_01.png" id="2_pprte"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_js3jf"]
+size = Vector3(1, 0.297272, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ccf2"]
+albedo_texture = ExtResource("2_pprte")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_p11or"]
+material = SubResource("StandardMaterial3D_6ccf2")
+
+[node name="Jump_Pad" type="Area3D"]
+script = ExtResource("1_0c388")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0676422, 0)
+shape = SubResource("BoxShape3D_js3jf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.178802, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_p11or")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

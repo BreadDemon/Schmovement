@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://xhpf67anjb8h" path="res://assets/PrototypeTexture/PNG/Dark/texture_13.png" id="1_7mya1"]
 [ext_resource type="PackedScene" uid="uid://dem1v18u02ngc" path="res://nodes/CharacterController.tscn" id="2_td74k"]
-[ext_resource type="PackedScene" uid="uid://bvxchrpc37fyo" path="res://nodes/cube.tscn" id="3_xjvym"]
-[ext_resource type="PackedScene" uid="uid://qg4u00qfqsy7" path="res://nodes/ramp.tscn" id="4_e36ik"]
-[ext_resource type="PackedScene" uid="uid://bt4o8jqmtib6b" path="res://nodes/sphere.tscn" id="5_48q3d"]
+[ext_resource type="PackedScene" uid="uid://bvxchrpc37fyo" path="res://nodes/objects/cube.tscn" id="3_xjvym"]
+[ext_resource type="PackedScene" uid="uid://qg4u00qfqsy7" path="res://nodes/objects/ramp.tscn" id="4_e36ik"]
+[ext_resource type="PackedScene" uid="uid://bt4o8jqmtib6b" path="res://nodes/objects/sphere.tscn" id="5_48q3d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_twd8w"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

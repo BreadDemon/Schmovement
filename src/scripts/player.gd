@@ -1,7 +1,10 @@
 extends CharacterBody3D
+class_name Player
 
 # Gravity
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+@export var jump_buffer_time = 0.2
+var jump_timer = 0
 
 # Player Objects
 @onready var standing = $Standing
@@ -18,16 +21,6 @@ var current_speed = 5.0
 @export var sprinting_speed = 7.0
 @export var crouched_speed = 3.0
 @export var jump_velocity = 4.5
-
-# States
-enum states {
-	WALKING,
-	RUNNING,
-	CROUCHING,
-	SLIDING,
-}
-var curr_state = states.WALKING
-var prev_state = states.WALKING
 
 # State vars
 var walking_state = false
@@ -73,7 +66,6 @@ func _input(event):
 
 func _physics_process(delta):
 	input_dir = Input.get_vector("left", "right", "forward", "back")
-
 	handle_movement(delta)
 	move_and_slide()
 
@@ -93,7 +85,7 @@ func handle_movement(delta):
 			else:
 				current_speed = crouched_speed
 			running_state = false
-	elif !ray_cast_3d.is_colliding():
+	if !ray_cast_3d.is_colliding() and !Input.is_action_pressed("Crouch"):
 		set_standing()
 		neck.position.y = lerp(neck.position.y, 0.65, delta * crouch_lerp)
 		if Input.is_action_pressed("Sprint") and is_on_floor() and not Input.is_action_pressed("back"):
@@ -107,10 +99,9 @@ func handle_movement(delta):
 			walking_state = true
 			running_state = false
 			
-	handle_jump()
+	handle_jump(delta)
 	handle_sliding(delta)
 	handle_moving(delta)
-	handle_collisions()
 
 func set_standing():
 	standing.disabled = false
@@ -121,17 +112,29 @@ func set_crouching():
 	crouching.disabled = false
 
 # Handle jump, disables a slide so you can instantly slide once landing
-func handle_jump():
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
+func handle_jump(delta):
+	if Input.is_action_just_pressed("Jump"):
+		jump_timer = jump_buffer_time
+	
+	if (jump_timer > 0) and is_on_floor():
 		velocity.y = jump_velocity
+		print("Slide end")
 		sliding_state = false
+		current_speed = (sliding_timer+1) * slide_speed
+		sliding_timer = 0
+	jump_timer -= delta
 
 # Handle slide timer and camera tilt
 func handle_sliding(delta):
-	if sliding_timer > 0:
+	if sliding_timer > 0 and is_on_floor():
 		sliding_timer -= delta
 		direction = (slide_direction * Vector3(slide_vector.x, 0, slide_vector.y)).normalized()
 		current_speed = (sliding_timer+1) * slide_speed
+		if sliding_timer <= 0:
+			sliding_state = false
+			print("Slide end")
+	elif sliding_timer > 0:
+		sliding_timer -= delta
 		if sliding_timer <= 0:
 			sliding_state = false
 			print("Slide end")
@@ -145,24 +148,11 @@ func handle_moving(delta):
 	if is_on_floor():
 		if direction:
 			velocity.x = direction.x * current_speed
-			velocity.z = direction.z * current_speed
+			velocity.z = direction.z * current_speed 
 		else:
 			velocity.x = move_toward(velocity.x, 0, current_speed)
 			velocity.z = move_toward(velocity.z, 0, current_speed)
 	else:
 		velocity.y -= gravity * delta
-		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 2.0)
-		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 2.0)
-
-signal teleport
-signal loadzone
-
-func handle_collisions():
-	if ray_cast_teleporter.is_colliding():
-		var target = ray_cast_teleporter.get_collider()
-		print("Colided!!!!!!")
-		if target.name == "TeleportArea":
-			emit_signal("teleport", self, target)
-		elif target.name == "LoadZoneArea":
-			emit_signal("loadzone")	
-
+		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 3.0)
+		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 3.0)

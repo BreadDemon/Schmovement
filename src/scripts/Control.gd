@@ -8,7 +8,7 @@ func _ready():
 	
 func _on_PlayButton_pressed():
 	# Transition to the game scene
-	get_tree().change_scene_to_file("res://nodes/playgroung.tscn")
+	get_tree().change_scene_to_file("res://nodes/levels/playground.tscn")
 
 func _on_ExitButton_pressed():
 	# Quit the game
