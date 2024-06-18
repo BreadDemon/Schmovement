@@ -198,12 +198,12 @@ PathScene = "res://nodes/levels/World.tscn"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, -4)
 PathScene = "res://nodes/levels/test_map.tscn"
 
-[node name="StartCourse" parent="." node_paths=PackedStringArray("end_course") instance=ExtResource("10_05fom")]
+[node name="StartCourse" parent="." instance=ExtResource("10_05fom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00338, 1, 6.00146)
-end_course = NodePath("../EndCourse")
 
-[node name="EndCourse" parent="." instance=ExtResource("11_kat0f")]
+[node name="EndCourse" parent="." node_paths=PackedStringArray("start_course") instance=ExtResource("11_kat0f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00338, 1, 6.00146)
+start_course = NodePath("../StartCourse")
 
 [node name="EndCourse2" parent="." instance=ExtResource("11_kat0f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00338, 1, 9.00146)

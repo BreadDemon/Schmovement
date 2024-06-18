@@ -1,14 +1,24 @@
 extends Label
 
-var start_time: int
+var start_time = Global.start_time
 @export var running: bool = false
 
-func _ready():
+func _physics_process(delta):
 	if running:
-		start_time = Time.get_ticks_msec()
-		set_process(true)
+		start_time = float(start_time) + delta
+		update()
 
-func _process(delta):
+func update():
 	if running:
-		var current_time: float = Time.get_ticks_msec() - start_time
-		text = str(current_time/1000)
+		var formatted_time = str(start_time)
+		var decimal_index = formatted_time.find(".")
+		if decimal_index > 0:
+			formatted_time = formatted_time.left(decimal_index + 3)  # Take only two decimal places
+		
+		Global.start_time = formatted_time
+		text = formatted_time.replace(".", ":")
+
+func reset():
+	start_time = 0.0
+	Global.start_time = str(start_time)
+	update()

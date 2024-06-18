@@ -1,9 +1,9 @@
 extends Node3D
 class_name StartCourse
 
-@export var end_course: EndCourse
-
 func _on_body_entered(body):
 	if body is Player:
-		var timer = body.get_node("Neck/Camera3D/PanelContainer/Timer")
+		Global.start_time = str(0.0)
+		var timer = body.get_node("Neck/Timer").get_child(0).get_child(0)
+		timer.reset()
 		timer.running = true

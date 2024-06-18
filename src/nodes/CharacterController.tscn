@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_0u46p"]
 [ext_resource type="PackedScene" uid="uid://d1cdc6cilif2a" path="res://nodes/menus/pause_menu.tscn" id="2_aatc2"]
-[ext_resource type="Script" path="res://scripts/Mili_seconds.gd" id="2_ebpha"]
+[ext_resource type="PackedScene" uid="uid://dxllibo2xe04" path="res://nodes/menus/Timer.tscn" id="2_cd40u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cnaj6"]
 
@@ -26,19 +26,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 
-[node name="PanelContainer" type="PanelContainer" parent="Neck/Camera3D"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -326.0
-offset_bottom = 127.0
-grow_horizontal = 0
-
-[node name="Timer" type="Label" parent="Neck/Camera3D/PanelContainer"]
-layout_mode = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("2_ebpha")
+[node name="Timer" parent="Neck" instance=ExtResource("2_cd40u")]
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
