@@ -156,3 +156,4 @@ func handle_moving(delta):
 		velocity.y -= gravity * delta
 		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 3.0)
 		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 3.0)
+

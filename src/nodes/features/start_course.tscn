@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4hpx8unxlkoy"]
+
+[ext_resource type="Script" path="res://scripts/start_course.gd" id="1_u3u1t"]
+[ext_resource type="Texture2D" uid="uid://c3wcynfdcbmq2" path="res://assets/PrototypeTexture/PNG/Light/texture_01.png" id="2_1nypo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_isnhe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uh3r0"]
+albedo_texture = ExtResource("2_1nypo")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_kiv4g"]
+material = SubResource("StandardMaterial3D_uh3r0")
+
+[node name="StartCourse" type="Area3D"]
+script = ExtResource("1_u3u1t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_isnhe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_kiv4g")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
