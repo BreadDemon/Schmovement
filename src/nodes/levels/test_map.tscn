@@ -1,12 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://c71cg8reelnrx"]
+[gd_scene load_steps=17 format=3 uid="uid://c71cg8reelnrx"]
 
 [ext_resource type="Texture2D" uid="uid://c7ax5ssske6bn" path="res://assets/HDRI/kloppenheim_06_puresky_8k.hdr" id="1_2ic7k"]
 [ext_resource type="PackedScene" uid="uid://dem1v18u02ngc" path="res://nodes/CharacterController.tscn" id="1_fw4q1"]
 [ext_resource type="Texture2D" uid="uid://2cq1pbfxclnj" path="res://assets/PrototypeTexture/PNG/Dark/texture_01.png" id="2_itlxt"]
 [ext_resource type="PackedScene" uid="uid://bpk6w56a4l3uy" path="res://nodes/features/jump_pad.tscn" id="3_rffr6"]
-[ext_resource type="Texture2D" uid="uid://bu1el4t2ocxx1" path="res://assets/PrototypeTexture/PNG/Orange/texture_01.png" id="4_bdf5k"]
 [ext_resource type="PackedScene" uid="uid://po75jr6axkjl" path="res://nodes/features/teleporter.tscn" id="5_j3kf1"]
 [ext_resource type="PackedScene" uid="uid://cx7g5bussvmke" path="res://nodes/features/receptor.tscn" id="6_0g3fc"]
+[ext_resource type="PackedScene" uid="uid://b4hpx8unxlkoy" path="res://nodes/features/start_course.tscn" id="7_ssrem"]
+[ext_resource type="PackedScene" uid="uid://bwk6svly34oyr" path="res://nodes/features/end_course.tscn" id="8_kdxem"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qd8w1"]
 panorama = ExtResource("1_2ic7k")
@@ -39,12 +40,6 @@ uv1_triplanar = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbctr"]
 albedo_texture = ExtResource("2_itlxt")
 uv1_triplanar = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6vaa"]
-albedo_texture = ExtResource("4_bdf5k")
-
-[sub_resource type="BoxMesh" id="BoxMesh_aegb2"]
-material = SubResource("StandardMaterial3D_q6vaa")
 
 [node name="TestMap" type="Node3D"]
 
@@ -117,10 +112,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 13, -63.5)
 size = Vector3(3, 1, 10)
 material = SubResource("StandardMaterial3D_wvuen")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 14.1435, -64)
-mesh = SubResource("BoxMesh_aegb2")
-
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_fw4q1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.03225, 0)
 
@@ -138,3 +129,9 @@ receptor = NodePath("../receptor2")
 
 [node name="receptor2" parent="." instance=ExtResource("6_0g3fc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+
+[node name="StartCourse" parent="." instance=ExtResource("7_ssrem")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07665, 0.998873, -2.12691)
+
+[node name="EndCourse" parent="." instance=ExtResource("8_kdxem")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 14.1715, -86)
