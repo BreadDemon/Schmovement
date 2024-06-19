@@ -71,7 +71,7 @@ material = SubResource("StandardMaterial3D_bdlxh")
 [node name="Upper_Section" type="Node3D" parent="Map"]
 
 [node name="Jump_Pad" parent="Map/Upper_Section" instance=ExtResource("3_rffr6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6947, 4.70839, -32.5)
+transform = Transform3D(1.625, 0, 0, 0, 1.625, 0, 0, 0, 1.625, 14.6947, 4.70839, -32.3776)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Map/Upper_Section"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.312504, 0.161173, 3.12351)

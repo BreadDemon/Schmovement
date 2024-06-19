@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://d5vvfyaajm6"]
+[gd_scene load_steps=21 format=3 uid="uid://d5vvfyaajm6"]
 
 [ext_resource type="Texture2D" uid="uid://c7ax5ssske6bn" path="res://assets/HDRI/kloppenheim_06_puresky_8k.hdr" id="1_yj3sw"]
 [ext_resource type="Texture2D" uid="uid://xhpf67anjb8h" path="res://assets/PrototypeTexture/PNG/Dark/texture_13.png" id="2_6ip24"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cbjmtxba73jo0" path="res://nodes/features/loading_zone.tscn" id="9_xsjr0"]
 [ext_resource type="PackedScene" uid="uid://b4hpx8unxlkoy" path="res://nodes/features/start_course.tscn" id="10_05fom"]
 [ext_resource type="PackedScene" uid="uid://bwk6svly34oyr" path="res://nodes/features/end_course.tscn" id="11_kat0f"]
+[ext_resource type="PackedScene" uid="uid://bt4o8jqmtib6b" path="res://nodes/objects/sphere.tscn" id="12_6dukh"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_54ayb"]
 panorama = ExtResource("1_yj3sw")
@@ -199,11 +200,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, -4)
 PathScene = "res://nodes/levels/test_map.tscn"
 
 [node name="StartCourse" parent="." instance=ExtResource("10_05fom")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00338, 1, 6.00146)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00338, 1, -37.9985)
 
 [node name="EndCourse" parent="." node_paths=PackedStringArray("start_course") instance=ExtResource("11_kat0f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00338, 1, 6.00146)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00338, 1, -37.9985)
 start_course = NodePath("../StartCourse")
 
 [node name="EndCourse2" parent="." instance=ExtResource("11_kat0f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00338, 1, 9.00146)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.00338, 1, 50.0015)
+
+[node name="StartCourse2" parent="." instance=ExtResource("10_05fom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.00338, 1, 50.0015)
+
+[node name="sphere" parent="StartCourse2" instance=ExtResource("12_6dukh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.98429, 1, 3.8147e-06)

@@ -60,9 +60,9 @@ func _input(event):
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
-				neck.rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
-				camera.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
-				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90)) 
+			neck.rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
+			camera.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
+			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90)) 
 
 func _physics_process(delta):
 	input_dir = Input.get_vector("left", "right", "forward", "back")

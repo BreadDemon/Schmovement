@@ -13,7 +13,7 @@ func update():
 		var formatted_time = str(start_time)
 		var decimal_index = formatted_time.find(".")
 		if decimal_index > 0:
-			formatted_time = formatted_time.left(decimal_index + 3)  # Take only two decimal places
+			formatted_time = formatted_time.left(decimal_index + 4)  # Take only two decimal places
 		
 		Global.start_time = formatted_time
 		text = formatted_time.replace(".", ":")
