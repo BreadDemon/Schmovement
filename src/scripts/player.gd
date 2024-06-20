@@ -163,3 +163,13 @@ func reset():
 	var timer = get_node("Timer").get_child(0).get_child(0)
 	timer.reset_timer()
 	transform.origin = Global.origin_point
+	current_speed = 0
+	sliding_state = false
+	running_state = false
+	crouching_state = false
+	walking_state = true
+	set_standing()
+	sliding_timer = 0
+	velocity.x = 0
+	velocity.y = 0
+	velocity.z = 0

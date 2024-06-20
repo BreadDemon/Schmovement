@@ -135,8 +135,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0.849864)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07665, 0.998873, -2.12691)
 origin_point = NodePath("../Return_node")
 
-[node name="EndCourse" parent="." instance=ExtResource("8_kdxem")]
+[node name="EndCourse" parent="." node_paths=PackedStringArray("start_course") instance=ExtResource("8_kdxem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 14.1715, -86)
+start_course = NodePath("../StartCourse")
 
 [node name="Return_node" parent="." instance=ExtResource("9_k6fjs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 1)

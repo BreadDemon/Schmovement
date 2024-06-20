@@ -24,3 +24,4 @@ func _on_pause_button_pressed():
 func _on_reset_button_pressed():
 	var player = get_parent()
 	player.reset()
+	_on_pause_button_pressed()
