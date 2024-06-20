@@ -94,13 +94,13 @@ size = Vector3(3, 1, 10)
 material = SubResource("StandardMaterial3D_wvuen")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Map/Upper_Section/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4, -32.5)
-size = Vector3(3, 1, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4, -33)
+size = Vector3(3, 1, 11)
 material = SubResource("StandardMaterial3D_wvuen")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Map/Upper_Section/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 8.5, -43.5)
-size = Vector3(3, 10, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 8.5, -44)
+size = Vector3(3, 10, 11)
 material = SubResource("StandardMaterial3D_wvuen")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Map/Upper_Section/CSGCombiner3D"]

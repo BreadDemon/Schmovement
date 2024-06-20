@@ -29,6 +29,8 @@ var running_state = false
 var sliding_state = false
 
 # Slide vars
+var applied_sliding_factor = 0.0
+var sliding_factor = 1.1
 var sliding_timer = 0.0
 var sliding_timer_max = 1.0
 var slide_vector = Vector2.ZERO
@@ -72,6 +74,11 @@ func _physics_process(delta):
 	move_and_slide()
 
 func handle_movement(delta):
+	if Input.is_action_just_released("Crouch") and sliding_timer > 0 and is_on_floor():
+		sliding_timer = 0
+		print("Slide end")
+		sliding_state = false
+	
 	if Input.is_action_pressed("Crouch"):
 		neck.position.y = lerp(neck.position.y, 0.65 + crouching_depth, delta * crouch_lerp)
 		set_crouching()
@@ -95,7 +102,7 @@ func handle_movement(delta):
 			crouching_state = false
 			walking_state = false
 			running_state = true
-		else: 
+		elif is_on_floor(): 
 			current_speed = walking_speed
 			crouching_state = false
 			walking_state = true
