@@ -18,7 +18,7 @@ var jump_timer = 0
 # Speed vars
 var current_speed = 5.0
 @export var walking_speed = 5.0
-@export var sprinting_speed = 7.0
+@export var sprinting_speed = 7
 @export var crouched_speed = 3.0
 @export var jump_velocity = 4.5
 
@@ -36,6 +36,12 @@ var sliding_timer_max = 1.0
 var slide_vector = Vector2.ZERO
 var slide_direction = Vector3.ZERO
 var slide_speed = 5
+var spam_timer = 0.0
+var spam_timer_max = 0.5
+var spam_state = false
+
+# Wall Jump vars
+var can_wall_jump
 
 # Crouch vars
 @export var crouching_depth = -0.75
@@ -61,7 +67,7 @@ func _input(event):
 		menu.pause()
 	elif event.is_action_pressed("Reset"):
 		reset()
-		
+
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			neck.rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
@@ -74,10 +80,15 @@ func _physics_process(delta):
 	move_and_slide()
 
 func handle_movement(delta):
-	if Input.is_action_just_released("Crouch") and sliding_timer > 0 and is_on_floor():
+	if is_on_floor():
+		can_wall_jump = true
+	
+	if Input.is_action_just_released("Crouch") and is_on_floor():
 		sliding_timer = 0
 		print("Slide end")
 		sliding_state = false
+		spam_state = true
+		spam_timer = spam_timer_max
 	
 	if Input.is_action_pressed("Crouch"):
 		neck.position.y = lerp(neck.position.y, 0.65 + crouching_depth, delta * crouch_lerp)
@@ -85,7 +96,7 @@ func handle_movement(delta):
 		crouching_state = true
 		walking_state = false
 		if is_on_floor():
-			if running_state and input_dir != Vector2.ZERO and !sliding_state:
+			if running_state and input_dir != Vector2.ZERO and !sliding_state and !spam_state:
 				sliding_state = true
 				sliding_timer = sliding_timer_max
 				slide_vector = input_dir
@@ -107,7 +118,7 @@ func handle_movement(delta):
 			crouching_state = false
 			walking_state = true
 			running_state = false
-			
+
 	handle_jump(delta)
 	handle_sliding(delta)
 	handle_moving(delta)
@@ -115,7 +126,7 @@ func handle_movement(delta):
 func set_standing():
 	standing.disabled = false
 	crouching.disabled = true
-	
+
 func set_crouching():
 	standing.disabled = true
 	crouching.disabled = false
@@ -124,9 +135,15 @@ func set_crouching():
 func handle_jump(delta):
 	if Input.is_action_just_pressed("Jump"):
 		jump_timer = jump_buffer_time
-	
+
+	if jump_timer > 0 and is_on_wall() and can_wall_jump:
+		can_wall_jump = false
+		velocity.y = jump_velocity
+
 	if (jump_timer > 0) and is_on_floor():
 		velocity.y = jump_velocity
+		spam_state = false
+		spam_timer = 0
 		print("Slide end")
 		sliding_state = false
 		current_speed = (sliding_timer+1) * slide_speed
@@ -135,6 +152,10 @@ func handle_jump(delta):
 
 # Handle slide timer and camera tilt
 func handle_sliding(delta):
+	spam_timer -= delta
+	if spam_timer <= 0:
+		spam_state = false
+	
 	if sliding_timer > 0 and is_on_floor():
 		sliding_timer -= delta
 		direction = (slide_direction * Vector3(slide_vector.x, 0, slide_vector.y)).normalized()
