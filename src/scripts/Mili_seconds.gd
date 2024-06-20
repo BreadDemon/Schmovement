@@ -18,7 +18,8 @@ func update():
 		Global.start_time = formatted_time
 		text = formatted_time.replace(".", ":")
 
-func reset():
+func reset_timer():
 	start_time = 0.0
 	Global.start_time = str(start_time)
 	update()
+	running = false

@@ -5,13 +5,13 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4p1sf"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_umm4x"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cuqw"]
 albedo_texture = ExtResource("1_y7sbt")
 uv1_offset = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_5sqnw"]
-material = SubResource("StandardMaterial3D_umm4x")
+material = SubResource("StandardMaterial3D_8cuqw")
 
 [node name="EndCourse" type="Area3D"]
 script = ExtResource("1_pjbx6")
