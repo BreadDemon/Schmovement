@@ -57,7 +57,9 @@ func _input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	elif event.is_action_pressed("ui_cancel"):
 		menu.pause()
-
+	elif event.is_action_pressed("Reset"):
+		reset()
+		
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			neck.rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
@@ -157,3 +159,7 @@ func handle_moving(delta):
 		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 3.0)
 		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 3.0)
 
+func reset():
+	var timer = get_node("Timer").get_child(0).get_child(0)
+	timer.reset_timer()
+	transform.origin = Global.origin_point

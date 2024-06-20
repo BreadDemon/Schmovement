@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c71cg8reelnrx"]
+[gd_scene load_steps=18 format=3 uid="uid://c71cg8reelnrx"]
 
 [ext_resource type="Texture2D" uid="uid://c7ax5ssske6bn" path="res://assets/HDRI/kloppenheim_06_puresky_8k.hdr" id="1_2ic7k"]
 [ext_resource type="PackedScene" uid="uid://dem1v18u02ngc" path="res://nodes/CharacterController.tscn" id="1_fw4q1"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cx7g5bussvmke" path="res://nodes/features/receptor.tscn" id="6_0g3fc"]
 [ext_resource type="PackedScene" uid="uid://b4hpx8unxlkoy" path="res://nodes/features/start_course.tscn" id="7_ssrem"]
 [ext_resource type="PackedScene" uid="uid://bwk6svly34oyr" path="res://nodes/features/end_course.tscn" id="8_kdxem"]
+[ext_resource type="PackedScene" uid="uid://r3w3ughotgmt" path="res://nodes/features/return_node.tscn" id="9_k6fjs"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qd8w1"]
 panorama = ExtResource("1_2ic7k")
@@ -128,10 +129,14 @@ visible = false
 receptor = NodePath("../receptor2")
 
 [node name="receptor2" parent="." instance=ExtResource("6_0g3fc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0.849864)
 
-[node name="StartCourse" parent="." instance=ExtResource("7_ssrem")]
+[node name="StartCourse" parent="." node_paths=PackedStringArray("origin_point") instance=ExtResource("7_ssrem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07665, 0.998873, -2.12691)
+origin_point = NodePath("../Return_node")
 
 [node name="EndCourse" parent="." instance=ExtResource("8_kdxem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 14.1715, -86)
+
+[node name="Return_node" parent="." instance=ExtResource("9_k6fjs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 1)

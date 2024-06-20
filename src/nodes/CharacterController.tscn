@@ -26,10 +26,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 
-[node name="Timer" parent="Neck" instance=ExtResource("2_cd40u")]
-
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 target_position = Vector3(0, 2, 0)
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_aatc2")]
+
+[node name="Timer" parent="." instance=ExtResource("2_cd40u")]
