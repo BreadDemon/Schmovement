@@ -167,7 +167,7 @@ func handle_moving(delta):
 		velocity.z = lerp(velocity.z, direction.z * current_speed, delta * 3.0)
 
 func reset():
-	var timer = get_node("Timer").get_child(0).get_child(0)
+	var timer = get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
 	timer.reset_timer()
 	transform.origin = Global.origin_point
 	current_speed = 0

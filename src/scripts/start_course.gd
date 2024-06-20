@@ -5,7 +5,7 @@ class_name StartCourse
 
 func _on_body_entered(body):
 	if body is Player:
-		var timer = body.get_node("Timer").get_child(0).get_child(0)
+		var timer = body.get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
 		if !timer.running:
 			self.monitorable = true
 			self.monitoring = true
