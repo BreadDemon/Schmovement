@@ -61,7 +61,7 @@ size = Vector3(3, 1, 12)
 material = SubResource("StandardMaterial3D_eflsv")
 
 [node name="Area3D" parent="Map/CSGBox3D" instance=ExtResource("3_rffr6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.508392, -4.5)
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.508392, -4.5)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 17.5)
@@ -99,17 +99,17 @@ size = Vector3(3, 1, 11)
 material = SubResource("StandardMaterial3D_wvuen")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Map/Upper_Section/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 8.5, -44)
-size = Vector3(3, 10, 11)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 8.5, -44.5)
+size = Vector3(3, 10, 12)
 material = SubResource("StandardMaterial3D_wvuen")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Map/Upper_Section/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4, -54)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4, -55)
 size = Vector3(3, 1, 9)
 material = SubResource("StandardMaterial3D_wvuen")
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="Map/Upper_Section/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 13, -63.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 13, -64.5)
 size = Vector3(3, 1, 10)
 material = SubResource("StandardMaterial3D_wvuen")
 
@@ -117,26 +117,28 @@ material = SubResource("StandardMaterial3D_wvuen")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.03225, 0)
 
 [node name="Teleporter" parent="." node_paths=PackedStringArray("receptor") instance=ExtResource("5_j3kf1")]
-transform = Transform3D(2.03, 0, 0, 0, 2.03, 0, 0, 0, 2.03, 8.70767, 5, -83.8576)
+transform = Transform3D(2.03, 0, 0, 0, 2.03, 0, 0, 0, 2.03, 8.70767, 5, -84.8576)
 receptor = NodePath("../receptor")
 
 [node name="receptor" parent="." instance=ExtResource("6_0g3fc")]
-transform = Transform3D(1.185, 0, 0, 0, 1.185, 0, 0, 0, 1.185, 8.76474, 14.2817, -57.2127)
+transform = Transform3D(1.185, 0, 0, 0, 1.185, 0, 0, 0, 1.185, 8.76474, 14.2817, -58.2127)
 
 [node name="Area3D" parent="." node_paths=PackedStringArray("receptor") instance=ExtResource("5_j3kf1")]
-transform = Transform3D(735.462, 0, 0, 0, 26.94, 0, 0, 0, 789.45, 1, -69.5325, 0)
+transform = Transform3D(735.462, 0.00942736, 0.788774, -0.257017, 26.94, -0.392229, -0.734954, 0.0133758, 789.45, 1, -69.5325, 0)
 visible = false
 receptor = NodePath("../receptor2")
 
 [node name="receptor2" parent="." instance=ExtResource("6_0g3fc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0.849864)
+visible = false
 
 [node name="StartCourse" parent="." node_paths=PackedStringArray("origin_point") instance=ExtResource("7_ssrem")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07665, 0.998873, -2.12691)
+transform = Transform3D(3.01563, 0, 0, 0, 3.01563, 0, 0, 0, 1.00521, 1.07665, 0.998873, -2.12691)
+visible = false
 origin_point = NodePath("../Return_node")
 
 [node name="EndCourse" parent="." node_paths=PackedStringArray("start_course") instance=ExtResource("8_kdxem")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 14.1715, -86)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 14.1715, -87)
 start_course = NodePath("../StartCourse")
 
 [node name="Return_node" parent="." instance=ExtResource("9_k6fjs")]

@@ -25,7 +25,7 @@ func reset_timer():
 	running = false
 
 func set_pb():
-	if float(Global.personal_best) < float(Global.start_time):
+	if float(Global.personal_best) > float(Global.start_time) || float(Global.personal_best) == 0:
 		var personal_best = get_parent().get_node("PersonalBest")
 		Global.personal_best = Global.start_time
 		personal_best.text = Global.personal_best

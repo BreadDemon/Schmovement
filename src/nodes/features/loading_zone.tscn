@@ -13,7 +13,7 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_6qwcp"]
 material = SubResource("StandardMaterial3D_umm4x")
 
-[node name="Area3D" type="Area3D"]
+[node name="Loading Zone" type="Area3D"]
 script = ExtResource("1_xdjp2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
