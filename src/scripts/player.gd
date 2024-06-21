@@ -37,7 +37,7 @@ var slide_vector = Vector2.ZERO
 var slide_direction = Vector3.ZERO
 var slide_speed = 5
 var spam_timer = 0.0
-var spam_timer_max = 0.5
+var spam_timer_max = 0.4
 var spam_state = false
 
 # Wall Jump vars

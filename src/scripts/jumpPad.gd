@@ -5,5 +5,6 @@ extends Area3D
 func _on_body_entered(body):
 	if body is Player:
 		body.velocity.y = power
-		var new_speed = clamp(body.current_speed + 2.0, body.current_speed, body.sprinting_speed)
 		body.sliding_state = false
+		body.spam_state = false
+		body.spam_timer = 0

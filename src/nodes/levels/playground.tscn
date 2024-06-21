@@ -232,3 +232,7 @@ start_course = NodePath("../StartCourse4")
 
 [node name="Return_node" parent="." instance=ExtResource("13_kjd2g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56, 3, -42)
+
+[node name="LoadingZone3" parent="." instance=ExtResource("9_xsjr0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, -9)
+PathScene = "res://nodes/levels/City.tscn"
