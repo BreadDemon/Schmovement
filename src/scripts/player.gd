@@ -20,7 +20,7 @@ var current_speed = 5.0
 @export var walking_speed = 5.0
 @export var sprinting_speed = 7
 @export var crouched_speed = 3.0
-@export var jump_velocity = 4.5
+@export var jump_velocity = 5
 
 # State vars
 var walking_state = false
@@ -36,8 +36,9 @@ var sliding_timer_max = 1.0
 var slide_vector = Vector2.ZERO
 var slide_direction = Vector3.ZERO
 var slide_speed = 5
+var slide_speed_init = 5
 var spam_timer = 0.0
-var spam_timer_max = 0.4
+var spam_timer_max = 0.6
 var spam_state = false
 
 # Wall Jump vars
@@ -87,8 +88,6 @@ func handle_movement(delta):
 		sliding_timer = 0
 		print("Slide end")
 		sliding_state = false
-		spam_state = true
-		spam_timer = spam_timer_max
 	
 	if Input.is_action_pressed("Crouch"):
 		neck.position.y = lerp(neck.position.y, 0.65 + crouching_depth, delta * crouch_lerp)
@@ -100,6 +99,8 @@ func handle_movement(delta):
 				sliding_state = true
 				sliding_timer = sliding_timer_max
 				slide_vector = input_dir
+				spam_state = true
+				spam_timer = spam_timer_max
 				slide_direction = neck.transform.basis
 				print("Slide begin")
 			else:
