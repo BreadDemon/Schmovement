@@ -167,7 +167,8 @@ And they reset after touching the ground"
 
 [node name="Label3D10" type="Label3D" parent="Text"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 5, 106.417)
-text = "Green walls don't waste your wall jump"
+text = "Green walls give you your walljump back 
+once per touch of the wall"
 
 [node name="Label3D11" type="Label3D" parent="Text"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 5, 127.417)
