@@ -135,7 +135,9 @@ visible = false
 [node name="StartCourse" parent="." node_paths=PackedStringArray("origin_point") instance=ExtResource("7_ssrem")]
 transform = Transform3D(3.01563, 0, 0, 0, 3.01563, 0, 0, 0, 1.00521, 1.07665, 0.998873, -2.12691)
 visible = false
+run_name = "Training course"
 origin_point = NodePath("../Return_node")
+dev_time = 11.825
 
 [node name="EndCourse" parent="." node_paths=PackedStringArray("start_course") instance=ExtResource("8_kdxem")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 14.1715, -87)
