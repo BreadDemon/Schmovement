@@ -190,6 +190,7 @@ receptor = NodePath("../receptor")
 
 [node name="Area3D" parent="." instance=ExtResource("8_1k5wg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.48541, 0.500001, -9.0149)
+power = 25
 
 [node name="LoadingZone" parent="." instance=ExtResource("9_xsjr0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.0163, 0.980288, -3.9824)
