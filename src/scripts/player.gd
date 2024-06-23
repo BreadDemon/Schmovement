@@ -17,7 +17,6 @@ var has_jumped
 @onready var standing = $Standing
 @onready var crouching = $Crouching
 @onready var ray_cast_3d = $RayCast3D
-@onready var ray_cast_teleporter = $RayCast3D_teleporter
 @onready var neck := $Neck
 @onready var eyes = $Neck/Eyes
 @onready var camera = $Neck/Eyes/Camera3D
@@ -63,7 +62,7 @@ var head_bob_curr_intensity = 0.0
 
 
 # Crouch vars
-@export var crouching_depth = -0.75
+@export var crouching_depth = -0.8
 @export var crouch_lerp = 8.0
 @export var lerp_accel = 15.0
 
