@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1cdc6cilif2a"]
+[gd_scene load_steps=11 format=3 uid="uid://d1cdc6cilif2a"]
 
 [ext_resource type="Shader" path="res://shader/blur.gdshader" id="1_ra0gf"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="2_3qeef"]
+[ext_resource type="PackedScene" uid="uid://cp8xo27u1vt3l" path="res://nodes/menus/input_settings.tscn" id="3_12rbm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jwo6d"]
 shader = ExtResource("1_ra0gf")
@@ -163,11 +164,45 @@ tracks/3/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_i8xpb"]
+resource_name = "hide_pause"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_83wus"]
+resource_name = "unhide_pause"
+length = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2gyiy"]
 _data = {
 "Pause": SubResource("Animation_rb2ks"),
 "RESET": SubResource("Animation_rhhy6"),
-"Unpause": SubResource("Animation_y1ddt")
+"Unpause": SubResource("Animation_y1ddt"),
+"hide_pause": SubResource("Animation_i8xpb"),
+"unhide_pause": SubResource("Animation_83wus")
 }
 
 [node name="PauseMenu" type="ColorRect"]
@@ -179,6 +214,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_3qeef")
+input_settings = ExtResource("3_12rbm")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -233,6 +269,11 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Reset"
 
+[node name="SettingsButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings"
+
 [node name="ExitButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -242,3 +283,5 @@ text = "Exit"
 libraries = {
 "": SubResource("AnimationLibrary_2gyiy")
 }
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]

@@ -1,6 +1,7 @@
 extends ColorRect
 
-@onready var animator: AnimationPlayer =$AnimationPlayer
+@onready var animator: AnimationPlayer = $AnimationPlayer
+@export var input_settings: PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,3 +26,10 @@ func _on_reset_button_pressed():
 	var player = get_parent()
 	player.reset()
 	_on_pause_button_pressed()
+
+func _on_settings_button_pressed():
+	var Settings = input_settings.instantiate()
+	add_child(Settings)
+	Settings.ingame = true
+	animator.play("hide_pause")
+	Settings.animator.play("open_ingame")
