@@ -1,20 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://rkwqb85fyt33"]
+[gd_scene load_steps=2 format=3 uid="uid://rkwqb85fyt33"]
 
 [ext_resource type="Script" path="res://scripts/Control.gd" id="1_d72yk"]
-
-[sub_resource type="GDScript" id="GDScript_nu2g8"]
-script/source = "extends Button
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
 
 [node name="GameMenu" type="Control"]
 layout_mode = 3
@@ -26,42 +12,73 @@ grow_vertical = 2
 script = ExtResource("1_d72yk")
 
 [node name="Title" type="Label" parent="."]
-layout_mode = 0
-offset_right = 1151.0
-offset_bottom = 218.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -235.0
+offset_top = 50.0
+offset_right = 235.0
+offset_bottom = 143.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 68
 text = "Schmovement"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Play" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.007
-anchor_bottom = 0.037
-offset_left = 464.0
-offset_top = 280.0
-offset_right = 682.936
-offset_bottom = 312.024
-text = "Play"
-script = SubResource("GDScript_nu2g8")
-
-[node name="Exit" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.007
-anchor_bottom = 0.037
-offset_left = 465.0
-offset_top = 353.0
-offset_right = 683.936
-offset_bottom = 385.024
-text = "Exit"
-
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 503.0
-offset_top = 619.0
-offset_right = 673.0
-offset_bottom = 642.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -81.0
+offset_top = -114.0
+offset_right = 89.0
+offset_bottom = -91.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "I Love my girlfriend s2
 "
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -128.0
+offset_right = 256.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Play"
+expand_icon = true
+
+[node name="SettingButton" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings"
+
+[node name="Exit" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Exit"
