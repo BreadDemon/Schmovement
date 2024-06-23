@@ -31,6 +31,10 @@ func reset_timer():
 	running = false
 
 func set_pb(start_course):
+	if float(Global.start_time) == 0.0:
+		print("Failed PB setting somehow")
+		return
+		
 	if float(Global.personal_best) != 0:
 		var diff = get_parent().get_node("times").get_node("Diff")
 		var format = "%s%.3f"
