@@ -13,7 +13,7 @@ var input_actions = {
 	"left": "Move Left",
 	"right": "Move Right",
 	"Sprint": "Sprint",
-	"Crouch": "Crought",
+	"Crouch": "Crouch",
 	"Jump": "Jump",
 	"Reset": "Reset"
 }
