@@ -3,9 +3,13 @@ extends Control
 @onready var input_button_scene = preload('res://nodes/menus/input_button.tscn')
 @onready var action_list = $PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/ActionList
 
+@onready var animator: AnimationPlayer = $AnimationPlayer
+
 var is_remapping = false
 var action_to_remap = null
 var remapping_button = null
+
+var ingame = false
 
 var input_actions = {
 	"forward": "Move Forward",
@@ -20,12 +24,12 @@ var input_actions = {
 
 func _ready():
 	_create_action_list()
-	
+
 func _create_action_list():
 	InputMap.load_from_project_settings()
 	for item in action_list.get_children():
 		item.queue_free()
-	
+
 	for action in input_actions:
 		var button = input_button_scene.instantiate()
 		var action_label = button.find_child("LabelAction")
@@ -42,8 +46,6 @@ func _create_action_list():
 		action_list.add_child(button)
 		
 		button.pressed.connect(_on_input_button_pressed.bind(button, action))
-		
-
 
 func _on_input_button_pressed(button, action):
 	if !is_remapping:
@@ -51,7 +53,6 @@ func _on_input_button_pressed(button, action):
 		action_to_remap = action
 		remapping_button = button
 		button.find_child("LabelInput").text = "Press key to bind..."
-		
 
 func _input(event):
 	if is_remapping:
@@ -75,6 +76,10 @@ func _update_action_list(button, event):
 func _on_reset_button_pressed():
 	_create_action_list()
 
-
 func _on_back_button_pressed():
-	get_tree().change_scene_to_file("res://nodes/menus/game_menu.tscn")
+	if !ingame:
+		get_tree().change_scene_to_file("res://nodes/menus/game_menu.tscn")
+	else:
+		animator.play("close_ingame")
+		var pause = get_parent()
+		pause.animator.play("unhide_pause")
