@@ -26,7 +26,7 @@ func reset_timer():
 	update()
 	running = false
 
-func set_pb():
+func set_pb(start_course):
 	if float(Global.personal_best) != 0:
 		var diff = get_parent().get_node("Diff")
 		var format = "%s%.3f"
@@ -42,3 +42,4 @@ func set_pb():
 		var personal_best = get_parent().get_node("PersonalBest")
 		Global.personal_best = Global.start_time
 		personal_best.text = Global.personal_best
+		start_course.pb = Global.start_time

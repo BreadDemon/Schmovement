@@ -193,6 +193,7 @@ func handle_jump(delta):
 		has_jumped = true
 		velocity.y = jump_velocity
 
+
 	if (jump_timer > 0) and is_on_floor():
 		velocity.y = jump_velocity
 		wall_jump_wait = wall_jump_wait_max

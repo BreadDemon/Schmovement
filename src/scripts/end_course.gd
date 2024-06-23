@@ -8,5 +8,5 @@ func _on_body_entered(body):
 		var timer = body.get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
 		timer.running = false
 		if !start_course.has_calculated:
-			timer.set_pb()
+			timer.set_pb(start_course)
 			start_course.has_calculated = true

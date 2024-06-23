@@ -138,12 +138,12 @@ material = SubResource("StandardMaterial3D_typ0g")
 
 [node name="CSGPolygon3D2" type="CSGPolygon3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.9457, 13.9448, -19.7877)
-polygon = PackedVector2Array(1.56571, -0.784431, 0, 0, -8.97744, 4.73726, -8.97918, 5.05625, 1.55902, -0.447947)
+polygon = PackedVector2Array(1.56571, -0.784431, 0, 0, -8.3914, 4.73715, -8.3897, 5.05332, 1.55902, -0.447947)
 material = SubResource("StandardMaterial3D_5eif5")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.4702, 18.8386, -20)
-size = Vector3(2, 0.317871, 3)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.7609, 18.8386, -20.0403)
+size = Vector3(2, 0.317871, 3.58994)
 material = SubResource("StandardMaterial3D_hhdt3")
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="CSGCombiner3D"]
@@ -194,6 +194,7 @@ material = SubResource("StandardMaterial3D_rqkea")
 
 [node name="Jump_Pad" parent="CSGCombiner3D/CSGBox3D15" instance=ExtResource("1_2noc6")]
 transform = Transform3D(0.00812298, 0, -2.00666, 0, 1, 0, 1.93113, 0, 0.00844043, 0.194304, 2.50708, 5.83575)
+power = 11
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 12.5685, 12.3161, -14.7659)
