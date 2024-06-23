@@ -5,6 +5,13 @@ class_name Player
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var jump_buffer_time = 0.2
 var jump_timer = 0
+var wall_jump_wait = 0.0
+var wall_jump_wait_max = 0.2
+var can_wall_jump
+var can_coyote
+var coyote_timer = 0.0
+var coyote_timer_max = 0.1
+var has_jumped
 
 # Player Objects
 @onready var standing = $Standing
@@ -12,7 +19,8 @@ var jump_timer = 0
 @onready var ray_cast_3d = $RayCast3D
 @onready var ray_cast_teleporter = $RayCast3D_teleporter
 @onready var neck := $Neck
-@onready var camera := $Neck/Camera3D
+@onready var eyes = $Neck/Eyes
+@onready var camera = $Neck/Eyes/Camera3D
 @onready var menu := $PauseMenu
 
 # Speed vars
@@ -20,7 +28,7 @@ var current_speed = 5.0
 @export var walking_speed = 5.0
 @export var sprinting_speed = 7
 @export var crouched_speed = 3.0
-@export var jump_velocity = 5
+@export var jump_velocity = 4.7
 
 # State vars
 var walking_state = false
@@ -29,8 +37,6 @@ var running_state = false
 var sliding_state = false
 
 # Slide vars
-var applied_sliding_factor = 0.0
-var sliding_factor = 1.1
 var sliding_timer = 0.0
 var sliding_timer_max = 1.0
 var slide_vector = Vector2.ZERO
@@ -41,8 +47,20 @@ var spam_timer = 0.0
 var spam_timer_max = 0.6
 var spam_state = false
 
-# Wall Jump vars
-var can_wall_jump
+# Head bobbing vars
+var head_bob_sprinting_speed = 22.0
+var head_bob_walking_speed = 14.0
+var head_bob_crouching_speed = 10.0
+
+var head_bob_sprinting_intensity = 0.4
+var head_bob_walking_intensity = 0.2
+var head_bob_crouching_intensity = 0.1
+
+var head_bob_vector = Vector2.ZERO
+var head_bob_index  = 0.0
+var head_bob_curr_intensity = 0.0
+
+
 
 # Crouch vars
 @export var crouching_depth = -0.75
@@ -81,8 +99,6 @@ func _physics_process(delta):
 	move_and_slide()
 
 func handle_movement(delta):
-	if is_on_floor():
-		can_wall_jump = true
 	
 	if Input.is_action_just_released("Crouch") and is_on_floor():
 		sliding_timer = 0
@@ -120,9 +136,31 @@ func handle_movement(delta):
 			walking_state = true
 			running_state = false
 
+	handle_bob(delta)
 	handle_jump(delta)
 	handle_sliding(delta)
 	handle_moving(delta)
+
+func handle_bob(delta):
+	if running_state:
+		head_bob_curr_intensity = head_bob_sprinting_intensity
+		head_bob_index += head_bob_sprinting_speed * delta
+	elif walking_speed:
+		head_bob_curr_intensity = head_bob_walking_intensity
+		head_bob_index += head_bob_walking_speed * delta
+	elif crouching_state:
+		head_bob_curr_intensity = head_bob_crouching_intensity
+		head_bob_index += head_bob_crouching_speed * delta
+		
+	if is_on_floor() and !sliding_state and input_dir != Vector2.ZERO:
+		head_bob_vector.y = sin(head_bob_index)
+		head_bob_vector.x = sin(head_bob_index/2) + 0.5
+		
+		eyes.position.y = lerp(eyes.position.y, head_bob_vector.y * (head_bob_curr_intensity * 2.0), delta)
+		eyes.position.x = lerp(eyes.position.x, head_bob_vector.x * head_bob_curr_intensity, delta)
+	else:
+		eyes.position.y = lerp(eyes.position.y, 0.0, delta)
+		eyes.position.x = lerp(eyes.position.x, 0.0, delta)
 
 func set_standing():
 	standing.disabled = false
@@ -134,22 +172,52 @@ func set_crouching():
 
 # Handle jump, disables a slide so you can instantly slide once landing
 func handle_jump(delta):
+	jump_timer -= delta
+	wall_jump_wait -= delta
+	coyote_timer -= delta
+	
+	if !is_on_floor() and !has_jumped and coyote_timer < 0:
+		coyote_timer = coyote_timer_max
+		can_coyote = true
+	
+	if is_on_floor():
+		can_wall_jump = true
+		has_jumped = false
+	
 	if Input.is_action_just_pressed("Jump"):
 		jump_timer = jump_buffer_time
 
-	if jump_timer > 0 and is_on_wall() and can_wall_jump:
+	if jump_timer > 0 and is_on_wall() and can_wall_jump and !is_on_floor() and wall_jump_wait < 0:
 		can_wall_jump = false
+		can_coyote = false
+		has_jumped = true
 		velocity.y = jump_velocity
 
 	if (jump_timer > 0) and is_on_floor():
 		velocity.y = jump_velocity
+		wall_jump_wait = wall_jump_wait_max
 		spam_state = false
+		can_coyote = false
+		has_jumped = true
 		spam_timer = 0
 		print("Slide end")
 		sliding_state = false
 		current_speed = (sliding_timer+1) * slide_speed
 		sliding_timer = 0
-	jump_timer -= delta
+		
+	if jump_timer > 0 and !is_on_floor() and !has_jumped and can_coyote and coyote_timer > 0:
+		velocity.y = jump_velocity
+		wall_jump_wait = wall_jump_wait_max
+		spam_state = false
+		can_coyote = false
+		has_jumped = true
+		spam_timer = 0
+		print("Slide end")
+		print("Coyote jump")
+		sliding_state = false
+		current_speed = (sliding_timer+1) * slide_speed
+		sliding_timer = 0
+
 
 # Handle slide timer and camera tilt
 func handle_sliding(delta):

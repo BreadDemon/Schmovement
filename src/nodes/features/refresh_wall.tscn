@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0h6pl467n324"]
+
+[ext_resource type="Script" path="res://scripts/refresh_wall.gd" id="1_fup8l"]
+[ext_resource type="Texture2D" uid="uid://di6xa5f71edlx" path="res://assets/PrototypeTexture/PNG/Green/texture_01.png" id="2_35e6c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3n84h"]
+size = Vector3(2, 2, 0.560802)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iphku"]
+albedo_texture = ExtResource("2_35e6c")
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7v88b"]
+material = SubResource("StandardMaterial3D_iphku")
+
+[node name="RefreshWall" type="Area3D"]
+script = ExtResource("1_fup8l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.27152)
+shape = SubResource("BoxShape3D_3n84h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7v88b")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -3,6 +3,8 @@ extends Label
 var start_time = Global.start_time
 @export var running: bool = false
 
+var result_diff
+
 func _physics_process(delta):
 	if running:
 		start_time = float(start_time) + delta
@@ -13,7 +15,7 @@ func update():
 		var formatted_time = str(start_time+0.000)
 		var decimal_index = formatted_time.find(".")
 		if decimal_index > 0:
-			formatted_time = formatted_time.left(decimal_index + 4)  # Take only two decimal places
+			formatted_time = formatted_time.left(decimal_index + 4)  # Take only three decimal places
 		
 		Global.start_time = formatted_time
 		text = formatted_time.replace(".", ":")
@@ -25,6 +27,17 @@ func reset_timer():
 	running = false
 
 func set_pb():
+	if float(Global.personal_best) != 0:
+		var diff = get_parent().get_node("Diff")
+		var format = "%s%.3f"
+		result_diff = start_time - float(Global.personal_best)
+		if Global.start_time > Global.personal_best:
+			diff.text = format % ["+", result_diff]
+			diff.add_theme_color_override("font_color", Color(1, 0, 0))
+		else:
+			diff.text = format % ["", result_diff]
+			diff.add_theme_color_override("font_color", Color(0, 0.65, 0.075))
+
 	if float(Global.personal_best) > float(Global.start_time) || float(Global.personal_best) == 0:
 		var personal_best = get_parent().get_node("PersonalBest")
 		Global.personal_best = Global.start_time

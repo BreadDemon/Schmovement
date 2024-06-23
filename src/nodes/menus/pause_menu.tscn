@@ -211,6 +211,14 @@ text = "PAUSED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+modulate = Color(1, 0.693541, 0.351559, 1)
+layout_mode = 2
+text = "Warning!!!
+The timer in this game is not 100% accurate 
+seeing it counts in game physics ticks"
+horizontal_alignment = 1
+
 [node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 

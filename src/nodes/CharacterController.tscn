@@ -24,7 +24,9 @@ shape = SubResource("CapsuleShape3D_20j8w")
 [node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Neck"]
+[node name="Eyes" type="Node3D" parent="Neck"]
+
+[node name="Camera3D" type="Camera3D" parent="Neck/Eyes"]
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
