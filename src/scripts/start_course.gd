@@ -9,7 +9,13 @@ var has_calculated
 @export var dev_time: float
 var pb = 0.0
 
+func _ready():
+	#ConfigFileHandler.load_runs($".")
+	pass
+	
 func _on_body_entered(body):
+	ConfigFileHandler.load_runs($".")
+	
 	if body is Player:
 		var timer = body.get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
 		
