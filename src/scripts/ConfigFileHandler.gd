@@ -16,6 +16,8 @@ func _ready():
 		config.set_value("Keybinding","Jump", "Space")
 		config.set_value("Keybinding","Reset", "R")		
 		
+		config.set_value("Last_scene","path", "res://nodes/levels/Tutorial.tscn")		
+		
 		config.save(SETTINGS_FILE_PATH)
 	else:
 		config.load(SETTINGS_FILE_PATH)
@@ -52,6 +54,16 @@ func load_keybindings():
 		keybindings[key] = input_event
 	return keybindings
 
+func save_scene(scene: StringName):
+	config.set_value("Last_scene", "path", scene)
+	config.save(SETTINGS_FILE_PATH)
+
+func retrieve_last_scene() -> String:
+	var last_scene: String = config.get_value("Last_scene", "path")
+	if !last_scene.is_empty():
+		return last_scene
+	return ""
+	
 func save_runs(run_name: StringName, personal_best: String):
 	configruns.set_value("RunName", run_name, personal_best)
 	configruns.save(RUNS_FILE_PATH)
