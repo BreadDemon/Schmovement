@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bruvdcd07pu8s"]
 
 [ext_resource type="Material" uid="uid://bnbfqom1wyvcs" path="res://assets/Textures/Dark_texture.tres" id="1_vmfpb"]
-[ext_resource type="PackedScene" path="res://nodes/world_environment.tscn" id="2_7u8kc"]
+[ext_resource type="PackedScene" uid="uid://csuokjcklu0d7" path="res://nodes/world_environment.tscn" id="2_7u8kc"]
 [ext_resource type="PackedScene" uid="uid://dem1v18u02ngc" path="res://nodes/CharacterController.tscn" id="3_pp1nw"]
 [ext_resource type="PackedScene" uid="uid://po75jr6axkjl" path="res://nodes/features/teleporter.tscn" id="4_8y0v4"]
 [ext_resource type="PackedScene" uid="uid://cx7g5bussvmke" path="res://nodes/features/receptor.tscn" id="5_cpj2f"]

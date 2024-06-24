@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://c71cg8reelnrx"]
+[gd_scene load_steps=20 format=3 uid="uid://c71cg8reelnrx"]
 
 [ext_resource type="Texture2D" uid="uid://c7ax5ssske6bn" path="res://assets/HDRI/kloppenheim_06_puresky_8k.hdr" id="1_2ic7k"]
 [ext_resource type="PackedScene" uid="uid://dem1v18u02ngc" path="res://nodes/CharacterController.tscn" id="1_fw4q1"]
+[ext_resource type="Script" path="res://scripts/test_map.gd" id="1_kq41c"]
 [ext_resource type="Texture2D" uid="uid://2cq1pbfxclnj" path="res://assets/PrototypeTexture/PNG/Dark/texture_01.png" id="2_itlxt"]
 [ext_resource type="PackedScene" uid="uid://bpk6w56a4l3uy" path="res://nodes/features/jump_pad.tscn" id="3_rffr6"]
 [ext_resource type="PackedScene" uid="uid://po75jr6axkjl" path="res://nodes/features/teleporter.tscn" id="5_j3kf1"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b4hpx8unxlkoy" path="res://nodes/features/start_course.tscn" id="7_ssrem"]
 [ext_resource type="PackedScene" uid="uid://bwk6svly34oyr" path="res://nodes/features/end_course.tscn" id="8_kdxem"]
 [ext_resource type="PackedScene" uid="uid://r3w3ughotgmt" path="res://nodes/features/return_node.tscn" id="9_k6fjs"]
+[ext_resource type="PackedScene" uid="uid://cbjmtxba73jo0" path="res://nodes/features/loading_zone.tscn" id="11_cyk3g"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qd8w1"]
 panorama = ExtResource("1_2ic7k")
@@ -43,6 +45,7 @@ albedo_texture = ExtResource("2_itlxt")
 uv1_triplanar = true
 
 [node name="TestMap" type="Node3D"]
+script = ExtResource("1_kq41c")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0hcqp")
@@ -64,9 +67,9 @@ material = SubResource("StandardMaterial3D_eflsv")
 transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0.508392, -4.5)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 17.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 18.5)
 material_override = SubResource("StandardMaterial3D_fhvo2")
-size = Vector3(3, 1, 12)
+size = Vector3(3, 1, 14)
 material = SubResource("StandardMaterial3D_bdlxh")
 
 [node name="Upper_Section" type="Node3D" parent="Map"]
@@ -145,3 +148,7 @@ start_course = NodePath("../StartCourse")
 
 [node name="Return_node" parent="." instance=ExtResource("9_k6fjs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 1)
+
+[node name="Loading Zone" parent="." instance=ExtResource("11_cyk3g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3)
+PathScene = "res://nodes/levels/City.tscn"
