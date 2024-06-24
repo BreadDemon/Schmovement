@@ -51,3 +51,4 @@ func set_pb(start_course):
 		Global.personal_best = Global.start_time
 		personal_best.text = Global.personal_best
 		start_course.pb = Global.start_time
+		ConfigFileHandler.save_runs(start_course.run_name, start_course.pb)

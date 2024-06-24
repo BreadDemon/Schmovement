@@ -2,6 +2,7 @@ extends Node
 
 var config = ConfigFile.new()
 const SETTINGS_FILE_PATH = "user://settings.save"
+const RUNS_FILE_PATH = "user://runs.save"
 
 func _ready():
 	if !FileAccess.file_exists(SETTINGS_FILE_PATH):
@@ -12,7 +13,7 @@ func _ready():
 		config.set_value("Keybinding","Sprint", "Shift")
 		config.set_value("Keybinding","Crouch", "Ctrl")
 		config.set_value("Keybinding","Jump", "Space")
-		config.set_value("Keybinding","Reset", "R")
+		config.set_value("Keybinding","Reset", "R")		
 		
 		config.save(SETTINGS_FILE_PATH)
 	
@@ -46,3 +47,16 @@ func load_keybindings():
 		
 		keybindings[key] = input_event
 	return keybindings
+
+func save_runs(run_name: StringName, personal_best: String):
+	config.set_value("RunName", run_name, personal_best)
+	config.save(RUNS_FILE_PATH)
+	
+func load_runs(runs):
+	var items = runs.get_children()
+	var run_names = config.get_section_keys("RunName")
+	for run in items:
+		var sc = run.get_node("StartCourse")
+		for run_name in run_names:
+			if sc.run_name == run_name:
+				sc.pb = config.get_value("RunName", run_name)
