@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://d5vvfyaajm6"]
+[gd_scene load_steps=22 format=3 uid="uid://d5vvfyaajm6"]
 
+[ext_resource type="Script" path="res://scripts/playground.gd" id="1_2t3dd"]
 [ext_resource type="Texture2D" uid="uid://c7ax5ssske6bn" path="res://assets/HDRI/kloppenheim_06_puresky_8k.hdr" id="1_yj3sw"]
 [ext_resource type="Texture2D" uid="uid://xhpf67anjb8h" path="res://assets/PrototypeTexture/PNG/Dark/texture_13.png" id="2_6ip24"]
 [ext_resource type="PackedScene" uid="uid://deoawyiq5adrh" path="res://nodes/objects/escada.tscn" id="3_ibvji"]
@@ -47,6 +48,7 @@ albedo_texture = ExtResource("4_7lqbd")
 
 [node name="Playgroung" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00338268, 0, -0.00146389)
+script = ExtResource("1_2t3dd")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_osbiw")

@@ -11,7 +11,8 @@ func _ready():
 	
 func _on_PlayButton_pressed():
 	# Transition to the game scene
-	get_tree().change_scene_to_file("res://nodes/levels/Tutorial.tscn")
+	var scene = ConfigFileHandler.retrieve_last_scene()
+	get_tree().change_scene_to_file(scene)
 
 func _on_SettingsButton_pressed():
 	# Quit the game
