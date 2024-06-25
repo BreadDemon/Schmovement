@@ -2,22 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://bpk6w56a4l3uy" path="res://nodes/features/jump_pad.tscn" id="1_2noc6"]
 [ext_resource type="Texture2D" uid="uid://2cq1pbfxclnj" path="res://assets/PrototypeTexture/PNG/Dark/texture_01.png" id="1_2sa05"]
-[ext_resource type="Script" path="res://scripts/City.gd" id="1_7eria"]
+[ext_resource type="Script" path="res://scripts/Levels/City.gd" id="1_7eria"]
 [ext_resource type="PackedScene" uid="uid://csuokjcklu0d7" path="res://nodes/world_environment.tscn" id="1_xysv2"]
-[ext_resource type="PackedScene" uid="uid://dem1v18u02ngc" path="res://nodes/CharacterController.tscn" id="2_d03tp"]
 [ext_resource type="Texture2D" uid="uid://bu1el4t2ocxx1" path="res://assets/PrototypeTexture/PNG/Orange/texture_01.png" id="2_l1iu7"]
 [ext_resource type="Texture2D" uid="uid://lyntfo2h4m1i" path="res://assets/PrototypeTexture/PNG/Purple/texture_01.png" id="3_ao63s"]
 [ext_resource type="Texture2D" uid="uid://bsrl8ky78o5ou" path="res://assets/PrototypeTexture/PNG/Red/texture_01.png" id="4_ndevq"]
-[ext_resource type="PackedScene" uid="uid://b4hpx8unxlkoy" path="res://nodes/features/start_course.tscn" id="7_n04x5"]
-[ext_resource type="PackedScene" uid="uid://r3w3ughotgmt" path="res://nodes/features/return_node.tscn" id="8_1tobv"]
-[ext_resource type="PackedScene" uid="uid://bwk6svly34oyr" path="res://nodes/features/end_course.tscn" id="9_f0sov"]
+[ext_resource type="PackedScene" uid="uid://b4hpx8unxlkoy" path="res://nodes/features/Running/start_course.tscn" id="7_n04x5"]
+[ext_resource type="PackedScene" uid="uid://r3w3ughotgmt" path="res://nodes/features/Running/return_node.tscn" id="8_1tobv"]
+[ext_resource type="PackedScene" uid="uid://bwk6svly34oyr" path="res://nodes/features/Running/end_course.tscn" id="9_f0sov"]
 [ext_resource type="Material" uid="uid://bnbfqom1wyvcs" path="res://assets/Textures/Dark_texture.tres" id="11_nw7jb"]
 [ext_resource type="PackedScene" uid="uid://c0h6pl467n324" path="res://nodes/features/refresh_wall.tscn" id="12_nmrvk"]
 [ext_resource type="PackedScene" uid="uid://cbjmtxba73jo0" path="res://nodes/features/loading_zone.tscn" id="13_t4ahx"]
 [ext_resource type="PackedScene" uid="uid://bvxchrpc37fyo" path="res://nodes/objects/cube.tscn" id="14_6g0fh"]
 [ext_resource type="Material" uid="uid://dvxjdqtpsrr25" path="res://assets/Textures/Purple_texture.tres" id="14_pa7cp"]
-[ext_resource type="PackedScene" uid="uid://cx7g5bussvmke" path="res://nodes/features/receptor.tscn" id="15_wjyvv"]
-[ext_resource type="PackedScene" uid="uid://po75jr6axkjl" path="res://nodes/features/teleporter.tscn" id="16_gpeyr"]
+[ext_resource type="PackedScene" uid="uid://cx7g5bussvmke" path="res://nodes/features/Teleporter/receptor.tscn" id="15_wjyvv"]
+[ext_resource type="PackedScene" uid="uid://po75jr6axkjl" path="res://nodes/features/Teleporter/teleporter.tscn" id="16_gpeyr"]
+[ext_resource type="PackedScene" uid="uid://j43cqowhjsf6" path="res://nodes/ControllerV2.tscn" id="18_nk734"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_703mf"]
 albedo_texture = ExtResource("1_2sa05")
@@ -78,9 +78,6 @@ script = ExtResource("1_7eria")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.931096, 0.192381, 0.30992, -0.348827, 0.221115, 0.910729, 0.106679, -0.956085, 0.272987, 0, 3, 0)
 shadow_enabled = true
-
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_d03tp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0317, 1.51228, 4.91593)
 
 [node name="Runs" type="Node3D" parent="."]
 
@@ -813,3 +810,6 @@ transform = Transform3D(-9.18848e-08, 0, -1, 0, 2.10208, 0, 2.10208, 0, -4.37114
 
 [node name="RefreshWall4" parent="Map" instance=ExtResource("12_nmrvk")]
 transform = Transform3D(-4.32122e-08, 0, -1, 0, 0.98858, 0, 0.98858, 0, -4.37114e-08, -62.565, 4.47619, -29.5362)
+
+[node name="ControllerV2" parent="." instance=ExtResource("18_nk734")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, 4)

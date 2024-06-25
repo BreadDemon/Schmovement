@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4hpx8unxlkoy"]
 
-[ext_resource type="Script" path="res://scripts/start_course.gd" id="1_u3u1t"]
+[ext_resource type="Script" path="res://scripts/features/runs/start_course.gd" id="1_u3u1t"]
 [ext_resource type="Texture2D" uid="uid://c3wcynfdcbmq2" path="res://assets/PrototypeTexture/PNG/Light/texture_01.png" id="2_1nypo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_isnhe"]

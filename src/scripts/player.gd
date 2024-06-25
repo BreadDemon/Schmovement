@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Player
+
 
 # Gravity
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -41,7 +41,6 @@ var sliding_timer_max = 1.0
 var slide_vector = Vector2.ZERO
 var slide_direction = Vector3.ZERO
 var slide_speed = 5
-var slide_speed_init = 5
 var spam_timer = 0.0
 var spam_timer_max = 0.6
 var spam_state = false
