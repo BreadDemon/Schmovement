@@ -55,16 +55,11 @@ func hide_other_runs():
 		if run.get_node("start").run_name != run_name:
 			run.get_node("start").visible = false
 			run.get_node("end").visible = false
-		for checkpoint in run.get_node("checkpoints").get_children():
-			if checkpoint.mother_run.run_name != run_name:
-				checkpoint.visible = false
 func show_other_runs():
 	var runs = get_parent().get_parent().get_children()
 	print("Show me!")
 	for run in runs:
 		run.get_node("start").visible = true
-		for checkpoint in run.get_node("checkpoints").get_children():
-			checkpoint.visible = true
 func collected_all_checkpoints() -> bool:
 	for checkpoint in checkpoints:
 		if !checkpoint.is_collected:
@@ -75,6 +70,12 @@ func reset_all_checkpoints():
 		print(checkpoint.time_by_checkpoint)
 		print(checkpoint.time_since_last_checkpoint)
 		checkpoint.is_collected = false
+func show_my_checkpoints():
+	for checkpoint in get_parent().get_node("checkpoints").get_children():
+		checkpoint.visible = true
+func hide_my_checkpoints():
+	for checkpoint in get_parent().get_node("checkpoints").get_children():
+		checkpoint.visible = false
 func _on_body_entered(body):
 	ConfigFileHandler.load_runs($".")
 	
@@ -82,6 +83,7 @@ func _on_body_entered(body):
 		get_vars(body)
 		if node_type == _type.START and !timer.running and start_timer <= 0.0:
 			self.visible = false
+			show_my_checkpoints()
 			other_node.visible = true
 			set_vars()
 			hide_other_runs()
@@ -94,7 +96,8 @@ func _on_body_entered(body):
 				Global.origin_point = restart_point.transform.origin
 		elif node_type == _type.END and other_node == Global.run and timer.running and collected_all_checkpoints():
 			timer.running = false
-			start_timer = start_timer_max
+			hide_my_checkpoints()
+			other_node.start_timer = start_timer_max
 			timer.set_pb(other_node)
 			reset_all_checkpoints()
 			show_other_runs()
