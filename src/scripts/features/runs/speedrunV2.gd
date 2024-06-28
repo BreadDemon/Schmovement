@@ -53,6 +53,8 @@ func show_other_runs():
 		run.get_node("start").visible = true
 		run.get_node("end").visible = true
 func _on_body_entered(body):
+	ConfigFileHandler.load_runs($".")
+	
 	if body is Player:
 		get_vars(body)
 		if node_type == _type.START and !timer.running:

@@ -36,7 +36,7 @@ func set_pb(start_course):
 		Global.pb = Global.start_time
 		personal_best.text = str(Global.pb)
 		start_course.PB = float(Global.start_time)
-		ConfigFileHandler.save_runs(start_course.run_name, str(start_course.PB))
+		ConfigFileHandler.save_runs(start_course.run_name, start_course.PB)
 		return
 		
 	if float(Global.pb) != 0:
@@ -55,4 +55,4 @@ func set_pb(start_course):
 		Global.pb = Global.start_time
 		personal_best.text = str(Global.pb)
 		start_course.PB = float(Global.start_time)
-		ConfigFileHandler.save_runs(start_course.run_name, str(start_course.PB))
+		ConfigFileHandler.save_runs(start_course.run_name, start_course.PB)
