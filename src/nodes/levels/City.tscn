@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c4jqkpoltky2y"]
+[gd_scene load_steps=33 format=3 uid="uid://c4jqkpoltky2y"]
 
 [ext_resource type="PackedScene" uid="uid://bpk6w56a4l3uy" path="res://nodes/features/jump_pad.tscn" id="1_2noc6"]
 [ext_resource type="Texture2D" uid="uid://2cq1pbfxclnj" path="res://assets/PrototypeTexture/PNG/Dark/texture_01.png" id="1_2sa05"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cx7g5bussvmke" path="res://nodes/features/Teleporter/receptor.tscn" id="15_wjyvv"]
 [ext_resource type="PackedScene" uid="uid://po75jr6axkjl" path="res://nodes/features/Teleporter/teleporter.tscn" id="16_gpeyr"]
 [ext_resource type="PackedScene" uid="uid://j43cqowhjsf6" path="res://nodes/ControllerV2.tscn" id="18_nk734"]
+[ext_resource type="PackedScene" uid="uid://dth5eq8xdowfn" path="res://nodes/features/Running/speedrunV2.tscn" id="19_nfcuf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_703mf"]
 albedo_texture = ExtResource("1_2sa05")
@@ -858,3 +859,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.5, 3)
 
 [node name="Scene_return" parent="." instance=ExtResource("8_1tobv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 2.6116, 3)
+
+[node name="runs" type="Node3D" parent="."]
+
+[node name="James" type="Node3D" parent="runs"]
+
+[node name="start" parent="runs/James" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, -10)
+run_name = "James"
+other_node = NodePath("../end")
+
+[node name="end" parent="runs/James" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 1, -10)
+other_node = NodePath("../start")
+node_type = 1
+
+[node name="Jones" type="Node3D" parent="runs"]
+
+[node name="start" parent="runs/Jones" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, -14)
+run_name = "Jones"
+dev_time = 99.999
+other_node = NodePath("../end")
+
+[node name="end" parent="runs/Jones" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 1, -14)
+other_node = NodePath("../start")
+node_type = 1

@@ -3,6 +3,7 @@ class_name StartCourse
 
 @export var run_name = "None"
 @export var origin_point: ReturnNode
+
 var has_calculated
 
 # Implementar texto mostrando se venceu do tempo dev 
@@ -32,13 +33,14 @@ func _on_body_entered(body):
 				DevTime.text = ""
 			Personal.text = str(pb)
 			has_calculated = false
-			self.monitorable = true
-			self.monitoring = true
+			#self.monitorable = true
+			#self.monitoring = true
 			timer.reset_timer()
-			Global.start_time = str(0.0)
+			Global.start_time = 0.0
 			Global.start_course = self
 			Global.origin_point = origin_point.transform.origin
 			timer.running = true
 		else:
-			self.monitorable = false
-			self.monitoring = false
+			pass
+			#self.monitorable = false
+			#self.monitoring = false

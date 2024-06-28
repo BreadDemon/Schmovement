@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dth5eq8xdowfn"]
+
+[ext_resource type="Script" path="res://scripts/features/runs/speedrunV2.gd" id="1_1tevi"]
+[ext_resource type="Material" uid="uid://co3y5acwsyhdq" path="res://assets/Textures/green.tres" id="2_6tn5x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g0yyk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vlrm4"]
+material = ExtResource("2_6tn5x")
+
+[node name="Speedrun_Node" type="Area3D"]
+script = ExtResource("1_1tevi")
+dev_time = 12.321
+
+[node name="Shape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_g0yyk")
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_6tn5x")
+mesh = SubResource("BoxMesh_vlrm4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

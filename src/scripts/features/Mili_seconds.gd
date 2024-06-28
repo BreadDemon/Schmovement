@@ -1,4 +1,5 @@
 extends Label
+class_name GameTimer
 
 var start_time = Global.start_time
 @export var running: bool = false
@@ -7,48 +8,51 @@ var result_diff
 
 func _physics_process(delta):
 	if running:
-		start_time = float(start_time) + delta
+		start_time = start_time + delta
 		update()
 
 func update():
 	if running:
-		var formatted_time = str(start_time+0.000)
-		var decimal_index = formatted_time.find(".")
-		if decimal_index > 0:
-			formatted_time = formatted_time.left(decimal_index + 4)  # Take only three decimal places
+		var format = "%.3f"
+		format = format % start_time
 		
-		Global.start_time = formatted_time
-		text = formatted_time.replace(".", ":")
-		if start_time < float(Global.personal_best) || float(Global.personal_best) == 0.0:
+		Global.start_time = format
+		text = format.replace(".", ":")
+		if start_time < float(Global.pb) || float(Global.pb) == 0.0:
 			add_theme_color_override("font_color", Color(0, 1, 0))
 		else:
 			add_theme_color_override("font_color", Color(1, 0, 0))
 
 func reset_timer():
 	start_time = 0.0
-	Global.start_time = str(start_time)
+	Global.start_time = start_time
 	update()
 	running = false
 
+#TODO: make the save again, make it save floats
 func set_pb(start_course):
-	if float(Global.start_time) == 0.0:
-		print("Failed PB setting somehow")
+	if float(Global.pb) == 0.0:
+		var personal_best = get_parent().get_node("times").get_node("PersonalBest")
+		Global.pb = Global.start_time
+		personal_best.text = str(Global.pb)
+		start_course.PB = float(Global.start_time)
+		ConfigFileHandler.save_runs(start_course.run_name, str(start_course.PB))
 		return
 		
-	if float(Global.personal_best) != 0:
+	if float(Global.pb) != 0:
 		var diff = get_parent().get_node("times").get_node("Diff")
 		var format = "%s%.3f"
-		result_diff = start_time - float(Global.personal_best)
-		if Global.start_time > Global.personal_best:
+		result_diff = start_time - float(Global.pb)
+		if Global.start_time > Global.pb:
 			diff.text = format % ["+", result_diff]
 			diff.add_theme_color_override("font_color", Color(1, 0, 0))
 		else:
 			diff.text = format % ["", result_diff]
 			diff.add_theme_color_override("font_color", Color(0, 0.65, 0.075))
 
-	if float(Global.personal_best) > float(Global.start_time) || float(Global.personal_best) == 0:
+	if float(Global.pb) > float(Global.start_time) || float(Global.pb) == 0:
 		var personal_best = get_parent().get_node("times").get_node("PersonalBest")
-		Global.personal_best = Global.start_time
-		personal_best.text = Global.personal_best
-		start_course.pb = Global.start_time
-		ConfigFileHandler.save_runs(start_course.run_name, start_course.pb)
+		Global.pb = Global.start_time
+		personal_best.text = str(Global.pb)
+		start_course.PB = float(Global.start_time)
+		ConfigFileHandler.save_runs(start_course.run_name, str(start_course.PB))

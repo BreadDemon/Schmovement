@@ -1,7 +1,8 @@
 extends Node
 
-var start_time = 0
-var personal_best = 0
+var start_time:float = 0
+var pb: float
+var start: Speedrun
 
 var start_course
 

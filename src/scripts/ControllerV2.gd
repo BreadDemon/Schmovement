@@ -364,6 +364,8 @@ func reset():
 	var reset_timer = get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
 	reset_timer.reset_timer()
 	transform.origin = Global.origin_point
+	Global.start.visible = true
+	Global.start.show_other_runs()
 	current_speed = 0
 	slide_timer = 0
 	velocity.x = 0
