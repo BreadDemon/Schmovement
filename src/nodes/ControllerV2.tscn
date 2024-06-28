@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/ControllerV2.gd" id="1_ojey4"]
 [ext_resource type="PackedScene" uid="uid://d1cdc6cilif2a" path="res://nodes/menus/pause_menu.tscn" id="2_1avvc"]
-[ext_resource type="PackedScene" uid="uid://dxllibo2xe04" path="res://nodes/menus/Timer.tscn" id="3_mjqi2"]
 [ext_resource type="PackedScene" uid="uid://dq15eqjrays08" path="res://nodes/menus/debug.tscn" id="4_1jnl2"]
+[ext_resource type="PackedScene" uid="uid://bb1835p4yp4ax" path="res://nodes/menus/timerV2.tscn" id="4_2nt6k"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nq2yg"]
 
@@ -47,6 +47,6 @@ target_position = Vector3(0, 0, -1.5)
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_1avvc")]
 
-[node name="Timer" parent="." instance=ExtResource("3_mjqi2")]
-
 [node name="Debug" parent="." instance=ExtResource("4_1jnl2")]
+
+[node name="TimerV2" parent="." instance=ExtResource("4_2nt6k")]

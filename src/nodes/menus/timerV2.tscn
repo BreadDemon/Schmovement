@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb1835p4yp4ax"]
+
+[ext_resource type="Script" path="res://scripts/menus/timerV2.gd" id="1_euryo"]
+
+[node name="TimerV2" type="CanvasLayer"]
+script = ExtResource("1_euryo")
+
+[node name="Panel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(180, 0)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_bottom = 177.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Container" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+
+[node name="Name_Attempts" type="HBoxContainer" parent="Panel/Container"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Panel/Container/Name_Attempts"]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+
+[node name="Attempts" type="Label" parent="Panel/Container/Name_Attempts"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Clock" type="Label" parent="Panel/Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "0:000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Checkpoint" type="HBoxContainer" parent="Panel/Container"]
+layout_mode = 2
+
+[node name="Checkpoint_Diff" type="Label" parent="Panel/Container/Checkpoint"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Checkpoint_Time" type="Label" parent="Panel/Container/Checkpoint"]
+modulate = Color(0.34488, 0.846662, 5.39064e-06, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2
+
+[node name="Diff_PB" type="HBoxContainer" parent="Panel/Container"]
+layout_mode = 2
+
+[node name="Diff" type="Label" parent="Panel/Container/Diff_PB"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PersonalBest" type="Label" parent="Panel/Container/Diff_PB"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0.8, 0, 1)
+horizontal_alignment = 2
+
+[node name="DT" type="HBoxContainer" parent="Panel/Container"]
+layout_mode = 2
+
+[node name="time" type="Label" parent="Panel/Container/DT"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DevTime" type="Label" parent="Panel/Container/DT"]
+layout_mode = 2
+size_flags_horizontal = 3

@@ -11,6 +11,7 @@ var start_timer: float = 0.0
 @export var start_timer_max: float = 3.0
 var last_collected_checkpoint: Checkpoint
 var PB: float
+var attempts: int
 
 enum _type { START, END }
 @export var node_type: _type
@@ -18,8 +19,18 @@ enum _type { START, END }
 @onready var visual = $Visual
 const RED = preload("res://assets/Textures/red.tres")
 
-var timer: GameTimer
+var timer: TimerV2
+var container: VBoxContainer
+
 var timer_run_name: Label
+var timer_attempts: Label
+
+var clock: Label
+
+var checkpoint_diff: Label
+var checkpoint_time: Label
+
+var timer_diff: Label
 var timer_pb: Label
 var timer_dt: Label
 var timer_dt_beaten: Label
@@ -35,15 +46,25 @@ func _process(delta):
 	if start_timer < -1.0:
 		start_timer = 0.0
 func get_vars(body):
-	timer = body.get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
-	timer_run_name = timer.get_parent().get_node("Name")
-	timer_pb = timer.get_parent().get_node("times").get_node("PersonalBest")
-	timer_dt = timer.get_parent().get_node("DT").get_node("time")
-	timer_dt_beaten = timer.get_parent().get_node("DT").get_node("DevTime")
+	timer = body.get_node("TimerV2")
+	container = timer.get_node("Panel/Container")
+	
+	timer_run_name = container.get_node("Name_Attempts/Name")
+	timer_attempts = container.get_node("Name_Attempts/Attempts")
+	
+	clock = container.get_node("Clock")
+	
+	checkpoint_diff = container.get_node("Checkpoint/Checkpoint_Diff")
+	checkpoint_time = container.get_node("Checkpoint/Checkpoint_Time")
+	
+	timer_diff = container.get_node("Diff_PB/Diff")
+	timer_pb = container.get_node("Diff_PB/PersonalBest")
+	timer_dt = container.get_node("DT/time")
+	timer_dt_beaten = container.get_node("DT/DevTime")
 func set_vars():
 	timer_run_name.text = run_name
 	timer_dt.text = format % ["DT: ", str(dev_time)]
-	timer_pb.text = str(PB)
+	timer_pb.text = "PB: " + str(PB)
 	timer.reset_timer()
 	timer.running = true
 	if PB > dev_time or PB == 0.0:
@@ -76,12 +97,18 @@ func show_my_checkpoints():
 func hide_my_checkpoints():
 	for checkpoint in get_parent().get_node("checkpoints").get_children():
 		checkpoint.visible = false
+func clear_checkpoint_pb():
+	checkpoint_diff.text = ""
+	checkpoint_time.text = ""
 func _on_body_entered(body):
 	ConfigFileHandler.load_runs($".")
 	
 	if body is Player:
 		get_vars(body)
 		if node_type == _type.START and !timer.running and start_timer <= 0.0:
+			attempts += 1
+			clear_checkpoint_pb()
+			timer_attempts.text = str(attempts)
 			self.visible = false
 			show_my_checkpoints()
 			other_node.visible = true

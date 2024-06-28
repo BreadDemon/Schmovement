@@ -353,7 +353,7 @@ func _physics_process(delta):
 	finish_movement(delta)
 
 func reset_pos():
-	var run_timer = get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
+	var run_timer = get_node("TimerV2")
 	if run_timer.running:
 		return
 	transform.origin = scene_return.transform.origin
@@ -363,7 +363,7 @@ func reset_pos():
 	velocity.y = 0
 	velocity.z = 0
 func reset():
-	var reset_timer = get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
+	var reset_timer = get_node("TimerV2")
 	reset_timer.reset_timer()
 	transform.origin = Global.origin_point
 	Global.run.visible = true
