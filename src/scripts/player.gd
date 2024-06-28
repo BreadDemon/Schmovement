@@ -1,13 +1,11 @@
 extends CharacterBody3D
-
-
 # Gravity
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var jump_buffer_time = 0.2
 var jump_timer = 0
 var wall_jump_wait = 0.0
 var wall_jump_wait_max = 0.2
-var can_wall_jump
+var has_wall_jump
 var can_coyote
 var coyote_timer = 0.0
 var coyote_timer_max = 0.1
@@ -179,14 +177,14 @@ func handle_jump(delta):
 		can_coyote = true
 	
 	if is_on_floor():
-		can_wall_jump = true
+		has_wall_jump = true
 		has_jumped = false
 	
 	if Input.is_action_just_pressed("Jump"):
 		jump_timer = jump_buffer_time
 
-	if jump_timer > 0 and is_on_wall() and can_wall_jump and !is_on_floor() and wall_jump_wait < 0:
-		can_wall_jump = false
+	if jump_timer > 0 and is_on_wall() and has_wall_jump and !is_on_floor() and wall_jump_wait < 0:
+		has_wall_jump = false
 		can_coyote = false
 		has_jumped = true
 		velocity.y = jump_velocity

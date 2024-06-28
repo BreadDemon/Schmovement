@@ -1,14 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://j43cqowhjsf6"]
+[gd_scene load_steps=7 format=3 uid="uid://j43cqowhjsf6"]
 
 [ext_resource type="Script" path="res://scripts/ControllerV2.gd" id="1_ojey4"]
 [ext_resource type="PackedScene" uid="uid://d1cdc6cilif2a" path="res://nodes/menus/pause_menu.tscn" id="2_1avvc"]
 [ext_resource type="PackedScene" uid="uid://dxllibo2xe04" path="res://nodes/menus/Timer.tscn" id="3_mjqi2"]
 [ext_resource type="PackedScene" uid="uid://dq15eqjrays08" path="res://nodes/menus/debug.tscn" id="4_1jnl2"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mmxgm"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_owov4"]
-radius = 0.49006
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nq2yg"]
 
@@ -19,13 +14,6 @@ height = 0.96211
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 floor_constant_speed = true
 script = ExtResource("1_ojey4")
-
-[node name="StandingCapsule" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_mmxgm")
-
-[node name="CrouchingCapsule" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51, 0)
-shape = SubResource("SphereShape3D_owov4")
 
 [node name="StandingCylinder" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_nq2yg")
@@ -45,7 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99, 0)
 target_position = Vector3(0, 1.98, 0)
 
 [node name="Neck" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.648, 0)
 
 [node name="Interact" type="RayCast3D" parent="Neck"]
 target_position = Vector3(0, 0, -1.5)

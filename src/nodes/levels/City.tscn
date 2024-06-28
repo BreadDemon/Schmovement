@@ -580,7 +580,7 @@ transform = Transform3D(0.373166, 0, 0.927765, 0, 1, 0, -0.927765, 0, 0.373166, 
 transform = Transform3D(0.98872, 0, 0.149777, 0, 1, 0, -0.149777, 0, 0.98872, 22.512, 0.925709, -36.4365)
 
 [node name="receptor" parent="Map/Section2/Objects" instance=ExtResource("15_wjyvv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.5, 1, -52.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.5, 2, -52.5)
 
 [node name="Teleporter" parent="Map/Section2/Objects" node_paths=PackedStringArray("receptor") instance=ExtResource("16_gpeyr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 1, -52.5)
@@ -717,8 +717,8 @@ size = Vector3(1, 6, 5)
 material = ExtResource("11_nw7jb")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Map/Section3/Geometry/Building"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 10.5916, 9)
-size = Vector3(2, 1.81689, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 10.7187, 9)
+size = Vector3(2, 1.56274, 5)
 material = ExtResource("11_nw7jb")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Map/Section3/Geometry/Building"]
@@ -811,5 +811,51 @@ transform = Transform3D(-9.18848e-08, 0, -1, 0, 2.10208, 0, 2.10208, 0, -4.37114
 [node name="RefreshWall4" parent="Map" instance=ExtResource("12_nmrvk")]
 transform = Transform3D(-4.32122e-08, 0, -1, 0, 0.98858, 0, 0.98858, 0, -4.37114e-08, -62.565, 4.47619, -29.5362)
 
-[node name="ControllerV2" parent="." instance=ExtResource("18_nk734")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, 4)
+[node name="RefreshWall5" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 3.98581, 0, -8.74228e-08, 0, -1, 0.523478, 3.69887, 2.47904)
+
+[node name="RefreshWall6" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 3.98581, 0, -8.74228e-08, 0, -1, 2.52348, 3.69887, 2.47904)
+
+[node name="RefreshWall7" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 3.98581, 0, -8.74228e-08, 0, -1, 4.52348, 3.69887, 2.47904)
+
+[node name="RefreshWall8" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 3.98581, 0, -8.74228e-08, 0, -1, 6.52348, 3.69887, 2.47904)
+
+[node name="RefreshWall9" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 3.98581, 0, -8.74228e-08, 0, -1, 8.52348, 3.69887, 2.47904)
+
+[node name="RefreshWall10" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 3.98581, 0, -8.74228e-08, 0, -1, 10.5235, 3.69887, 2.47904)
+
+[node name="RefreshWall11" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 3.98581, 0, -8.74228e-08, 0, -1, 12.5235, 3.69887, 2.47904)
+
+[node name="RefreshWall12" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 17.5096, 3.69887, 0.509268)
+
+[node name="RefreshWall13" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 15.5096, 3.69887, 0.509268)
+
+[node name="RefreshWall14" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 13.5096, 3.69887, 0.509268)
+
+[node name="RefreshWall15" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 11.5096, 3.69887, 0.509268)
+
+[node name="RefreshWall16" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 9.50957, 3.69887, 0.509268)
+
+[node name="RefreshWall17" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 7.50957, 3.69887, 0.509268)
+
+[node name="RefreshWall18" parent="Map" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 5.50957, 3.69887, 0.509267)
+
+[node name="ControllerV2" parent="." node_paths=PackedStringArray("scene_return") instance=ExtResource("18_nk734")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.5, 3)
+scene_return = NodePath("../Scene_return")
+
+[node name="Scene_return" parent="." instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 2.6116, 3)

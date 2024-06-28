@@ -13,7 +13,11 @@ func _on_PlayButton_pressed():
 	# Transition to the game scene
 	var scene = ConfigFileHandler.retrieve_last_scene()
 	get_tree().change_scene_to_file(scene)
-
+	var keybindings = ConfigFileHandler.load_keybindings()
+	for action in keybindings.keys():
+		InputMap.action_erase_events(action)
+		InputMap.action_add_event(action, keybindings[action])
+		
 func _on_SettingsButton_pressed():
 	# Quit the game
 	get_tree().change_scene_to_file("res://nodes/menus/input_settings.tscn")

@@ -3,22 +3,22 @@ class_name Player
 
 # Airborne vars
 @export_category("Jump Settings")
-@export_range(0.1, 10, 0.1) var gravity_force: float = 1.2
+@export_range(0.1, 10, 0.1) var gravity_force: float = 1.0 # (1.2)
 @export var remove_air_penalty_offset: bool = false
-@export_range(0, 4, 0.1) var air_penalty: float = 1.3
-@export_range(0, 10) var jump_velocity: float = 4.5
-var air_penalty_offset: float = 17 # Maybe disponibilize this for edits
+@export_range(0, 4, 0.1) var air_penalty: float = 0.0 # (1.3)
+@export_range(0, 10) var jump_velocity: float = 4.7 # (4.5)
+var air_penalty_offset: float = 12 # (17) Maybe disponibilize this for edits
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var has_jumped: bool = false
 var set_coyote: bool = false
 var coyote_timer: float = 0.0
 @export_range(0, 3, 0.1) var coyote_timer_max: float = 0.2
 var jump_buffer_timer: float = 0.0
-@export_range(0, 3, 0.1) var jump_buffer_timer_max: float = 0.3
+@export_range(0, 3, 0.1) var jump_buffer_timer_max: float = 0.2
 var has_wall_jump: bool = true
 var wall_jump_wait: float = 0.0
-@export_range(0, 2, 0.1) var wall_jump_wait_max = 0.2
-@export var use_jump_buffer_for_wall_jumps: bool = false
+@export_range(0, 2, 0.01) var wall_jump_wait_max = 0.21
+@export var use_jump_buffer_for_wall_jumps: bool = true
 
 # Only for textual display
 var grounded: bool
@@ -35,7 +35,8 @@ var current_speed:float = walk_speed
 enum States { WALKING, RUNNING, CROUCHING, SLIDING }
 var current_state: States = States.WALKING
 var previous_state: States = States.WALKING
-@export var capsule_hitbox: bool = false 
+@export var capsule_hitbox: bool = false
+@export var scene_return: ReturnNode
 
 # Mouse Vars
 @export_category("Mouse Settings")
@@ -47,7 +48,7 @@ var direction: Vector3 = Vector3.ZERO
 
 # Lerp vars
 @export_category("Lerp Settings")
-var lerp_accel: float = 20
+var lerp_accel: float = 15 # (20)
 @export_range(0, 5, 0.1) var speed_lerp_factor: float = 2.0
 @export_range(0, 5, 0.1) var crouch_camera_lerp_factor = 3.0
 
@@ -59,16 +60,6 @@ var slide_direction = Vector3.ZERO
 @export_range(0, 5, 0.1) var slide_timer_max: float = 1.0
 @export_range(0, 10, 0.1) var slide_speed: float = 5.0
 
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	standing_cylinder.disabled = false
-	crouching_cylinder.disabled = true
-	if capsule_hitbox:
-		standing_cylinder = standing_capsule
-		crouching_cylinder = crouching_capsule
-		standing_cylinder.disabled = false
-		crouching_cylinder.disabled = true
-
 func _input(event):
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -76,6 +67,8 @@ func _input(event):
 		pause_menu.pause()
 	elif event.is_action_pressed("Reset"):
 		reset()
+	elif event.is_action_pressed("Return"):
+		reset_pos()
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
@@ -98,10 +91,11 @@ func _process(_delta):
 	text += "Has_wall_jump: " + str(has_wall_jump) + "\n"
 	text += "Can_wall_jump: " + str(can_wall_jump()) + "\n"
 	debug_vars.text = text
+	
+	if position.y < -100:
+		transform.origin = scene_return.transform.origin
 
 # Controller parts
-@onready var standing_capsule = $StandingCapsule
-@onready var crouching_capsule = $CrouchingCapsule
 @onready var standing_cylinder = $StandingCylinder
 @onready var crouching_cylinder = $CrouchingCylinder
 @onready var crouched_view = $CrouchedView
@@ -114,6 +108,11 @@ func _process(_delta):
 @onready var pause_menu = $PauseMenu
 @onready var timer = $Timer
 @onready var debug = $Debug
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	standing_cylinder.disabled = false
+	crouching_cylinder.disabled = true
 
 func handle_timers(delta):
 	slide_timer -= delta
@@ -138,7 +137,6 @@ func toggle_crouch_cylinder():
 func toggle_standing_cylinder():
 	standing_cylinder.disabled = false
 	crouching_cylinder.disabled = true
-
 func can_slide() -> bool:
 	var is_crouched: bool = Input.is_action_pressed("Crouch") 
 	var is_running: bool = current_state == States.RUNNING
@@ -150,6 +148,12 @@ func keep_sliding() -> bool:
 	var still_sliding: bool = slide_timer > 0.0
 	var still_crouching: bool = Input.is_action_pressed("Crouch")
 	return still_sliding and still_crouching and is_on_floor() and slide_state
+func can_sprint() -> bool:
+	var tried_running: bool = Input.is_action_pressed("Sprint") 
+	var is_crouching: bool = current_state != States.CROUCHING 
+	var is_sliding: bool = current_state != States.SLIDING
+	var is_moving = input_dir != Vector2.ZERO
+	return tried_running and is_crouching and is_sliding and is_moving
 func switch_state(state: States):
 	previous_state = current_state
 	current_state = state
@@ -165,7 +169,7 @@ func handle_states(delta):
 			direction = (slide_direction * Vector3(slide_vector.x, 0, slide_vector.y)).normalized()
 			current_speed = (slide_timer + 1) * slide_speed
 		neck.position.y = lerp(neck.position.y, crouched_view.position.y, delta * crouch_camera_lerp_factor)
-	elif Input.is_action_pressed("Sprint") and current_state != States.CROUCHING and current_state != States.SLIDING:
+	elif can_sprint():
 		if current_state != States.RUNNING:
 			switch_state(States.RUNNING)
 		if is_on_floor():
@@ -205,7 +209,7 @@ func can_wall_jump() -> bool:
 	var tried_jump: bool = Input.is_action_just_pressed("Jump")
 	var on_wall: bool = is_on_wall() and !is_on_floor() 
 	if use_jump_buffer_for_wall_jumps:
-		return jump_buffer_timer > 0 and has_jump and wall_jump_timer_over and tried_jump and on_wall
+		return jump_buffer_timer > 0 and has_jump and wall_jump_timer_over and on_wall
 	return has_jump and wall_jump_timer_over and tried_jump and on_wall
 func handle_coyote(_delta):
 	if !is_on_floor() and !has_jumped and !set_coyote:
@@ -264,6 +268,17 @@ func _physics_process(delta):
 	handle_vertical(delta)
 	finish_movement(delta)
 
+# TODO: Make a reset Controller function
+func reset_pos():
+	var timer = get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
+	if timer.running:
+		return
+	transform.origin = scene_return.transform.origin
+	current_speed = 0
+	slide_timer = 0
+	velocity.x = 0
+	velocity.y = 0
+	velocity.z = 0
 func reset():
 	var reset_timer = get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
 	reset_timer.reset_timer()

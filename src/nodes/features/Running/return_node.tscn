@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://r3w3ughotgmt"]
+[gd_scene load_steps=4 format=3 uid="uid://r3w3ughotgmt"]
 
 [ext_resource type="Script" path="res://scripts/features/runs/return_node.gd" id="1_d7aep"]
+[ext_resource type="Material" uid="uid://dyt6kwwaxc158" path="res://assets/Textures/orange.tres" id="2_gtf3i"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mu8jc"]
 
 [node name="Return_node" type="Node3D"]
+visible = false
 script = ExtResource("1_d7aep")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+material_override = ExtResource("2_gtf3i")
+mesh = SubResource("SphereMesh_mu8jc")
