@@ -18,6 +18,8 @@ func _ready():
 		
 		config.set_value("Last_scene","path", "res://nodes/levels/Tutorial.tscn")		
 		
+		config.set_value("debug", "enable", false)
+		
 		config.save(SETTINGS_FILE_PATH)
 	else:
 		config.load(SETTINGS_FILE_PATH)
@@ -64,7 +66,7 @@ func retrieve_last_scene() -> String:
 		return last_scene
 	return ""
 	
-func save_runs(run_name: StringName, personal_best: String):
+func save_runs(run_name: StringName, personal_best: float):
 	configruns.set_value("RunName", run_name, personal_best)
 	configruns.save(RUNS_FILE_PATH)
 	
@@ -72,4 +74,10 @@ func load_runs(runs):
 	var run_names = configruns.get_section_keys("RunName")
 	for run_name in run_names:
 		if runs.run_name == run_name:
-			runs.pb = configruns.get_value("RunName", run_name)
+			runs.PB = configruns.get_value("RunName", run_name)
+
+func save_debug(config_name: String, state):
+	pass
+
+func load_debug(config_name):
+	pass
