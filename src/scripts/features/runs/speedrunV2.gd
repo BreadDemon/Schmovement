@@ -24,14 +24,9 @@ var format = "%s%s"
 var PB: float
 
 func _ready():
-	print_debug("Initial checkpoints state in _ready")
 	if node_type == _type.END:
 		run_name = other_node.run_name
 		visual.set_material_override(RED)
-	
-	# Backup the initial state of checkpoints
-	var backup_checkpoints = checkpoints.duplicate()
-	print_debug("Initial Checkpoints (backup)")
 
 func get_vars(body):
 	timer = body.get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")

@@ -367,6 +367,8 @@ func reset():
 	transform.origin = Global.origin_point
 	Global.start.visible = true
 	Global.start.show_other_runs()
+	for checkpoint in Global.start.other_node.checkpoints:
+		checkpoint.is_collected = false
 	current_speed = 0
 	slide_timer = 0
 	velocity.x = 0
