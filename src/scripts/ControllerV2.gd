@@ -29,6 +29,8 @@ var grounded: bool
 @export_range(0, 20, 0.1) var walk_speed: float = 5.0
 @export_range(0, 20, 0.1) var run_speed: float = 7.0
 var current_speed:float = walk_speed
+@export var air_speed_penalty: bool = false
+@export_range(0, 1, 0.01) var air_speed_penalty_amount: float = 0.9
 
 @export_category("Controller settings")
 # Controller States
@@ -129,6 +131,10 @@ func _ready():
 	crouching_cylinder.disabled = true
 	var global_return = get_parent().get_node("Scene_return")
 	scene_return = global_return
+	var keybindings = ConfigFileHandler.load_keybindings()
+	for action in keybindings.keys():
+		InputMap.action_erase_events(action)
+		InputMap.action_add_event(action, keybindings[action])
 
 func handle_timers(delta):
 	if !is_on_ramp || is_on_ramp and !is_looking_down_ramp:
@@ -268,7 +274,6 @@ func handle_vertical(delta):
 	handle_jump(delta)
 	handle_wall_jump()
 
-
 func get_camera_facing_direction() -> Vector3:
 	# Assuming the camera is a child of the player and its forward direction is its local -Z axis
 	return -camera.global_transform.basis.z
@@ -317,7 +322,7 @@ func check_ramp_and_inclination():
 		else:
 			is_on_ramp = false
 			ramp_modifier = 0.0
-func finish_movement(_delta):
+func finish_movement(delta):
 	if is_on_floor():
 		if direction:
 			velocity.x = direction.x * current_speed
@@ -327,8 +332,11 @@ func finish_movement(_delta):
 			velocity.z = move_toward(velocity.z, 0, current_speed)
 	else:
 		if direction:
-			velocity.x = direction.x * current_speed
-			velocity.z = direction.z * current_speed
+			if air_speed_penalty and current_speed > 10.0:
+				current_speed = lerp(current_speed, current_speed * air_speed_penalty_amount, delta/4)
+			else:
+				velocity.x = direction.x * current_speed
+				velocity.z = direction.z * current_speed
 	move_and_slide()
 func _physics_process(delta):
 	input_dir = Input.get_vector("left", "right", "forward", "back")
@@ -361,10 +369,3 @@ func reset():
 	velocity.x = 0
 	velocity.y = 0
 	velocity.z = 0
-
-
-
-
-
-
-
