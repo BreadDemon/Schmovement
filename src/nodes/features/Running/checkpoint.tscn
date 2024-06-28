@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5aaqwp8l466r"]
+[gd_scene load_steps=5 format=3 uid="uid://b5aaqwp8l466r"]
 
 [ext_resource type="Script" path="res://scripts/features/runs/checkpoint.gd" id="1_o4e3n"]
+[ext_resource type="Material" uid="uid://dvxjdqtpsrr25" path="res://assets/Textures/Purple_texture.tres" id="2_egu7e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uwqqf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ma5ru"]
+material = ExtResource("2_egu7e")
 
 [node name="Checkpoint" type="Area3D"]
 script = ExtResource("1_o4e3n")
+
+[node name="Shape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_uwqqf")
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ma5ru")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

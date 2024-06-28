@@ -176,7 +176,8 @@ func can_sprint() -> bool:
 	var is_crouching: bool = current_state != States.CROUCHING 
 	var is_sliding: bool = current_state != States.SLIDING
 	var is_moving = input_dir != Vector2.ZERO
-	return tried_running and is_crouching and is_sliding and is_moving
+	var is_going_back = Input.is_action_pressed("back")
+	return tried_running and is_crouching and is_sliding and is_moving and !is_going_back
 func switch_state(state: States):
 	previous_state = current_state
 	current_state = state
@@ -351,8 +352,8 @@ func _physics_process(delta):
 
 # TODO: Make a go to last checkpoint
 func reset_pos():
-	var timer = get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
-	if timer.running:
+	var run_timer = get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
+	if run_timer.running:
 		return
 	transform.origin = scene_return.transform.origin
 	current_speed = 0
