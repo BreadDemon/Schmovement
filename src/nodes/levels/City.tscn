@@ -874,21 +874,28 @@ other_node = NodePath("../end")
 [node name="end" parent="runs/James" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 1, -10)
 other_node = NodePath("../start")
-node_type = 1
 checkpoints = [NodePath("../checkpoints/Checkpoint"), NodePath("../checkpoints/Checkpoint2")]
+node_type = 1
 
 [node name="Return_node" parent="runs/James" instance=ExtResource("8_1tobv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.8007, 2.5, -10.0221)
 
 [node name="checkpoints" type="Node3D" parent="runs/James"]
 
-[node name="Checkpoint" parent="runs/James/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("20_8e12n")]
+[node name="Checkpoint" parent="runs/James/checkpoints" node_paths=PackedStringArray("respawn_point", "mother_run") instance=ExtResource("20_8e12n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 1, -18)
+is_respwanable = true
+respawn_point = NodePath("../../respawns/Return_node")
 mother_run = NodePath("../../start")
 
 [node name="Checkpoint2" parent="runs/James/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("20_8e12n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, -7)
 mother_run = NodePath("../../start")
+
+[node name="respawns" type="Node3D" parent="runs/James"]
+
+[node name="Return_node" parent="runs/James/respawns" instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 2, -20)
 
 [node name="Jones" type="Node3D" parent="runs"]
 
@@ -902,8 +909,8 @@ other_node = NodePath("../end")
 [node name="end" parent="runs/Jones" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 1, -14)
 other_node = NodePath("../start")
-node_type = 1
 checkpoints = [NodePath("../checkpoints/Checkpoint"), NodePath("../checkpoints/Checkpoint2"), NodePath("../checkpoints/Checkpoint3")]
+node_type = 1
 
 [node name="Return_node" parent="runs/Jones" instance=ExtResource("8_1tobv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 2, -14)
@@ -921,3 +928,34 @@ mother_run = NodePath("../../start")
 [node name="Checkpoint3" parent="runs/Jones/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("20_8e12n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 1, -7)
 mother_run = NodePath("../../start")
+
+[node name="An Apple for an Old Man" type="Node3D" parent="runs"]
+
+[node name="start" parent="runs/An Apple for an Old Man" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 1, -14.2047)
+run_name = "An Apple\\n for an Old Man"
+dev_time = 29.14
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+
+[node name="end" parent="runs/An Apple for an Old Man" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 1, -14.2)
+other_node = NodePath("../start")
+checkpoints = [NodePath("../checkpoints/Checkpoint")]
+node_type = 1
+
+[node name="Return_node" parent="runs/An Apple for an Old Man" instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 2, -14.2)
+
+[node name="checkpoints" type="Node3D" parent="runs/An Apple for an Old Man"]
+
+[node name="Checkpoint" parent="runs/An Apple for an Old Man/checkpoints" node_paths=PackedStringArray("respawn_point", "mother_run") instance=ExtResource("20_8e12n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 1, -35)
+is_respwanable = true
+respawn_point = NodePath("../../respawns/Return_node")
+mother_run = NodePath("../../start")
+
+[node name="respawns" type="Node3D" parent="runs/An Apple for an Old Man"]
+
+[node name="Return_node" parent="runs/An Apple for an Old Man/respawns" instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 2.0422, -35)

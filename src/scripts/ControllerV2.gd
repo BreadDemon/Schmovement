@@ -5,7 +5,7 @@ class_name Player
 @export_category("Jump Settings")
 @export_range(0.1, 10, 0.1) var gravity_force: float = 1.0 # (1.2)
 @export var remove_air_penalty_offset: bool = false
-@export_range(0, 4, 0.1) var air_penalty: float = 0.0 # (1.3)
+@export_range(0, 4, 0.1) var air_penalty: float = 1.0
 @export_range(0, 10) var jump_velocity: float = 4.7 # (4.5)
 var air_penalty_offset: float = 12 # (17) Maybe disponibilize this for edits
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -80,12 +80,14 @@ func _input(event):
 		reset()
 	elif event.is_action_pressed("Return"):
 		reset_pos()
+	elif event.is_action_pressed("LastCheckpoint"):
+		last_checkpoint()
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			neck.rotate_y(deg_to_rad(-event.relative.x * sensitivity))
 			camera.rotate_x(deg_to_rad(-event.relative.y * sensitivity))
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90)) 
+			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89)) 
 
 func _process(_delta):
 	var debug_vars: Label = get_node("Debug/PanelContainer/VBoxContainer/Variables")
@@ -350,7 +352,6 @@ func _physics_process(delta):
 	check_ramp_and_inclination()
 	finish_movement(delta)
 
-# TODO: Make a go to last checkpoint
 func reset_pos():
 	var run_timer = get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
 	if run_timer.running:
@@ -365,12 +366,22 @@ func reset():
 	var reset_timer = get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
 	reset_timer.reset_timer()
 	transform.origin = Global.origin_point
-	Global.start.visible = true
-	Global.start.show_other_runs()
-	for checkpoint in Global.start.other_node.checkpoints:
+	Global.run.visible = true
+	Global.run.show_other_runs()
+	for checkpoint in Global.run.other_node.checkpoints:
 		checkpoint.is_collected = false
 	current_speed = 0
 	slide_timer = 0
 	velocity.x = 0
 	velocity.y = 0
 	velocity.z = 0
+func last_checkpoint():
+	if Global.checkpoint_respawn != null:
+		transform.origin = Global.checkpoint_respawn.transform.origin
+		current_speed = 0
+		slide_timer = 0
+		velocity.x = 0
+		velocity.y = 0
+		velocity.z = 0
+	else:
+		print("Can't respawn")

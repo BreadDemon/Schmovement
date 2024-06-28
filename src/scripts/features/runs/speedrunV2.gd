@@ -6,10 +6,14 @@ class_name Speedrun
 @export var dev_time: float
 @export var restart_point: ReturnNode
 @export var other_node: Speedrun
+@export var checkpoints: Array[Checkpoint] = []
+var start_timer: float = 0.0
+@export var start_timer_max: float = 3.0
+var last_collected_checkpoint: Checkpoint
+var PB: float
+
 enum _type { START, END }
 @export var node_type: _type
-@export var checkpoints: Array[Checkpoint] = []
-var last_collected_checkpoint: Checkpoint
 
 @onready var visual = $Visual
 const RED = preload("res://assets/Textures/red.tres")
@@ -21,20 +25,21 @@ var timer_dt: Label
 var timer_dt_beaten: Label
 var format = "%s%s"
 
-var PB: float
-
 func _ready():
 	if node_type == _type.END:
 		run_name = other_node.run_name
 		visual.set_material_override(RED)
-
+		visible = false
+func _process(delta):
+	start_timer -= delta
+	if start_timer < -1.0:
+		start_timer = 0.0
 func get_vars(body):
 	timer = body.get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
 	timer_run_name = timer.get_parent().get_node("Name")
 	timer_pb = timer.get_parent().get_node("times").get_node("PersonalBest")
 	timer_dt = timer.get_parent().get_node("DT").get_node("time")
 	timer_dt_beaten = timer.get_parent().get_node("DT").get_node("DevTime")
-
 func set_vars():
 	timer_run_name.text = run_name
 	timer_dt.text = format % ["DT: ", str(dev_time)]
@@ -43,7 +48,6 @@ func set_vars():
 	timer.running = true
 	if PB > dev_time or PB == 0.0:
 		timer_dt_beaten.text = ""
-
 func hide_other_runs():
 	var runs = get_parent().get_parent().get_children()
 	print("Hide me!")
@@ -54,44 +58,46 @@ func hide_other_runs():
 		for checkpoint in run.get_node("checkpoints").get_children():
 			if checkpoint.mother_run.run_name != run_name:
 				checkpoint.visible = false
-
 func show_other_runs():
 	var runs = get_parent().get_parent().get_children()
 	print("Show me!")
 	for run in runs:
 		run.get_node("start").visible = true
-		run.get_node("end").visible = true
 		for checkpoint in run.get_node("checkpoints").get_children():
 			checkpoint.visible = true
-
 func collected_all_checkpoints() -> bool:
 	for checkpoint in checkpoints:
 		if !checkpoint.is_collected:
 			return false
 	return true
-
 func reset_all_checkpoints():
 	for checkpoint in checkpoints:
+		print(checkpoint.time_by_checkpoint)
+		print(checkpoint.time_since_last_checkpoint)
 		checkpoint.is_collected = false
-
 func _on_body_entered(body):
 	ConfigFileHandler.load_runs($".")
 	
 	if body is Player:
 		get_vars(body)
-		if node_type == _type.START and !timer.running:
+		if node_type == _type.START and !timer.running and start_timer <= 0.0:
 			self.visible = false
+			other_node.visible = true
 			set_vars()
 			hide_other_runs()
+			last_collected_checkpoint = null
+			Global.checkpoint_respawn = restart_point
 			Global.pb = PB
-			Global.start_time = 0.0
-			Global.start = self
+			Global.time = 0.0
+			Global.run = self
 			if restart_point != null:
 				Global.origin_point = restart_point.transform.origin
-		elif other_node == Global.start and timer.running and collected_all_checkpoints():
+		elif node_type == _type.END and other_node == Global.run and timer.running and collected_all_checkpoints():
 			timer.running = false
+			start_timer = start_timer_max
 			timer.set_pb(other_node)
 			reset_all_checkpoints()
 			show_other_runs()
+			self.visible = false
 			if other_node.PB < other_node.dev_time and other_node.PB != 0.0:
 				timer_dt_beaten.text = "Beaten!"

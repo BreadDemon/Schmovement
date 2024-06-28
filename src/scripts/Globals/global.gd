@@ -1,8 +1,9 @@
 extends Node
 
-var start_time:float = 0
+var time:float = 0
 var pb: float
-var start: Speedrun
+var run: Speedrun
+var checkpoint_respawn: ReturnNode
 
 var start_course
 
