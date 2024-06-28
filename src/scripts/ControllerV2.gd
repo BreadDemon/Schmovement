@@ -35,7 +35,6 @@ var current_speed:float = walk_speed
 enum States { WALKING, RUNNING, CROUCHING, SLIDING }
 var current_state: States = States.WALKING
 var previous_state: States = States.WALKING
-@export var capsule_hitbox: bool = false
 @export var scene_return: ReturnNode
 
 # Mouse Vars
@@ -59,6 +58,16 @@ var slide_vector: Vector2 = Vector2.ZERO
 var slide_direction = Vector3.ZERO
 @export_range(0, 5, 0.1) var slide_timer_max: float = 1.0
 @export_range(0, 10, 0.1) var slide_speed: float = 5.0
+
+# Ramp vars
+@export_category("Ramp Vars")
+@export_range(0, 30, 1) var MAX_ANGLE_VARIANCE: float = 15.0
+var TOLERANCE: float = 0.1 # Tolerance for angle checking
+var is_on_ramp: bool
+var is_looking_down_ramp: bool
+var ramp_inclination: float
+var ramp_modifier: float = 0.0
+@export_range(0, 2, 0.1) var ramp_modifier_base: float = 0.5
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -90,6 +99,10 @@ func _process(_delta):
 	text += "Grounded: " + str(grounded) + "\n"
 	text += "Has_wall_jump: " + str(has_wall_jump) + "\n"
 	text += "Can_wall_jump: " + str(can_wall_jump()) + "\n"
+	text += "Is_on_ramp: " + str(is_on_ramp) + "\n"
+	text += "Is_looking_down_ramp: " + str(is_looking_down_ramp) + "\n"
+	text += "Ramp_angle: %.2f\n" % ramp_inclination  
+	text += "Ramp_modifier: %.2f\n" % ramp_modifier  
 	debug_vars.text = text
 	
 	if position.y < -100:
@@ -108,14 +121,18 @@ func _process(_delta):
 @onready var pause_menu = $PauseMenu
 @onready var timer = $Timer
 @onready var debug = $Debug
+@onready var ramp_cast = $RampCast
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	standing_cylinder.disabled = false
 	crouching_cylinder.disabled = true
+	var global_return = get_parent().get_node("Scene_return")
+	scene_return = global_return
 
 func handle_timers(delta):
-	slide_timer -= delta
+	if !is_on_ramp || is_on_ramp and !is_looking_down_ramp:
+		slide_timer -= delta
 	if slide_timer < 0.0:
 		slide_timer = 0.0
 	
@@ -167,7 +184,13 @@ func handle_states(delta):
 			slide_direction = neck.transform.basis
 		if is_on_floor():
 			direction = (slide_direction * Vector3(slide_vector.x, 0, slide_vector.y)).normalized()
-			current_speed = (slide_timer + 1) * slide_speed
+			if is_on_ramp:
+				apply_floor_snap()
+			if is_looking_down_ramp:
+				current_speed = (slide_timer + 1 + ramp_modifier * delta) * slide_speed
+				ramp_modifier += ramp_modifier_base
+			else:
+				current_speed = (slide_timer + 1) * slide_speed
 		neck.position.y = lerp(neck.position.y, crouched_view.position.y, delta * crouch_camera_lerp_factor)
 	elif can_sprint():
 		if current_state != States.RUNNING:
@@ -245,6 +268,55 @@ func handle_vertical(delta):
 	handle_jump(delta)
 	handle_wall_jump()
 
+
+func get_camera_facing_direction() -> Vector3:
+	# Assuming the camera is a child of the player and its forward direction is its local -Z axis
+	return -camera.global_transform.basis.z
+func rad2deg(radians: float) -> float:
+	return radians * 180.0 / PI
+func is_facing_downward(normal: Vector3, facing_direction: Vector3) -> bool:
+	var horizontal_normal = normal
+	horizontal_normal.y = 0
+	horizontal_normal = horizontal_normal.normalized()
+
+	# Project facing direction onto horizontal plane
+	var horizontal_facing_direction = facing_direction
+	horizontal_facing_direction.y = 0
+	horizontal_facing_direction = horizontal_facing_direction.normalized()
+
+	var angle = acos(horizontal_facing_direction.dot(horizontal_normal) / (horizontal_facing_direction.length() * horizontal_normal.length()))
+	var angle_degrees = rad2deg(angle)
+	return angle_degrees <= MAX_ANGLE_VARIANCE
+func calculate_ramp_inclination(normal: Vector3) -> float:
+	var vertical_direction = Vector3(0, 1, 0) # Assuming y-axis is up
+	var dot_product = normal.dot(vertical_direction)
+	var normal_magnitude = normal.length()
+	var vertical_magnitude = vertical_direction.length()
+	var cos_theta = dot_product / (normal_magnitude * vertical_magnitude)
+	return acos(cos_theta)
+func is_ramp(normal: Vector3) -> bool:
+	# Assuming a ramp is anything not horizontal
+	var vertical_direction = Vector3(0, 1, 0)
+	return abs(normal.dot(vertical_direction)) < 1.0 - TOLERANCE
+func check_ramp_and_inclination():
+	if ramp_cast.is_colliding():
+		var collision_normal = ramp_cast.get_collision_normal()
+		
+		# Check if the surface is a ramp
+		if is_ramp(collision_normal):
+			is_on_ramp = true
+
+			var inclination = calculate_ramp_inclination(collision_normal)
+			ramp_inclination = rad2deg(inclination)
+
+			var player_facing_direction = get_camera_facing_direction()
+			if is_facing_downward(collision_normal, player_facing_direction):
+				is_looking_down_ramp = true
+			else:
+				is_looking_down_ramp = false
+		else:
+			is_on_ramp = false
+			ramp_modifier = 0.0
 func finish_movement(_delta):
 	if is_on_floor():
 		if direction:
@@ -266,9 +338,10 @@ func _physics_process(delta):
 	handle_timers(delta)
 	handle_states(delta)
 	handle_vertical(delta)
+	check_ramp_and_inclination()
 	finish_movement(delta)
 
-# TODO: Make a reset Controller function
+# TODO: Make a go to last checkpoint
 func reset_pos():
 	var timer = get_node("Timer/MarginContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
 	if timer.running:
@@ -288,3 +361,10 @@ func reset():
 	velocity.x = 0
 	velocity.y = 0
 	velocity.z = 0
+
+
+
+
+
+
+

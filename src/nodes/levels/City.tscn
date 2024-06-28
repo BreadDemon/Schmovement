@@ -853,9 +853,8 @@ transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 7.
 [node name="RefreshWall18" parent="Map" instance=ExtResource("12_nmrvk")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 5.50957, 3.69887, 0.509267)
 
-[node name="ControllerV2" parent="." node_paths=PackedStringArray("scene_return") instance=ExtResource("18_nk734")]
+[node name="ControllerV2" parent="." instance=ExtResource("18_nk734")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.5, 3)
-scene_return = NodePath("../Scene_return")
 
 [node name="Scene_return" parent="." instance=ExtResource("8_1tobv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 2.6116, 3)
