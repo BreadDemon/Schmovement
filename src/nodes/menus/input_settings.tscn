@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp8xo27u1vt3l"]
+[gd_scene load_steps=8 format=3 uid="uid://cp8xo27u1vt3l"]
 
 [ext_resource type="PackedScene" uid="uid://b68cpofe26anw" path="res://nodes/menus/input_button.tscn" id="1_bm2wr"]
 [ext_resource type="Script" path="res://scripts/menus/input_settings.gd" id="1_o3j5m"]
+
+[sub_resource type="Theme" id="Theme_dlowx"]
 
 [sub_resource type="Animation" id="Animation_7niio"]
 length = 0.001
@@ -64,6 +66,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 3
 script = ExtResource("1_o3j5m")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -90,34 +93,243 @@ theme_override_constants/margin_bottom = 8
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ActionList" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="InputButton" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/ActionList" instance=ExtResource("1_bm2wr")]
+[node name="Settings" type="TabBar" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings"]
+layout_mode = 0
+offset_right = 720.0
+offset_bottom = 393.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+
+[node name="EnableDebug" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer"]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CheckButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/EnableDebug"]
+layout_mode = 2
+text = "Enable Debug"
+
+[node name="closedebug" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/closedebug"]
 layout_mode = 2
 text = "Close Settings"
 
-[node name="ResetButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Keybinds" type="TabBar" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme = SubResource("Theme_dlowx")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ActionList" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InputButton" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer/ScrollContainer/ActionList" instance=ExtResource("1_bm2wr")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Close Settings"
+
+[node name="ResetButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 focus_mode = 0
 text = "Reset to default"
+
+[node name="Debug" type="TabBar" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug"]
+layout_mode = 0
+offset_right = 720.0
+offset_bottom = 393.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+
+[node name="closedebug" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/closedebug"]
+layout_mode = 2
+text = "Close Settings"
+
+[node name="DebugSettings" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SpeedTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Speed Variables
+"
+horizontal_alignment = 1
+
+[node name="WalkSpeedHbox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="WalkSpeed" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Walking Speed: "
+
+[node name="walk_speed_slider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 20.0
+step = 0.1
+
+[node name="WalkSpeedValue" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="CrouchSpeedHbox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CrouchSpeed" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CrouchSpeedHbox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Crouch Speed: "
+
+[node name="crouch_speed_slider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CrouchSpeedHbox"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 20.0
+step = 0.1
+
+[node name="CrouchSpeedValue" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CrouchSpeedHbox"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="RunSpeedHbox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RunSpeed" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RunSpeedHbox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Run Speed: "
+
+[node name="run_speed_slider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RunSpeedHbox"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 20.0
+step = 0.1
+
+[node name="RunSpeedValue" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RunSpeedHbox"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="EnableAirPenalty" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Enable Air Speed Penalty
+"
+
+[node name="AirSpeedPenaltyAmountHbox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AirSpeedPenaltySpeed" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Air Speed penalty: "
+
+[node name="air_speed_penalty_slider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+
+[node name="AirSpeedPenaltyValue" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="JumpTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Jump Variables
+"
+horizontal_alignment = 1
+
+[node name="LerpTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Lerp
+"
+horizontal_alignment = 1
+
+[node name="SlideTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Slide Variables
+"
+horizontal_alignment = 1
+
+[node name="RampTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ramp Variables
+"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="BackButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Close Settings"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_n7wt6")
 }
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/EnableDebug/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/closedebug/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/closedebug/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="drag_ended" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox/walk_speed_slider" to="." method="_on_h_slider_drag_ended"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox/walk_speed_slider" to="." method="_on_walk_speed_slider_value_changed"]
+[connection signal="drag_ended" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CrouchSpeedHbox/crouch_speed_slider" to="." method="_on_crouch_speed_slider_drag_ended"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CrouchSpeedHbox/crouch_speed_slider" to="." method="_on_crouch_speed_slider_value_changed"]
+[connection signal="drag_ended" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RunSpeedHbox/run_speed_slider" to="." method="_on_run_speed_slider_drag_ended"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RunSpeedHbox/run_speed_slider" to="." method="_on_run_speed_slider_value_changed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HBoxContainer2/BackButton" to="." method="_on_back_button_pressed"]
