@@ -675,10 +675,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5, 28.573, -18.5)
 power = 14
 
 [node name="RefreshWall" parent="Map/Section3/Objects" instance=ExtResource("12_nmrvk")]
-transform = Transform3D(-6.91417, 0, -8.74228e-08, 0, 2.04787, 0, 6.04456e-07, 0, -1, -37.5455, 25.4434, -4.51088)
+transform = Transform3D(-2, 0, -1.50996e-07, 0, 2, 0, 3.01992e-07, 0, -1, -32.9455, 25.4434, -4.51088)
+
+[node name="RefreshWall3" parent="Map/Section3/Objects" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(-2, 0, -1.50996e-07, 0, 2, 0, 3.01992e-07, 0, -1, -42.4455, 25.4434, -4.51088)
+
+[node name="RefreshWall4" parent="Map/Section3/Objects" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(-2, 0, -1.50996e-07, 0, 2, 0, 3.01992e-07, 0, -1, -37.7455, 25.4434, -4.51088)
 
 [node name="RefreshWall2" parent="Map/Section3/Objects" instance=ExtResource("12_nmrvk")]
-transform = Transform3D(-3.02228e-07, 0, 1, 0, 2.04787, 0, -6.91416, 0, -4.37114e-08, -44.4643, 25.4434, -11.3373)
+transform = Transform3D(-2.14569e-07, 0, 1, 0, 2, 0, -2, 0, -1.07284e-07, -44.4122, 25.4434, -6.44421)
+
+[node name="RefreshWall5" parent="Map/Section3/Objects" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(-2.14569e-07, 0, 1, 0, 2, 0, -2, 0, -1.07284e-07, -44.4122, 25.4434, -15.9442)
+
+[node name="RefreshWall6" parent="Map/Section3/Objects" instance=ExtResource("12_nmrvk")]
+transform = Transform3D(-2.14569e-07, 0, 1, 0, 2, 0, -2, 0, -1.07284e-07, -44.4122, 25.4434, -11.2442)
 
 [node name="RefreshWall" parent="Map" instance=ExtResource("12_nmrvk")]
 transform = Transform3D(-9.14447e-08, 0, -1, 0, 2.09201, 0, 2.09201, 0, -4.37114e-08, -62.565, 2.54635, -48.3554)
@@ -876,7 +888,7 @@ restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
 
 [node name="end" parent="runs/Hidden" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("19_nfcuf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 37, 2)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -38, 37.2, 2)
 other_node = NodePath("../start")
 checkpoints = [NodePath("../checkpoints/Checkpoint")]
 node_type = 1

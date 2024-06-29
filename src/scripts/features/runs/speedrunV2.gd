@@ -33,7 +33,6 @@ var checkpoint_time: Label
 var timer_diff: Label
 var timer_pb: Label
 var timer_dt: Label
-var timer_dt_beaten: Label
 var format = "%s%s"
 
 func _ready():
@@ -50,7 +49,6 @@ func get_vars(body):
 	container = timer.get_node("Panel/Container")
 	
 	timer_run_name = container.get_node("Name_Attempts/Name")
-	timer_attempts = container.get_node("Name_Attempts/Attempts")
 	
 	clock = container.get_node("Clock")
 	
@@ -58,9 +56,9 @@ func get_vars(body):
 	checkpoint_time = container.get_node("Checkpoint/Checkpoint_Time")
 	
 	timer_diff = container.get_node("Diff_PB/Diff")
-	timer_pb = container.get_node("Diff_PB/PersonalBest")
+	timer_attempts = container.get_node("Diff_PB/Attempts")
+	timer_pb = container.get_node("DT/PersonalBest")
 	timer_dt = container.get_node("DT/time")
-	timer_dt_beaten = container.get_node("DT/DevTime")
 func set_vars():
 	timer_run_name.text = run_name
 	timer_dt.text = format % ["DT: ", str(dev_time)]
@@ -68,7 +66,7 @@ func set_vars():
 	timer.reset_timer()
 	timer.running = true
 	if PB > dev_time or PB == 0.0:
-		timer_dt_beaten.text = ""
+		timer_dt.add_theme_color_override("font_color", Color(1, 0, 0))
 func hide_other_runs():
 	var runs = get_parent().get_parent().get_children()
 	print("Hide me!")
@@ -105,6 +103,10 @@ func _on_body_entered(body):
 	
 	if body is Player:
 		get_vars(body)
+		if other_node.PB < other_node.dev_time and other_node.PB != 0.0:
+			timer_dt.add_theme_color_override("font_color", Color(0, 1, 0))
+		else:
+			timer_dt.add_theme_color_override("font_color", Color(0, 1, 0))
 		if node_type == _type.START and !timer.running and start_timer <= 0.0:
 			attempts += 1
 			clear_checkpoint_pb()
@@ -129,5 +131,3 @@ func _on_body_entered(body):
 			reset_all_checkpoints()
 			show_other_runs()
 			self.visible = false
-			if other_node.PB < other_node.dev_time and other_node.PB != 0.0:
-				timer_dt_beaten.text = "Beaten!"

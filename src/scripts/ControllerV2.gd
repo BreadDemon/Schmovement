@@ -71,6 +71,17 @@ var ramp_inclination: float
 var ramp_modifier: float = 0.0
 @export_range(0, 2, 0.1) var ramp_modifier_base: float = 0.5
 
+@export_category("Headbob vars")
+@export_range(0, 50, 0.1) var head_bob_sprinting_speed: float = 22.0
+@export_range(0, 30, 0.1) var head_bob_walking_speed: float = 14.0
+@export_range(0, 20, 0.1) var head_bob_crouching_speed: float = 10.0
+@export_range(0, 2, 0.01) var head_bob_sprinting_intensity: float = 0.4
+@export_range(0, 2, 0.01) var head_bob_walking_intensity: float = 0.2
+@export_range(0, 2, 0.01) var head_bob_crouching_intensity: float = 0.1
+var head_bob_vector = Vector2.ZERO
+var head_bob_index  = 0.0
+var head_bob_curr_intensity = 0.0
+
 func _input(event):
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -82,6 +93,8 @@ func _input(event):
 		reset_pos()
 	elif event.is_action_pressed("LastCheckpoint"):
 		last_checkpoint()
+	elif event.is_action_pressed("Remove"):
+		timer.switch_timer()
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
@@ -126,11 +139,13 @@ func _process(_delta):
 @onready var timer = $TimerV2
 @onready var debug = $Debug
 @onready var ramp_cast = $RampCast
+@onready var jump_particles = $LandingParticles
+@onready var jump_sound = $AudioStreamPlayer
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	standing_cylinder.disabled = false
-	crouching_cylinder.disabled = true
+	crouching_cylinder.disabled = false
 	var global_return = get_parent().get_node("Scene_return")
 	scene_return = global_return
 	var keybindings = ConfigFileHandler.load_keybindings()
@@ -158,10 +173,8 @@ func handle_timers(delta):
 
 func toggle_crouch_cylinder():
 	standing_cylinder.disabled = true
-	crouching_cylinder.disabled = false
 func toggle_standing_cylinder():
 	standing_cylinder.disabled = false
-	crouching_cylinder.disabled = true
 func can_slide() -> bool:
 	var is_crouched: bool = Input.is_action_pressed("Crouch") 
 	var is_running: bool = current_state == States.RUNNING
@@ -258,12 +271,17 @@ func handle_jump(_delta):
 	
 	if jump_buffer_timer > 0 and is_on_floor():
 		velocity.y = jump_velocity
+		jump_sound.play()
+		jump_particles.get_child(0).emitting = true
 		wall_jump_wait = wall_jump_wait_max
 		slide_timer = 0.0
 		has_jumped = true
 func handle_wall_jump():
 	if can_wall_jump():
 		has_wall_jump = false
+		wall_jump_wait = wall_jump_wait_max
+		jump_sound.play()
+		jump_particles.get_child(0).emitting = true
 		velocity.y = jump_velocity
 func handle_vertical(delta):
 	if not is_on_floor():
@@ -277,6 +295,26 @@ func handle_vertical(delta):
 	handle_jump(delta)
 	handle_wall_jump()
 
+func handle_bob(delta):
+	if current_state == States.RUNNING:
+		head_bob_curr_intensity = head_bob_sprinting_intensity
+		head_bob_index += head_bob_sprinting_speed * delta
+	elif current_state == States.WALKING:
+		head_bob_curr_intensity = head_bob_walking_intensity
+		head_bob_index += head_bob_walking_speed * delta
+	elif current_state == States.CROUCHING:
+		head_bob_curr_intensity = head_bob_crouching_intensity
+		head_bob_index += head_bob_crouching_speed * delta
+		
+	if is_on_floor() and current_state != States.SLIDING and input_dir != Vector2.ZERO:
+		head_bob_vector.y = sin(head_bob_index)
+		head_bob_vector.x = sin(head_bob_index/2) + 0.5
+		
+		eyes.position.y = lerp(eyes.position.y, head_bob_vector.y * (head_bob_curr_intensity * 2.0), delta)
+		eyes.position.x = lerp(eyes.position.x, head_bob_vector.x * head_bob_curr_intensity, delta)
+	else:
+		eyes.position.y = lerp(eyes.position.y, 0.0, delta)
+		eyes.position.x = lerp(eyes.position.x, 0.0, delta)
 func get_camera_facing_direction() -> Vector3:
 	# Assuming the camera is a child of the player and its forward direction is its local -Z axis
 	return -camera.global_transform.basis.z
@@ -349,6 +387,7 @@ func _physics_process(delta):
 	handle_timers(delta)
 	handle_states(delta)
 	handle_vertical(delta)
+	handle_bob(delta)
 	check_ramp_and_inclination()
 	finish_movement(delta)
 

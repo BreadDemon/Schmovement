@@ -18,6 +18,7 @@ func _on_body_entered(body):
 	var checkpoint_time = body.get_node("TimerV2/Panel/Container/Checkpoint/Checkpoint_Time")
 	if body is Player and timer.running and Global.run == mother_run and !is_collected:
 		is_collected = true
+		visible = false
 		time_by_checkpoint = Global.time
 		if Global.run.last_collected_checkpoint == null:
 			Global.run.last_collected_checkpoint = self

@@ -1,12 +1,24 @@
 extends Area3D
 
-var had_wj
+var player: Player = null
+var had_wall_jump: bool = false
+var gave_wall_jump: bool = false
+
+func _process(delta):
+	if player != null:
+		if player.has_wall_jump:
+			had_wall_jump = true
+	
+	if had_wall_jump and !player.has_wall_jump and !gave_wall_jump:
+		player.has_wall_jump = true
+		gave_wall_jump = true
 
 func _on_body_entered(body):
 	if body is Player:
-		body.has_wall_jump = true
-
+		player = body
 
 func _on_body_exited(body):
 	if body is Player:
-		body.has_wall_jump = true
+		player = null
+		gave_wall_jump = false
+		had_wall_jump = false
