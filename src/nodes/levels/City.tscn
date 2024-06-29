@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c4jqkpoltky2y"]
+[gd_scene load_steps=32 format=3 uid="uid://c4jqkpoltky2y"]
 
 [ext_resource type="PackedScene" uid="uid://bpk6w56a4l3uy" path="res://nodes/features/jump_pad.tscn" id="1_2noc6"]
 [ext_resource type="Texture2D" uid="uid://2cq1pbfxclnj" path="res://assets/PrototypeTexture/PNG/Dark/texture_01.png" id="1_2sa05"]
@@ -7,9 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bu1el4t2ocxx1" path="res://assets/PrototypeTexture/PNG/Orange/texture_01.png" id="2_l1iu7"]
 [ext_resource type="Texture2D" uid="uid://lyntfo2h4m1i" path="res://assets/PrototypeTexture/PNG/Purple/texture_01.png" id="3_ao63s"]
 [ext_resource type="Texture2D" uid="uid://bsrl8ky78o5ou" path="res://assets/PrototypeTexture/PNG/Red/texture_01.png" id="4_ndevq"]
-[ext_resource type="PackedScene" uid="uid://b4hpx8unxlkoy" path="res://nodes/features/Running/start_course.tscn" id="7_n04x5"]
 [ext_resource type="PackedScene" uid="uid://r3w3ughotgmt" path="res://nodes/features/Running/return_node.tscn" id="8_1tobv"]
-[ext_resource type="PackedScene" uid="uid://bwk6svly34oyr" path="res://nodes/features/Running/end_course.tscn" id="9_f0sov"]
 [ext_resource type="Material" uid="uid://bnbfqom1wyvcs" path="res://assets/Textures/Dark_texture.tres" id="11_nw7jb"]
 [ext_resource type="PackedScene" uid="uid://c0h6pl467n324" path="res://nodes/features/refresh_wall.tscn" id="12_nmrvk"]
 [ext_resource type="PackedScene" uid="uid://cbjmtxba73jo0" path="res://nodes/features/loading_zone.tscn" id="13_t4ahx"]
@@ -81,127 +79,8 @@ script = ExtResource("1_7eria")
 transform = Transform3D(0.931096, 0.192381, 0.30992, -0.348827, 0.221115, 0.910729, 0.106679, -0.956085, 0.272987, 0, 3, 0)
 shadow_enabled = true
 
-[node name="Runs" type="Node3D" parent="."]
-
-[node name="The Climb" type="Node3D" parent="Runs"]
-
-[node name="StartCourse" parent="Runs/The Climb" node_paths=PackedStringArray("origin_point") instance=ExtResource("7_n04x5")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4, 1.24582, -9)
-run_name = "The Climb"
-origin_point = NodePath("../Return_node")
-dev_time = 21.533
-
-[node name="Return_node" parent="Runs/The Climb" instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -12)
-
-[node name="EndCourse" parent="Runs/The Climb" node_paths=PackedStringArray("start_course") instance=ExtResource("9_f0sov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.43556, 39.1312, -17.656)
-start_course = NodePath("../StartCourse")
-
-[node name="Creativity is Key" type="Node3D" parent="Runs"]
-
-[node name="StartCourse" parent="Runs/Creativity is Key" node_paths=PackedStringArray("origin_point") instance=ExtResource("7_n04x5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 8, -22)
-run_name = "Creativity is Key"
-origin_point = NodePath("../Return_node2")
-dev_time = 15.874
-
-[node name="EndCourse2" parent="Runs/Creativity is Key" node_paths=PackedStringArray("start_course") instance=ExtResource("9_f0sov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 39, -10)
-start_course = NodePath("../StartCourse")
-
-[node name="Return_node2" parent="Runs/Creativity is Key" instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5586, 9.21617, -22)
-
-[node name="Hidden" type="Node3D" parent="Runs"]
-
-[node name="StartCourse" parent="Runs/Hidden" node_paths=PackedStringArray("origin_point") instance=ExtResource("7_n04x5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.5, 1, -52.5)
-run_name = "Hidden"
-origin_point = NodePath("../Return_node")
-dev_time = 33.999
-
-[node name="Return_node" parent="Runs/Hidden" instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.0668, 2.5, -52.6202)
-
-[node name="EndCourse" parent="Runs/Hidden" node_paths=PackedStringArray("start_course") instance=ExtResource("9_f0sov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 37, 0)
-start_course = NodePath("../StartCourse")
-
-[node name="CrossBuilding" type="Node3D" parent="Runs"]
-
-[node name="StartCourse" parent="Runs/CrossBuilding" node_paths=PackedStringArray("origin_point") instance=ExtResource("7_n04x5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 37, -10)
-run_name = "Cross Building 1"
-origin_point = NodePath("../Return_node")
-dev_time = 17.443
-
-[node name="EndCourse" parent="Runs/CrossBuilding" node_paths=PackedStringArray("start_course") instance=ExtResource("9_f0sov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 39, -8)
-start_course = NodePath("../StartCourse")
-
-[node name="Return_node" parent="Runs/CrossBuilding" instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7446, 38.5, -10.2614)
-
-[node name="An Apple" type="Node3D" parent="Runs"]
-
-[node name="StartCourse" parent="Runs/An Apple" node_paths=PackedStringArray("origin_point") instance=ExtResource("7_n04x5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 1, -12)
-run_name = "An Apple"
-origin_point = NodePath("../Return_node")
-dev_time = 13.549
-
-[node name="EndCourse" parent="Runs/An Apple" node_paths=PackedStringArray("start_course") instance=ExtResource("9_f0sov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.6331, 1, -37)
-start_course = NodePath("../StartCourse")
-
-[node name="Return_node" parent="Runs/An Apple" instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 2.12084, -12)
-
-[node name="For an Old Man" type="Node3D" parent="Runs"]
-
-[node name="StartCourse" parent="Runs/For an Old Man" node_paths=PackedStringArray("origin_point") instance=ExtResource("7_n04x5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.3, 1, -37)
-run_name = "For an Old Man"
-origin_point = NodePath("../Return_node")
-dev_time = 13.591
-
-[node name="Return_node" parent="Runs/For an Old Man" instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 2, -39)
-
-[node name="EndCourse" parent="Runs/For an Old Man" node_paths=PackedStringArray("start_course") instance=ExtResource("9_f0sov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 1, -10)
-start_course = NodePath("../StartCourse")
-
-[node name="Lost Cigar" type="Node3D" parent="Runs"]
-
-[node name="StartCourse" parent="Runs/Lost Cigar" node_paths=PackedStringArray("origin_point") instance=ExtResource("7_n04x5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 23.4, -15)
-run_name = "Lost Cigar"
-origin_point = NodePath("../Return_node")
-dev_time = 12.716
-
-[node name="EndCourse" parent="Runs/Lost Cigar" node_paths=PackedStringArray("start_course") instance=ExtResource("9_f0sov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 24, -1)
-start_course = NodePath("../StartCourse")
-
-[node name="Return_node" parent="Runs/Lost Cigar" instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 25, -12)
-
-[node name="CrossBuilding2" type="Node3D" parent="Runs"]
-
-[node name="Return_node" parent="Runs/CrossBuilding2" instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 41, -10)
-
-[node name="StartCourse" parent="Runs/CrossBuilding2" node_paths=PackedStringArray("origin_point") instance=ExtResource("7_n04x5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 39, -10)
-run_name = "Cross Building 2"
-origin_point = NodePath("../Return_node")
-dev_time = 24.999
-
-[node name="EndCourse" parent="Runs/CrossBuilding2" node_paths=PackedStringArray("start_course") instance=ExtResource("9_f0sov")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 37, -12)
-start_course = NodePath("../StartCourse")
+[node name="Scene_return" parent="." instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 2.6116, 3)
 
 [node name="Map" type="Node3D" parent="."]
 
@@ -855,85 +734,13 @@ transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 7.
 [node name="RefreshWall18" parent="Map" instance=ExtResource("12_nmrvk")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 5.50957, 3.69887, 0.509267)
 
-[node name="ControllerV2" parent="." instance=ExtResource("18_nk734")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.5, 3)
-
-[node name="Scene_return" parent="." instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 2.6116, 3)
-
 [node name="runs" type="Node3D" parent="."]
-
-[node name="James" type="Node3D" parent="runs"]
-
-[node name="start" parent="runs/James" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, -10)
-run_name = "James"
-restart_point = NodePath("../Return_node")
-other_node = NodePath("../end")
-
-[node name="end" parent="runs/James" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("19_nfcuf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 1, -10)
-other_node = NodePath("../start")
-checkpoints = [NodePath("../checkpoints/Checkpoint"), NodePath("../checkpoints/Checkpoint2")]
-node_type = 1
-
-[node name="Return_node" parent="runs/James" instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.8007, 2.5, -10.0221)
-
-[node name="checkpoints" type="Node3D" parent="runs/James"]
-
-[node name="Checkpoint" parent="runs/James/checkpoints" node_paths=PackedStringArray("respawn_point", "mother_run") instance=ExtResource("20_8e12n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 1, -18)
-is_respwanable = true
-respawn_point = NodePath("../../respawns/Return_node")
-mother_run = NodePath("../../start")
-
-[node name="Checkpoint2" parent="runs/James/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("20_8e12n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, -7)
-mother_run = NodePath("../../start")
-
-[node name="respawns" type="Node3D" parent="runs/James"]
-
-[node name="Return_node" parent="runs/James/respawns" instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 2, -20)
-
-[node name="Jones" type="Node3D" parent="runs"]
-
-[node name="start" parent="runs/Jones" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, -14)
-run_name = "Jones"
-dev_time = 99.999
-restart_point = NodePath("../Return_node")
-other_node = NodePath("../end")
-
-[node name="end" parent="runs/Jones" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("19_nfcuf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 1, -14)
-other_node = NodePath("../start")
-checkpoints = [NodePath("../checkpoints/Checkpoint"), NodePath("../checkpoints/Checkpoint2"), NodePath("../checkpoints/Checkpoint3")]
-node_type = 1
-
-[node name="Return_node" parent="runs/Jones" instance=ExtResource("8_1tobv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 2, -14)
-
-[node name="checkpoints" type="Node3D" parent="runs/Jones"]
-
-[node name="Checkpoint" parent="runs/Jones/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("20_8e12n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 1, -16)
-mother_run = NodePath("../../start")
-
-[node name="Checkpoint2" parent="runs/Jones/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("20_8e12n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -17)
-mother_run = NodePath("../../start")
-
-[node name="Checkpoint3" parent="runs/Jones/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("20_8e12n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 1, -7)
-mother_run = NodePath("../../start")
 
 [node name="An Apple for an Old Man" type="Node3D" parent="runs"]
 
 [node name="start" parent="runs/An Apple for an Old Man" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 1, -14.2047)
-run_name = "An Apple\\n for an Old Man"
+run_name = "An Apple for an Old Man"
 dev_time = 29.14
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
@@ -959,3 +766,126 @@ mother_run = NodePath("../../start")
 
 [node name="Return_node" parent="runs/An Apple for an Old Man/respawns" instance=ExtResource("8_1tobv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 2.0422, -35)
+
+[node name="The Climb" type="Node3D" parent="runs"]
+
+[node name="start" parent="runs/The Climb" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4, 1.3, -9)
+run_name = "The Climb"
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+
+[node name="end" parent="runs/The Climb" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 40, -18)
+other_node = NodePath("../start")
+node_type = 1
+
+[node name="Return_node" parent="runs/The Climb" instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -12)
+
+[node name="checkpoints" type="Node3D" parent="runs/The Climb"]
+
+[node name="respawns" type="Node3D" parent="runs/The Climb"]
+
+[node name="Lost Cigar" type="Node3D" parent="runs"]
+
+[node name="start" parent="runs/Lost Cigar" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 23.5, -15.5)
+run_name = "Lost Cigar"
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+
+[node name="end" parent="runs/Lost Cigar" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.5, 24, -1.5)
+other_node = NodePath("../start")
+node_type = 1
+
+[node name="Return_node" parent="runs/Lost Cigar" instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 24, -14)
+
+[node name="checkpoints" type="Node3D" parent="runs/Lost Cigar"]
+
+[node name="respawns" type="Node3D" parent="runs/Lost Cigar"]
+
+[node name="Creativity is Key" type="Node3D" parent="runs"]
+
+[node name="start" parent="runs/Creativity is Key" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 8, -24)
+run_name = "Creativity is Key"
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+
+[node name="end" parent="runs/Creativity is Key" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 40, -18)
+other_node = NodePath("../start")
+node_type = 1
+
+[node name="Return_node" parent="runs/Creativity is Key" instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 9, -21)
+
+[node name="checkpoints" type="Node3D" parent="runs/Creativity is Key"]
+
+[node name="respawns" type="Node3D" parent="runs/Creativity is Key"]
+
+[node name="Cross Building 1" type="Node3D" parent="runs"]
+
+[node name="start" parent="runs/Cross Building 1" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 37, -10)
+run_name = "Cross Building 1"
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+
+[node name="end" parent="runs/Cross Building 1" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 39, -8)
+other_node = NodePath("../start")
+node_type = 1
+
+[node name="Return_node" parent="runs/Cross Building 1" instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 38, -10)
+
+[node name="checkpoints" type="Node3D" parent="runs/Cross Building 1"]
+
+[node name="respawns" type="Node3D" parent="runs/Cross Building 1"]
+
+[node name="Cross Building 2" type="Node3D" parent="runs"]
+
+[node name="start" parent="runs/Cross Building 2" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 39, -10)
+run_name = "Cross Building 2"
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+
+[node name="end" parent="runs/Cross Building 2" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 37, -12)
+other_node = NodePath("../start")
+node_type = 1
+
+[node name="Return_node" parent="runs/Cross Building 2" instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 40, -10)
+
+[node name="checkpoints" type="Node3D" parent="runs/Cross Building 2"]
+
+[node name="respawns" type="Node3D" parent="runs/Cross Building 2"]
+
+[node name="Hidden" type="Node3D" parent="runs"]
+
+[node name="start" parent="runs/Hidden" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.5, 1, -52.5)
+run_name = "Hidden"
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+
+[node name="end" parent="runs/Hidden" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 37, 2)
+other_node = NodePath("../start")
+node_type = 1
+
+[node name="Return_node" parent="runs/Hidden" instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 2, -52.5)
+
+[node name="checkpoints" type="Node3D" parent="runs/Hidden"]
+
+[node name="respawns" type="Node3D" parent="runs/Hidden"]
+
+[node name="ControllerV2" parent="." instance=ExtResource("18_nk734")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.5, 3)

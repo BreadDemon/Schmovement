@@ -3,7 +3,7 @@ class_name Speedrun
 
 @export_category("Run Settings")
 @export var run_name: String = "None"
-@export var dev_time: float
+@export var dev_time: float = 0.0
 @export var restart_point: ReturnNode
 @export var other_node: Speedrun
 @export var checkpoints: Array[Checkpoint] = []
