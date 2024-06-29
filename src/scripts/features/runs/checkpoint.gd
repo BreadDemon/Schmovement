@@ -43,6 +43,7 @@ func _on_body_entered(body):
 			else:
 				var diff = time_since_last_checkpoint - checkpoint_pb
 				checkpoint_diff.text = "+" + str(diff)
+				checkpoint_pb = time_since_last_checkpoint
 				checkpoint_time.text = str(time_since_last_checkpoint)
 				checkpoint_diff.add_theme_color_override("font_color", Color(1, 0, 0))
 		else:

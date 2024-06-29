@@ -364,6 +364,11 @@ func reset_pos():
 	velocity.z = 0
 func reset():
 	var reset_timer = get_node("TimerV2")
+	var checkpoint_timer = reset_timer.get_node("Panel/Container/Checkpoint")
+	var PB_timer = reset_timer.get_node("Panel/Container/Diff_PB")
+	checkpoint_timer.get_node("Checkpoint_Diff").text = ""
+	checkpoint_timer.get_node("Checkpoint_Time").text = ""
+	PB_timer.get_node("Diff").text = ""
 	reset_timer.reset_timer()
 	transform.origin = Global.origin_point
 	Global.run.visible = true
