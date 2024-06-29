@@ -76,8 +76,12 @@ func load_runs(runs):
 		if runs.run_name == run_name:
 			runs.PB = configruns.get_value("RunName", run_name)
 
-func save_debug(config_name: String, state):
-	pass
+func save_debug(config_name: String, value):
+	config.set_value("debug", config_name, value)
+	config.save(SETTINGS_FILE_PATH)
 
-func load_debug(config_name):
-	pass
+func load_debug():
+	var debug_settings = {}
+	for key in config.get_section_keys("debug"):
+		debug_settings[key] = config.get_value("debug", key)
+	return debug_settings

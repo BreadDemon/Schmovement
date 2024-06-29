@@ -1,9 +1,28 @@
 extends Control
 
 @onready var input_button_scene = preload('res://nodes/menus/input_button.tscn')
-@onready var action_list = $PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/ActionList
+@onready var action_list = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer/ScrollContainer/ActionList
+
+# DEBUG STUFF 
+
+## Speed Variables
+@onready var debug_settings = $PanelContainer/MarginContainer/VBoxContainer/TabContainer
+@onready var debug_check = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/EnableDebug/CheckButton
+
+@onready var walk_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox/walk_speed_slider
+@onready var walk_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox/WalkSpeedValue
+@onready var crouch_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CrouchSpeedHbox/crouch_speed_slider
+@onready var crouch_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CrouchSpeedHbox/CrouchSpeedValue
+@onready var run_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RunSpeedHbox/run_speed_slider
+@onready var run_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RunSpeedHbox/RunSpeedValue
+@onready var enable_air_penalty = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/EnableAirPenalty
+@onready var air_speed_penalty_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox/air_speed_penalty_slider
+@onready var air_speed_penalty_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox/AirSpeedPenaltyValue
+
 
 @onready var animator: AnimationPlayer = $AnimationPlayer
+
+@onready var player: Player
 
 var is_remapping = false
 var action_to_remap = null
@@ -25,6 +44,10 @@ var input_actions = {
 func _ready():
 	_load_keybindings_from_settings()
 	_create_action_list()
+	if !Global.debug:
+		debug_settings.set_tab_hidden(2, true)
+	else:
+		debug_check.button_pressed = true
 
 func _load_keybindings_from_settings():
 	var keybindings = ConfigFileHandler.load_keybindings()
@@ -97,3 +120,29 @@ func _on_back_button_pressed():
 		animator.play("close_ingame")
 		var pause = get_parent()
 		pause.animator.play("unhide_pause")
+
+func _on_check_button_toggled(toggled_on):
+	if !toggled_on:
+		debug_settings.set_tab_hidden(2, true)
+	else:
+		debug_settings.set_tab_hidden(2, false)
+	Global.debug = toggled_on
+	ConfigFileHandler.save_debug("enable", toggled_on)
+
+func _on_h_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("walk_speed", walk_speed_slider.value)
+func _on_walk_speed_slider_value_changed(value):
+	walk_speed_value.text = str(walk_speed_slider.value)
+	
+func _on_crouch_speed_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("crouch_speed", crouch_speed_slider.value)
+func _on_crouch_speed_slider_value_changed(value):
+	crouch_speed_value.text = str(crouch_speed_slider.value)
+
+func _on_run_speed_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug('run_speed', run_speed_slider.value)
+func _on_run_speed_slider_value_changed(value):
+	run_speed_value.text = str(run_speed_slider.value)

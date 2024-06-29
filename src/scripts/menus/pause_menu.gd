@@ -31,5 +31,6 @@ func _on_settings_button_pressed():
 	var Settings = input_settings.instantiate()
 	add_child(Settings)
 	Settings.ingame = true
+	Settings.player = get_parent()
 	animator.play("hide_pause")
 	Settings.animator.play("open_ingame")

@@ -2,7 +2,6 @@
 
 [ext_resource type="Material" uid="uid://bnbfqom1wyvcs" path="res://assets/Textures/Dark_texture.tres" id="1_vmfpb"]
 [ext_resource type="PackedScene" uid="uid://csuokjcklu0d7" path="res://nodes/world_environment.tscn" id="2_7u8kc"]
-[ext_resource type="PackedScene" uid="uid://dem1v18u02ngc" path="res://nodes/CharacterController.tscn" id="3_pp1nw"]
 [ext_resource type="PackedScene" uid="uid://po75jr6axkjl" path="res://nodes/features/Teleporter/teleporter.tscn" id="4_8y0v4"]
 [ext_resource type="PackedScene" uid="uid://cx7g5bussvmke" path="res://nodes/features/Teleporter/receptor.tscn" id="5_cpj2f"]
 [ext_resource type="PackedScene" uid="uid://c0h6pl467n324" path="res://nodes/features/refresh_wall.tscn" id="6_2o6up"]
@@ -11,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bwk6svly34oyr" path="res://nodes/features/Running/end_course.tscn" id="9_kpdix"]
 [ext_resource type="PackedScene" uid="uid://r3w3ughotgmt" path="res://nodes/features/Running/return_node.tscn" id="10_gyn5w"]
 [ext_resource type="PackedScene" uid="uid://cbjmtxba73jo0" path="res://nodes/features/loading_zone.tscn" id="11_pp1s8"]
+[ext_resource type="PackedScene" uid="uid://j43cqowhjsf6" path="res://nodes/ControllerV2.tscn" id="11_q4udr"]
 
 [node name="Tutorial" type="Node3D"]
 
@@ -114,9 +114,6 @@ size = Vector3(1.27429, 4, 1.33643)
 material = ExtResource("1_vmfpb")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_7u8kc")]
-
-[node name="CharacterBody3D" parent="." instance=ExtResource("3_pp1nw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Text" type="Node3D" parent="."]
 
@@ -248,3 +245,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.18328, 5.5, 156.582)
 [node name="Loading Zone" parent="." instance=ExtResource("11_pp1s8")]
 transform = Transform3D(6.69272, 0, 0, 0, 6.69272, 0, 0, 0, 1, 0, 4, 167)
 PathScene = "res://nodes/levels/City.tscn"
+
+[node name="ControllerV2" parent="." instance=ExtResource("11_q4udr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.92864, 0)
