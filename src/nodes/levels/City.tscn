@@ -875,9 +875,10 @@ run_name = "Hidden"
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
 
-[node name="end" parent="runs/Hidden" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
+[node name="end" parent="runs/Hidden" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 37, 2)
 other_node = NodePath("../start")
+checkpoints = [NodePath("../checkpoints/Checkpoint")]
 node_type = 1
 
 [node name="Return_node" parent="runs/Hidden" instance=ExtResource("8_1tobv")]
@@ -885,7 +886,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 2, -52.5)
 
 [node name="checkpoints" type="Node3D" parent="runs/Hidden"]
 
+[node name="Checkpoint" parent="runs/Hidden/checkpoints" node_paths=PackedStringArray("respawn_point", "mother_run") instance=ExtResource("20_8e12n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 8, -12)
+is_respwanable = true
+respawn_point = NodePath("../../respawns/Return_node")
+mother_run = NodePath("../../start")
+
 [node name="respawns" type="Node3D" parent="runs/Hidden"]
+
+[node name="Return_node" parent="runs/Hidden/respawns" instance=ExtResource("8_1tobv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 9, -12)
 
 [node name="ControllerV2" parent="." instance=ExtResource("18_nk734")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.5, 3)

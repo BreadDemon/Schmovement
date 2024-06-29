@@ -123,7 +123,7 @@ func _process(_delta):
 @onready var eyes = $Neck/Eyes
 @onready var camera = $Neck/Eyes/Camera3D
 @onready var pause_menu = $PauseMenu
-@onready var timer = $Timer
+@onready var timer = $TimerV2
 @onready var debug = $Debug
 @onready var ramp_cast = $RampCast
 
@@ -384,7 +384,7 @@ func reset():
 	velocity.y = 0
 	velocity.z = 0
 func last_checkpoint():
-	if Global.checkpoint_respawn != null:
+	if Global.checkpoint_respawn != null and timer.running:
 		transform.origin = Global.checkpoint_respawn.transform.origin
 		current_speed = 0
 		slide_timer = 0
