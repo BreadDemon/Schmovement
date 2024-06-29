@@ -107,12 +107,89 @@ offset_bottom = 393.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
 
-[node name="EnableDebug" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer"]
+[node name="Settings" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer"]
 layout_mode = 2
 
-[node name="CheckButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/EnableDebug"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings"]
 layout_mode = 2
-text = "Enable Debug"
+text = "Mouse Settings"
+horizontal_alignment = 1
+
+[node name="Sensitivity" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings"]
+layout_mode = 2
+
+[node name="SensitivityText" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/Sensitivity"]
+layout_mode = 2
+text = "Sensitivity: "
+
+[node name="SensitivitySlider" type="HSlider" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/Sensitivity"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="SensitivityValue" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/Sensitivity"]
+layout_mode = 2
+text = "0.1"
+
+[node name="SpeedrunTimerText" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings"]
+layout_mode = 2
+text = "Speedrun Timer Config"
+horizontal_alignment = 1
+
+[node name="SpeedrunTimer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings"]
+layout_mode = 2
+
+[node name="RunName" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer"]
+layout_mode = 2
+
+[node name="RunNameButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/RunName"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Run Name:"
+
+[node name="Splits" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer"]
+layout_mode = 2
+
+[node name="SplitsButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/Splits"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Splits: "
+
+[node name="Stats" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer"]
+layout_mode = 2
+
+[node name="StatsButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Stats: "
+
+[node name="PB" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer"]
+layout_mode = 2
+
+[node name="PersonalBestButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/PB"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Personal Best: "
+
+[node name="Debug" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings"]
+layout_mode = 2
+text = "Debug Options"
+horizontal_alignment = 1
+
+[node name="EnableDebug" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings"]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/EnableDebug"]
+layout_mode = 2
+text = "Player Debug Menu"
 
 [node name="closedebug" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer"]
 layout_mode = 2
@@ -321,7 +398,13 @@ libraries = {
 "": SubResource("AnimationLibrary_n7wt6")
 }
 
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/EnableDebug/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="drag_ended" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/Sensitivity/SensitivitySlider" to="." method="_on_sensitivity_slider_drag_ended"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/Sensitivity/SensitivitySlider" to="." method="_on_sensitivity_slider_drag_ended"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/RunName/RunNameButton" to="." method="_on_run_name_button_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/Splits/SplitsButton" to="." method="_on_splits_button_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/Stats/StatsButton" to="." method="_on_stats_button_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/PB/PersonalBestButton" to="." method="_on_personal_best_button_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/EnableDebug/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/closedebug/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]

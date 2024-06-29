@@ -7,7 +7,7 @@ extends Control
 
 ## Speed Variables
 @onready var debug_settings = $PanelContainer/MarginContainer/VBoxContainer/TabContainer
-@onready var debug_check = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/EnableDebug/CheckButton
+@onready var debug_check = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/EnableDebug/CheckButton
 
 @onready var walk_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox/walk_speed_slider
 @onready var walk_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox/WalkSpeedValue
@@ -19,6 +19,8 @@ extends Control
 @onready var air_speed_penalty_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox/air_speed_penalty_slider
 @onready var air_speed_penalty_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox/AirSpeedPenaltyValue
 
+@onready var sensitivity_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/Sensitivity/SensitivitySlider
+@onready var sensitivity_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/Sensitivity/SensitivityValue
 
 @onready var animator: AnimationPlayer = $AnimationPlayer
 
@@ -42,6 +44,7 @@ var input_actions = {
 }
 
 func _ready():
+	player = get_parent().get_parent()
 	_load_keybindings_from_settings()
 	_create_action_list()
 	if !Global.debug:
@@ -146,3 +149,25 @@ func _on_run_speed_slider_drag_ended(value_changed):
 		ConfigFileHandler.save_debug('run_speed', run_speed_slider.value)
 func _on_run_speed_slider_value_changed(value):
 	run_speed_value.text = str(run_speed_slider.value)
+
+func _on_sensitivity_slider_drag_ended(value_changed):
+	if value_changed:
+		sensitivity_value.text = str(sensitivity_slider.value)
+		if ingame:
+			player.sensitivity = sensitivity_slider.value
+
+func _on_run_name_button_toggled(toggled_on):
+	if (!toggled_on || toggled_on) and ingame:
+		player.timer.switch_name(toggled_on)
+
+func _on_splits_button_toggled(toggled_on):
+	if (!toggled_on || toggled_on) and ingame:
+		player.timer.switch_splits(toggled_on)
+
+func _on_stats_button_toggled(toggled_on):
+	if (!toggled_on || toggled_on) and ingame:
+		player.timer.switch_stats(toggled_on)
+
+func _on_personal_best_button_toggled(toggled_on):
+	if (!toggled_on || toggled_on) and ingame:
+		player.timer.switch_pb(toggled_on)

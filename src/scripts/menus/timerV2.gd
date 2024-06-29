@@ -15,20 +15,20 @@ var result_diff
 func switch_timer():
 	visible = !visible
 
-func switch_name():
-	timer_name.visible = !timer_name.visible
+func switch_name(state: bool):
+	timer_name.visible = state
 
 func switch_clock():
 	clock.visible = !clock.visible
 	
-func switch_splits():
-	checkpoint_section.visible = !checkpoint_section.visible
+func switch_splits(state: bool):
+	checkpoint_section.visible = state
 	
-func switch_stats():
-	stats.visible = !stats.visible
+func switch_stats(state: bool):
+	stats.visible = state
 	
-func switch_pb():
-	pb_stat.visible = !pb_stat.visible
+func switch_pb(state: bool):
+	pb_stat.visible = state
 	
 func _physics_process(delta):
 	if running:

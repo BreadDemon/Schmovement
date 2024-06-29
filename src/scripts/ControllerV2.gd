@@ -93,7 +93,7 @@ func _input(event):
 		reset_pos()
 	elif event.is_action_pressed("LastCheckpoint"):
 		last_checkpoint()
-	elif event.is_action_pressed("Remove"):
+	elif event.is_action_pressed("ToggleTimer"):
 		timer.switch_timer()
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -263,6 +263,7 @@ func handle_coyote(_delta):
 	
 	if Input.is_action_just_pressed("Jump") and can_coyote():
 		velocity.y = jump_velocity
+		jump_sound.play()
 		slide_timer = 0.0
 		has_jumped = true
 func handle_jump(_delta):
