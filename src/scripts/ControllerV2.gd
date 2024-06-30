@@ -19,6 +19,8 @@ var has_wall_jump: bool = true
 var wall_jump_wait: float = 0.0
 @export_range(0, 2, 0.01) var wall_jump_wait_max = 0.21
 @export var use_jump_buffer_for_wall_jumps: bool = true
+var jump_again_timer: float = 0.0
+@export_range(0, 2, 0.01) var jump_again_timer_max: float = 0.3
 
 # Only for textual display
 var grounded: bool
@@ -177,6 +179,10 @@ func handle_timers(delta):
 	wall_jump_wait -= delta
 	if wall_jump_wait < -1.0:
 		wall_jump_wait = -1.0
+		
+	jump_again_timer -= delta
+	if jump_again_timer < -1.0:
+		jump_again_timer = -1.0
 
 func toggle_crouch_cylinder():
 	standing_cylinder.disabled = true
@@ -278,8 +284,10 @@ func handle_jump(_delta):
 		jump_buffer_timer = jump_buffer_timer_max
 	
 	if jump_buffer_timer > 0 and is_on_floor():
+		if jump_again_timer < 0:
+			jump_sound.play()
+		jump_again_timer = jump_again_timer_max
 		velocity.y = jump_velocity
-		jump_sound.play()
 		jump_particles.get_child(0).emitting = true
 		wall_jump_wait = wall_jump_wait_max
 		slide_timer = 0.0

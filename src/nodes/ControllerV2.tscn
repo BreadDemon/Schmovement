@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://j43cqowhjsf6"]
+[gd_scene load_steps=10 format=3 uid="uid://j43cqowhjsf6"]
 
 [ext_resource type="Script" path="res://scripts/ControllerV2.gd" id="1_ojey4"]
 [ext_resource type="PackedScene" uid="uid://d1cdc6cilif2a" path="res://nodes/menus/pause_menu.tscn" id="2_1avvc"]
 [ext_resource type="PackedScene" uid="uid://dq15eqjrays08" path="res://nodes/menus/debug.tscn" id="4_1jnl2"]
 [ext_resource type="PackedScene" uid="uid://bb1835p4yp4ax" path="res://nodes/menus/timerV2.tscn" id="4_2nt6k"]
+[ext_resource type="PackedScene" uid="uid://b1m1vct8n06na" path="res://nodes/menus/version_tag.tscn" id="5_dxnps"]
 [ext_resource type="PackedScene" uid="uid://kaeixhsvn7mh" path="res://nodes/particles/landing_particles.tscn" id="5_sfw46"]
 [ext_resource type="AudioStream" uid="uid://cpb0ahnor718" path="res://assets/zapsplat_animals_cat_jump_onto_mattress_003_47476.mp3" id="6_xy4yb"]
 
@@ -53,6 +54,8 @@ target_position = Vector3(0, 0, -1.5)
 visible = false
 
 [node name="TimerV2" parent="." instance=ExtResource("4_2nt6k")]
+
+[node name="VersionTag" parent="." instance=ExtResource("5_dxnps")]
 
 [node name="LandingParticles" parent="." instance=ExtResource("5_sfw46")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

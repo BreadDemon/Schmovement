@@ -23,6 +23,13 @@ func _ready():
 		
 		config.set_value("debug", "enable", false)
 		
+		config.set_value("Settings", "sensitivity", 0.1)
+		config.set_value("Settings", "enable_run_name", true)
+		config.set_value("Settings", "enable_splits", true)
+		config.set_value("Settings", "enable_stats", true)
+		config.set_value("Settings", "enable_personal_best", true)
+		config.set_value("Settings", "enable_debug_stats", true)
+		
 		config.save(SETTINGS_FILE_PATH)
 	else:
 		config.load(SETTINGS_FILE_PATH)

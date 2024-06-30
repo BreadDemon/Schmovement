@@ -65,8 +65,6 @@ func set_vars():
 	timer_pb.text = "PB: " + str(PB)
 	timer.reset_timer()
 	timer.running = true
-	if PB > dev_time or PB == 0.0:
-		timer_dt.add_theme_color_override("font_color", Color(1, 0, 0))
 func hide_other_runs():
 	var runs = get_parent().get_parent().get_children()
 	print("Hide me!")
@@ -103,11 +101,12 @@ func _on_body_entered(body):
 	
 	if body is Player:
 		get_vars(body)
-		if other_node.PB < other_node.dev_time and other_node.PB != 0.0:
-			timer_dt.add_theme_color_override("font_color", Color(0, 1, 0))
-		else:
-			timer_dt.add_theme_color_override("font_color", Color(0, 1, 0))
+		
 		if node_type == _type.START and !timer.running and start_timer <= 0.0:
+			if PB < dev_time and PB != 0.0:
+				timer_dt.add_theme_color_override("font_color", Color(0, 1, 0))
+			else:
+				timer_dt.add_theme_color_override("font_color", Color(1, 0, 0))
 			attempts += 1
 			ConfigFileHandler.save_attempts(run_name, attempts)
 			clear_checkpoint_pb()
