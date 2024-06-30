@@ -161,6 +161,8 @@ func _ready():
 	timer.switch_stats(settings_load.enable_stats)
 	timer.switch_pb(settings_load.enable_personal_best)
 	debug.visible = settings_load.enable_debug_stats
+	var debug_load = ConfigFileHandler.load_debug()
+	Global.debug = debug_load.enable
 	
 func handle_timers(delta):
 	if !is_on_ramp || is_on_ramp and !is_looking_down_ramp:
