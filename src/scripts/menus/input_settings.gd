@@ -62,7 +62,8 @@ func _ready():
 	
 	_load_settings_from_file()
 	
-	var debug_load = ConfigFileHandler.load_debug()
+	
+	var debug_load = ConfigFileHandler.load_settings()
 	debug_check.button_pressed = debug_load.enable
 
 func _load_settings_from_file():
@@ -147,13 +148,22 @@ func _on_back_button_pressed():
 		pause.animator.play("unhide_pause")
 
 func _on_check_button_toggled(toggled_on):
-	if !toggled_on:
-		debug_settings.set_tab_hidden(2, true)
+	if ingame:
+		if !player.timer.running:
+			if !toggled_on:
+				debug_settings.set_tab_hidden(2, true)
+			else:
+				debug_settings.set_tab_hidden(2, false)
+			Global.debug = toggled_on
+			ConfigFileHandler.save_settings("enable", toggled_on)
 	else:
-		debug_settings.set_tab_hidden(2, false)
-	Global.debug = toggled_on
-	ConfigFileHandler.save_debug("enable", toggled_on)
-
+		if !toggled_on:
+			debug_settings.set_tab_hidden(2, true)
+		else:
+			debug_settings.set_tab_hidden(2, false)
+		Global.debug = toggled_on
+		ConfigFileHandler.save_settings("enable", toggled_on)
+		
 func _on_h_slider_drag_ended(value_changed):
 	if value_changed:
 		ConfigFileHandler.save_debug("walk_speed", walk_speed_slider.value)
