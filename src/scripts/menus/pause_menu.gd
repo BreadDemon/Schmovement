@@ -22,6 +22,7 @@ func _process(delta):
 
 func _input(event):
 	if Input.is_action_just_pressed("CloseMenu") and get_tree().paused:
+		get_parent().load_debug_vars()
 		pause_timer = pause_timer_max
 		animator.play("Unpause")
 		get_tree().paused = false
@@ -34,6 +35,7 @@ func pause():
 	
 func _on_pause_button_pressed():
 	animator.play("Unpause")
+	get_parent().load_debug_vars()
 	get_tree().paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 

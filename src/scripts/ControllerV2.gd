@@ -145,14 +145,15 @@ func _process(_delta):
 @onready var jump_sound = $AudioStreamPlayer
 
 func load_debug_vars():
-	var debug_load = ConfigFileHandler.load_debug()
-	Global.debug = debug_load.enable
-	gravity_force = debug_load.gravity_force
+	var enabled_debug = ConfigFileHandler.load_settings()
+	Global.debug = enabled_debug.enable
+	var debug_load = ConfigFileHandler.load_debug(Global.debug)
 	remove_air_penalty_offset = debug_load.air_penalty_offset
+	gravity_force = debug_load.gravity_force
 	air_penalty = debug_load.air_move_penalty
 	jump_velocity = debug_load.jump_velocity
-	coyote_timer = debug_load.coyote_timer
-	jump_buffer_timer = debug_load.jump_buffer_timer
+	coyote_timer_max = debug_load.coyote_timer
+	jump_buffer_timer_max = debug_load.jump_buffer_timer
 	wall_jump_wait_max = debug_load.wall_jump_timer
 	jump_again_timer_max = debug_load.jump_again_timer
 	crouched_speed = debug_load.crouch_speed
@@ -172,7 +173,7 @@ func load_debug_vars():
 	head_bob_sprinting_intensity = debug_load.hb_sprint_intensity
 	head_bob_walking_speed = debug_load.hb_walk_speed
 	head_bob_walking_intensity = debug_load.hb_walk_intensity
-	#use_jump_buffer_for_wall_jumps = debug.use_jbuff
+	use_jump_buffer_for_wall_jumps = debug_load.use_jbuff
 	
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
