@@ -23,8 +23,6 @@ extends Control
 @onready var run_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RunSpeedHbox/run_speed_slider
 @onready var run_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RunSpeedHbox/RunSpeedValue
 @onready var enable_air_penalty = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/EnableAirPenalty
-@onready var air_speed_penalty_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox/air_speed_penalty_slider
-@onready var air_speed_penalty_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox/AirSpeedPenaltyValue
 
 @onready var sensitivity_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/Sensitivity/SensitivitySlider
 @onready var sensitivity_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/Sensitivity/SensitivityValue
@@ -220,4 +218,171 @@ func _on_option_button_item_selected(index):
 				#player.timer.get_child(0).set_margin(SIDE_TOP, 10)
 
 
+func _on_enable_air_speed_penalty_toggled(toggled_on):
+	ConfigFileHandler.save_debug("air_speed_penalty", toggled_on)
+	
+@onready var air_speed_penalty_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox/air_speed_penalty_slider
+@onready var air_speed_penalty_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox/AirSpeedPenaltyValue
+func _on_air_speed_penalty_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("air_speed_penalty_amount", air_speed_penalty_slider.value)
+func _on_air_speed_penalty_slider_value_changed(value):
+	air_speed_penalty_value.text = str(air_speed_penalty_slider.value)
 
+@onready var gravity_force_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/GravityForce/GravityForceSlider
+@onready var gravity_force_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/GravityForce/GravityForceValue
+func _on_gravity_force_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("gravity_force", gravity_force_slider.value)
+func _on_gravity_force_slider_value_changed(value):
+	gravity_force_value.text = str(gravity_force_slider.value)
+
+func _on_air_penalty_offset_toggled(toggled_on):
+	ConfigFileHandler.save_debug("air_penalty_offset", toggled_on)
+
+@onready var air_move_penalty_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirMovePenalty/AirMovePenaltySlider
+@onready var air_move_penalty_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirMovePenalty/AirMovePenaltyValue
+func _on_air_move_penalty_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("air_move_penalty", air_move_penalty_slider.value)
+func _on_air_move_penalty_slider_value_changed(value):
+	air_move_penalty_value.text = str(air_move_penalty_slider.value)
+
+@onready var jump_velocity_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/JumpVelocity/JumpVelocitySlider
+@onready var jump_velocity_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/JumpVelocity/JumpVelocityValue
+func _on_jump_velocity_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("jump_velocity", jump_velocity_slider.value)
+func _on_jump_velocity_slider_value_changed(value):
+	jump_velocity_value.text = str(jump_velocity_slider.value)
+
+@onready var coyote_timer_max_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CoyoteTimerMax/CoyoteTimerMaxSlider
+@onready var coyote_timer_max_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CoyoteTimerMax/CoyoteTimerMaxValue
+func _on_coyote_timer_max_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("coyote_timer", coyote_timer_max_slider.value)
+func _on_coyote_timer_max_slider_value_changed(value):
+	coyote_timer_max_value.text = str(coyote_timer_max_slider.value)
+
+@onready var jump_buffer_timer_max_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/JumpBufferTimerMax/JumpBufferTimerMaxSlider
+@onready var jump_buffer_timer_max_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/JumpBufferTimerMax/JumpBufferTimerMaxValue
+func _on_jump_buffer_timer_max_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("jump_buffer_timer", jump_buffer_timer_max_slider.value)
+func _on_jump_buffer_timer_max_slider_value_changed(value):
+	jump_buffer_timer_max_value.text = str(jump_buffer_timer_max_slider.value)
+
+@onready var wall_jump_timer_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WallJumpTimer/WallJumpTimerSlider
+@onready var wall_jump_timer_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WallJumpTimer/WallJumpTimerValue
+func _on_wall_jump_timer_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("wall_jump_timer", wall_jump_timer_slider.value)
+func _on_wall_jump_timer_slider_value_changed(value):
+	wall_jump_timer_value.text = str(wall_jump_timer_slider.value)
+
+func _on_use_jump_buffer_for_wall_jump_toggled(toggled_on):
+	ConfigFileHandler.save_debug("use_jbuff", toggled_on)
+
+@onready var jump_again_timer_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/JumpAgainTimer/JumpAgainTimerSlider
+@onready var jump_again_timer_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/JumpAgainTimer/JumpAgainTimerValue
+func _on_jump_again_timer_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("jump_again_timer", jump_again_timer_slider.value)
+func _on_jump_again_timer_slider_value_changed(value):
+	jump_again_timer_value.text = str(jump_again_timer_slider.value)
+
+@onready var speed_lerp_factor_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/SpeedLerpFactor/SpeedLerpFactorSlider
+@onready var speed_lerp_factor_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/SpeedLerpFactor/SpeedLerpFactorValue
+func _on_speed_lerp_factor_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("speed_lerp_factor", speed_lerp_factor_slider.value)
+func _on_speed_lerp_factor_slider_value_changed(value):
+	speed_lerp_factor_value.text = str(speed_lerp_factor_slider.value)
+
+@onready var crouch_lerp_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CrouchLerpSpeed/CrouchLerpSpeedSlider
+@onready var crouch_lerp_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CrouchLerpSpeed/CrouchLerpSpeedValue
+func _on_crouch_lerp_speed_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("crouch_lerp_factor", crouch_lerp_speed_slider.value)
+func _on_crouch_lerp_speed_slider_value_changed(value):
+	crouch_lerp_speed_value.text = str(crouch_lerp_speed_slider.value)
+
+@onready var slide_timer_max_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/SlideTimerMax/SlideTimerMaxSlider
+@onready var slide_timer_max_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/SlideTimerMax/SlideTimerMaxValue
+func _on_slide_timer_max_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("slide_timer", slide_timer_max_slider.value)
+func _on_slide_timer_max_slider_value_changed(value):
+	slide_timer_max_value.text = str(slide_timer_max_slider.value)
+
+@onready var slide_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/SlideSpeed/SlideSpeedSlider
+@onready var slide_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/SlideSpeed/SlideSpeedValue
+func _on_slide_speed_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("slide_speed", slide_speed_slider.value)
+func _on_slide_speed_slider_value_changed(value):
+	slide_speed_value.text = str(slide_speed_slider.value)
+
+@onready var ramp_down_look_angle_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RampDownLookAngle/RampDownLookAngleSlider
+@onready var ramp_down_look_angle_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RampDownLookAngle/RampDownLookAngleValue
+func _on_ramp_down_look_angle_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("ramp_look_angle", ramp_down_look_angle_slider.value)
+func _on_ramp_down_look_angle_slider_value_changed(value):
+	ramp_down_look_angle_value.text = str(ramp_down_look_angle_slider.value)
+
+@onready var ramp_modifier_base_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RampModifierBase/RampModifierBaseSlider
+@onready var ramp_modifier_base_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RampModifierBase/RampModifierBaseValue
+func _on_ramp_modifier_base_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("ramp_modifier_base", ramp_modifier_base_slider.value)
+func _on_ramp_modifier_base_slider_value_changed(value):
+	ramp_modifier_base_value.text = str(ramp_modifier_base_slider.value)
+
+@onready var headbob_sprint_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobSprintSpeed/HeadbobSprintSpeedSlider
+@onready var headbob_sprint_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobSprintSpeed/HeadbobSprintSpeedValue
+func _on_headbob_sprint_speed_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("hb_sprint_speed", headbob_sprint_speed_slider.value)
+func _on_headbob_sprint_speed_slider_value_changed(value):
+	headbob_sprint_speed_value.text = str(headbob_sprint_speed_slider.value)
+
+@onready var headbob_sprint_intensity_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobSprintIntensity/HeadbobSprintIntensitySlider
+@onready var headbob_sprint_intensity_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobSprintIntensity/HeadbobSprintIntensityValue
+func _on_headbob_sprint_intensity_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("hb_sprint_intensity", headbob_sprint_intensity_slider.value)
+func _on_headbob_sprint_intensity_slider_value_changed(value):
+	headbob_sprint_intensity_value.text = str(headbob_sprint_intensity_slider.value)
+
+@onready var headbob_walk_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobWalkSpeed/HeadbobWalkSpeedSlider
+@onready var headbob_walk_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobWalkSpeed/HeadbobWalkSpeedValue
+func _on_headbob_walk_speed_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("hb_walk_speed", headbob_walk_speed_slider.value)
+func _on_headbob_walk_speed_slider_changed():
+	headbob_walk_speed_value.text = str(headbob_walk_speed_slider.value)
+
+@onready var headbob_walk_intensity_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobWalkIntensity/HeadbobWalkIntensitySlider
+@onready var headbob_walk_intensity_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobWalkIntensity/HeadbobWalkIntensityValue
+func _on_headbob_walk_intensity_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("hb_walk_intensity", headbob_walk_intensity_slider.value)
+func _on_headbob_walk_intensity_slider_value_changed(value):
+	headbob_walk_intensity_value.text = str(headbob_walk_intensity_slider.value)
+
+@onready var headbob_crouch_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobCrouchSpeed/HeadbobCrouchSpeedSlider
+@onready var headbob_crouch_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobCrouchSpeed/HeadbobCrouchSpeedValue
+func _on_headbob_crouch_speed_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("hb_crouch_speed", headbob_crouch_speed_slider.value)
+func _on_headbob_crouch_speed_slider_value_changed(value):
+	headbob_crouch_speed_value.text = str(headbob_crouch_speed_slider.value)
+
+@onready var headbob_crouch_intensity_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobCrouchIntensity/HeadbobCrouchIntensitySlider
+@onready var headbob_crouch_intensity_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobCrouchIntensity/HeadbobCrouchIntensityValue
+func _on_headbob_crouch_intensity_slider_drag_ended(value_changed):
+	if value_changed:
+		ConfigFileHandler.save_debug("hb_crouch_intensity", headbob_crouch_intensity_slider.value)
+func _on_headbob_crouch_intensity_slider_value_changed(value):
+	headbob_crouch_intensity_value.text = str(headbob_crouch_intensity_slider.value)

@@ -144,6 +144,36 @@ func _process(_delta):
 @onready var jump_particles = $LandingParticles
 @onready var jump_sound = $AudioStreamPlayer
 
+func load_debug_vars():
+	var debug_load = ConfigFileHandler.load_debug()
+	Global.debug = debug_load.enable
+	gravity_force = debug_load.gravity_force
+	remove_air_penalty_offset = debug_load.air_penalty_offset
+	air_penalty = debug_load.air_move_penalty
+	jump_velocity = debug_load.jump_velocity
+	coyote_timer = debug_load.coyote_timer
+	jump_buffer_timer = debug_load.jump_buffer_timer
+	wall_jump_wait_max = debug_load.wall_jump_timer
+	jump_again_timer_max = debug_load.jump_again_timer
+	crouched_speed = debug_load.crouch_speed
+	walk_speed = debug_load.walk_speed
+	run_speed = debug_load.run_speed
+	air_speed_penalty = debug_load.air_speed_penalty
+	air_speed_penalty_amount = debug_load.air_speed_penalty_amount
+	speed_lerp_factor = debug_load.speed_lerp_factor
+	crouch_camera_lerp_factor = debug_load.crouch_lerp_factor
+	slide_timer_max = debug_load.slide_timer
+	slide_speed = debug_load.slide_speed
+	MAX_ANGLE_VARIANCE = debug_load.ramp_look_angle
+	ramp_modifier_base = debug_load.ramp_modifier_base
+	head_bob_crouching_speed = debug_load.hb_crouch_speed
+	head_bob_crouching_intensity = debug_load.hb_crouch_intensity
+	head_bob_sprinting_speed = debug_load.hb_sprint_speed
+	head_bob_sprinting_intensity = debug_load.hb_sprint_intensity
+	head_bob_walking_speed = debug_load.hb_walk_speed
+	head_bob_walking_intensity = debug_load.hb_walk_intensity
+	#use_jump_buffer_for_wall_jumps = debug.use_jbuff
+	
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	standing_cylinder.disabled = false
@@ -161,8 +191,7 @@ func _ready():
 	timer.switch_stats(settings_load.enable_stats)
 	timer.switch_pb(settings_load.enable_personal_best)
 	debug.visible = settings_load.enable_debug_stats
-	var debug_load = ConfigFileHandler.load_debug()
-	Global.debug = debug_load.enable
+	load_debug_vars()
 	
 func handle_timers(delta):
 	if !is_on_ramp || is_on_ramp and !is_looking_down_ramp:
