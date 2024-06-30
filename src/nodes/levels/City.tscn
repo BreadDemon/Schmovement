@@ -756,11 +756,17 @@ run_name = "An Apple for an Old Man"
 dev_time = 29.14
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
+start_timer_max = null
+show_end = null
+node_type = null
 
 [node name="end" parent="runs/An Apple for an Old Man" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 1, -14.2)
+run_name = null
 other_node = NodePath("../start")
 checkpoints = [NodePath("../checkpoints/Checkpoint")]
+start_timer_max = null
+show_end = null
 node_type = 1
 
 [node name="Return_node" parent="runs/An Apple for an Old Man" instance=ExtResource("8_1tobv")]
@@ -786,10 +792,16 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4, 1.3, -9)
 run_name = "The Climb"
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
+start_timer_max = null
+show_end = null
+node_type = null
 
 [node name="end" parent="runs/The Climb" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 40, -18)
+run_name = null
 other_node = NodePath("../start")
+start_timer_max = null
+show_end = null
 node_type = 1
 
 [node name="Return_node" parent="runs/The Climb" instance=ExtResource("8_1tobv")]
@@ -806,10 +818,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 23.5, -15.5)
 run_name = "Lost Cigar"
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
+start_timer_max = null
+show_end = null
+node_type = null
 
 [node name="end" parent="runs/Lost Cigar" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.5, 24, -1.5)
+run_name = null
 other_node = NodePath("../start")
+start_timer_max = null
+show_end = null
 node_type = 1
 
 [node name="Return_node" parent="runs/Lost Cigar" instance=ExtResource("8_1tobv")]
@@ -826,10 +844,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 8, -24)
 run_name = "Creativity is Key"
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
+start_timer_max = null
+show_end = null
+node_type = null
 
 [node name="end" parent="runs/Creativity is Key" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 40, -18)
+run_name = null
 other_node = NodePath("../start")
+start_timer_max = null
+show_end = null
 node_type = 1
 
 [node name="Return_node" parent="runs/Creativity is Key" instance=ExtResource("8_1tobv")]
@@ -846,10 +870,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 37, -10)
 run_name = "Cross Building 1"
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
+start_timer_max = null
+show_end = null
+node_type = null
 
 [node name="end" parent="runs/Cross Building 1" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 39, -8)
+run_name = null
 other_node = NodePath("../start")
+start_timer_max = null
+show_end = null
 node_type = 1
 
 [node name="Return_node" parent="runs/Cross Building 1" instance=ExtResource("8_1tobv")]
@@ -866,10 +896,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 39, -10)
 run_name = "Cross Building 2"
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
+start_timer_max = null
+show_end = null
+node_type = null
 
 [node name="end" parent="runs/Cross Building 2" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 37, -12)
+run_name = null
 other_node = NodePath("../start")
+start_timer_max = null
+show_end = null
 node_type = 1
 
 [node name="Return_node" parent="runs/Cross Building 2" instance=ExtResource("8_1tobv")]
@@ -886,11 +922,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.5, 1, -52.5)
 run_name = "Hidden"
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
+start_timer_max = null
+show_end = null
+node_type = null
 
 [node name="end" parent="runs/Hidden" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -38, 37.2, 2)
+run_name = null
 other_node = NodePath("../start")
 checkpoints = [NodePath("../checkpoints/Checkpoint")]
+start_timer_max = null
+show_end = null
 node_type = 1
 
 [node name="Return_node" parent="runs/Hidden" instance=ExtResource("8_1tobv")]

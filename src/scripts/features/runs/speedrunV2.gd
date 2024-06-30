@@ -56,13 +56,11 @@ func get_vars(body):
 	checkpoint_diff = container.get_node("Checkpoint/Checkpoint_Diff")
 	checkpoint_time = container.get_node("Checkpoint/Checkpoint_Time")
 	
-	timer_diff = container.get_node("Diff_PB/Diff")
 	timer_attempts = container.get_node("Diff_PB/Attempts")
+	timer_diff = container.get_node("DT/Diff")
 	timer_pb = container.get_node("DT/PersonalBest")
-	timer_dt = container.get_node("DT/time")
 func set_vars():
 	timer_run_name.text = run_name
-	timer_dt.text = format % ["DT: ", str(dev_time)]
 	timer_pb.text = "PB: " + str(PB)
 	timer.reset_timer()
 	timer.running = true
@@ -101,13 +99,13 @@ func _on_body_entered(body):
 		
 		if node_type == _type.START and !timer.running and start_timer <= 0.0:
 			if PB < dev_time and PB != 0.0:
-				timer_dt.add_theme_color_override("font_color", Color(0, 1, 0))
+				timer_pb.add_theme_color_override("font_color", Color(1, 1, 0))
 			else:
-				timer_dt.add_theme_color_override("font_color", Color(1, 0, 0))
+				timer_pb.add_theme_color_override("font_color", Color(0, 1, 0))
 			attempts += 1
 			ConfigFileHandler.save_attempts(run_name, attempts)
 			clear_checkpoint_pb()
-			timer_attempts.text = str(attempts)
+			timer_attempts.text = "Attempts: " + str(attempts)
 			self.visible = false
 			show_my_checkpoints()
 			if show_end:

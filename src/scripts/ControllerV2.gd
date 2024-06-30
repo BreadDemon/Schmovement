@@ -423,7 +423,6 @@ func reset():
 	var PB_timer = reset_timer.get_node("PanelContainer/Panel/Container/Diff_PB")
 	checkpoint_timer.get_node("Checkpoint_Diff").text = ""
 	checkpoint_timer.get_node("Checkpoint_Time").text = ""
-	PB_timer.get_node("Diff").text = ""
 	reset_timer.reset_timer()
 	transform.origin = Global.origin_point
 	if Global.run != null:

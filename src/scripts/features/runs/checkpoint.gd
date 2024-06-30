@@ -8,10 +8,13 @@ var time_by_checkpoint: float
 var time_since_last_checkpoint: float
 var checkpoint_pb: float
 @export var mother_run: Speedrun 
+const ORANGE = preload("res://assets/Textures/orange.tres")
+@onready var visual = $Visual
 
 func _ready():
 	visible = false
-
+	if is_respwanable:
+		visual.set_material_override(ORANGE)
 func _on_body_entered(body):
 	var timer = body.get_node("TimerV2")
 	var checkpoint_diff = body.get_node("TimerV2/PanelContainer/Panel/Container/Checkpoint/Checkpoint_Diff")

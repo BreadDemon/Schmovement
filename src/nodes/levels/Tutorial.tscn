@@ -529,10 +529,9 @@ to get up
 "
 
 [node name="Label3D13" type="Label3D" parent="Text"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0740846, 25.5079, -0.0715199)
-text = "Press Backspace
-to return to the last
-respawnable checkpoint
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0740846, 25.5079, 0.000887528)
+text = "Orange boxes are respanwnable
+checkpoints, click Backspace to return
 "
 
 [node name="Runs" type="Node3D" parent="."]
@@ -544,13 +543,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 run_name = "Tutorial"
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
+start_timer_max = null
 show_end = false
+node_type = null
 
 [node name="end" parent="Runs/Tutorial" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("4_2bp5y")]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 39, 0)
 visible = false
+run_name = null
 other_node = NodePath("../start")
 checkpoints = [NodePath("../checkpoints/Checkpoint"), NodePath("../checkpoints/Checkpoint2"), NodePath("../checkpoints/Checkpoint4")]
+start_timer_max = null
+show_end = null
 node_type = 1
 
 [node name="Return_node" parent="Runs/Tutorial" instance=ExtResource("10_gyn5w")]

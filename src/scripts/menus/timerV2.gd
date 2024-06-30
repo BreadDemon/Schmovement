@@ -64,7 +64,7 @@ func set_pb(start_course):
 		return
 		
 	if float(Global.pb) != 0:
-		var diff = get_node("PanelContainer/Panel/Container/Diff_PB/Diff")
+		var diff = get_node("PanelContainer/Panel/Container/DT/Diff")
 		var format = "%s%.3f"
 		result_diff = start_time - float(Global.pb)
 		if Global.time > Global.pb:
