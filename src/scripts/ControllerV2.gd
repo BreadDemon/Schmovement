@@ -152,7 +152,14 @@ func _ready():
 	for action in keybindings.keys():
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, keybindings[action])
-
+	var settings_load = ConfigFileHandler.load_settings()
+	sensitivity = settings_load.sensitivity
+	timer.switch_name(settings_load.enable_run_name)
+	timer.switch_splits(settings_load.enable_splits)
+	timer.switch_stats(settings_load.enable_stats)
+	timer.switch_pb(settings_load.enable_personal_best)
+	debug.visible = settings_load.enable_debug_stats
+	
 func handle_timers(delta):
 	if !is_on_ramp || is_on_ramp and !is_looking_down_ramp:
 		slide_timer -= delta

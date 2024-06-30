@@ -1,15 +1,21 @@
 extends Control
 
 @onready var input_button_scene = preload('res://nodes/menus/input_button.tscn')
-@onready var action_list = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer/ScrollContainer/ActionList
+@onready var action_list = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Keybinds/MarginContainer/VBoxContainer/ScrollContainer/ActionList
+
+#Settings
+@onready var enable_debug_stats = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/EnableDebug/Enable_debug_stats
+@onready var run_name_button = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/RunName/RunNameButton
+@onready var splits_button = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/Splits/SplitsButton
+@onready var stats_button = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/Stats/StatsButton
+@onready var personal_best_button = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/PB/PersonalBestButton
 
 # DEBUG STUFF 
+@onready var debug_check = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/EnableDebug/Enable_debug
+
+@onready var debug_settings = $PanelContainer/MarginContainer/VBoxContainer/TabContainer
 
 ## Speed Variables
-@onready var debug_settings = $PanelContainer/MarginContainer/VBoxContainer/TabContainer
-@onready var debug_check = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/EnableDebug/Enable_debug
-@onready var enable_debug_stats = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/EnableDebug/Enable_debug_stats
-
 @onready var walk_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox/walk_speed_slider
 @onready var walk_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox/WalkSpeedValue
 @onready var crouch_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/CrouchSpeedHbox/crouch_speed_slider
@@ -41,7 +47,10 @@ var input_actions = {
 	"Sprint": "Sprint",
 	"Crouch": "Crouch",
 	"Jump": "Jump",
-	"Reset": "Reset"
+	"Reset": "Reset",
+	"Return": "Return to Spawn",
+	"LastCheckpoint": "Return to Checkpoint",
+	"ToggleTimer": "Toggle Timer"
 }
 
 func _ready():
@@ -52,7 +61,21 @@ func _ready():
 		debug_settings.set_tab_hidden(2, true)
 	else:
 		debug_check.button_pressed = true
+	
+	_load_settings_from_file()
+	
+	var debug_load = ConfigFileHandler.load_debug()
+	debug_check.button_pressed = debug_load.enable
 
+func _load_settings_from_file():
+	var settings_load = ConfigFileHandler.load_settings()
+	sensitivity_slider.value = settings_load.sensitivity
+	run_name_button.button_pressed = settings_load.enable_run_name
+	splits_button.button_pressed = settings_load.enable_splits
+	stats_button.button_pressed = settings_load.enable_stats
+	personal_best_button.button_pressed = settings_load.enable_personal_best
+	enable_debug_stats.button_pressed = settings_load.enable_debug_stats
+	
 func _load_keybindings_from_settings():
 	var keybindings = ConfigFileHandler.load_keybindings()
 	for action in keybindings.keys():
@@ -153,30 +176,36 @@ func _on_run_speed_slider_value_changed(value):
 
 func _on_sensitivity_slider_drag_ended(value_changed):
 	if value_changed:
-		sensitivity_value.text = str(sensitivity_slider.value)
-		if ingame:
+		if ingame:	
 			player.sensitivity = sensitivity_slider.value
-
+		ConfigFileHandler.save_settings("sensitivity", sensitivity_slider.value)
+func _on_sensitivity_slider_value_changed(value):
+	sensitivity_value.text = str(sensitivity_slider.value)
+	
 func _on_run_name_button_toggled(toggled_on):
+	ConfigFileHandler.save_settings("enable_run_name", toggled_on)
 	if (!toggled_on || toggled_on) and ingame:
 		player.timer.switch_name(toggled_on)
 
 func _on_splits_button_toggled(toggled_on):
+	ConfigFileHandler.save_settings("enable_splits", toggled_on)
 	if (!toggled_on || toggled_on) and ingame:
 		player.timer.switch_splits(toggled_on)
 
 func _on_stats_button_toggled(toggled_on):
+	ConfigFileHandler.save_settings("enable_stats", toggled_on)
 	if (!toggled_on || toggled_on) and ingame:
 		player.timer.switch_stats(toggled_on)
 
 func _on_personal_best_button_toggled(toggled_on):
+	ConfigFileHandler.save_settings("enable_personal_best", toggled_on)
 	if (!toggled_on || toggled_on) and ingame:
 		player.timer.switch_pb(toggled_on)
 
 func _on_enable_debug_stats_toggled(toggled_on):
+	ConfigFileHandler.save_settings("enable_debug_stats", toggled_on)
 	if ingame:
 		player.debug.visible = toggled_on
-
 
 func _on_option_button_item_selected(index):
 	if ingame:
@@ -189,3 +218,6 @@ func _on_option_button_item_selected(index):
 				player.timer.get_child(0).set_anchor(SIDE_BOTTOM, 0.0)
 				#player.timer.get_child(0).set_margin(SIDE_LEFT, 10)
 				#player.timer.get_child(0).set_margin(SIDE_TOP, 10)
+
+
+
