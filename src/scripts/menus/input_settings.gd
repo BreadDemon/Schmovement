@@ -144,8 +144,8 @@ func _on_back_button_pressed():
 	if !ingame:
 		get_tree().change_scene_to_file("res://nodes/menus/game_menu.tscn")
 	else:
-		animator.play("close_ingame")
 		var pause = get_parent()
+		animator.play("close_ingame")
 		pause.animator.play("unhide_pause")
 
 func _on_check_button_toggled(toggled_on):

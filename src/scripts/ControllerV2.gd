@@ -87,7 +87,7 @@ var head_bob_curr_intensity = 0.0
 func _input(event):
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	elif event.is_action_pressed("Pause"):
+	elif Input.is_action_just_pressed("Pause") and pause_menu.pause_timer < 0.0:
 		pause_menu.pause()
 	elif event.is_action_pressed("Reset"):
 		reset()

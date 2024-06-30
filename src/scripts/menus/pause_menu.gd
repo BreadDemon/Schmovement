@@ -3,6 +3,9 @@ extends ColorRect
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @export var input_settings: PackedScene
 
+var pause_timer: float = 0.0
+var pause_timer_max: float = 0.1
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var Resume = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ResumeButton
@@ -11,6 +14,19 @@ func _ready():
 	Reset.button_down.connect(_on_reset_button_pressed)
 	var Exit = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExitButton
 	Exit.button_down.connect(get_tree().quit)
+
+func _process(delta):
+	print(pause_timer)
+	pause_timer -= delta
+	if pause_timer <= -1.0:
+		pause_timer = -1.0
+
+func _input(event):
+	if Input.is_action_just_pressed("CloseMenu") and get_tree().paused:
+		pause_timer = pause_timer_max
+		animator.play("Unpause")
+		get_tree().paused = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func pause():
 	animator.play("Pause")
