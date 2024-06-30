@@ -43,12 +43,12 @@ target_position = Vector3(0, -1.5, 0)
 [node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.648, 0)
 
-[node name="Interact" type="RayCast3D" parent="Neck"]
-target_position = Vector3(0, 0, -1.5)
-
 [node name="Eyes" type="Node3D" parent="Neck"]
 
 [node name="Camera3D" type="Camera3D" parent="Neck/Eyes"]
+
+[node name="Interact" type="RayCast3D" parent="Neck/Eyes/Camera3D"]
+target_position = Vector3(0, 0, -1.5)
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_1avvc")]
 

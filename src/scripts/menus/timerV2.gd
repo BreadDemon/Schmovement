@@ -41,7 +41,7 @@ func update():
 		format = format % start_time
 		
 		Global.time = format
-		clock.text = format.replace(".", ":")
+		clock.text = format
 		if start_time < float(Global.pb) || float(Global.pb) == 0.0:
 			clock.add_theme_color_override("font_color", Color(0, 1, 0))
 		else:

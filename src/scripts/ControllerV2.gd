@@ -3,10 +3,10 @@ class_name Player
 
 # Airborne vars
 @export_category("Jump Settings")
-@export_range(0.1, 10, 0.1) var gravity_force: float = 1.0 # (1.2)
+@export_range(0.0, 10, 0.1) var gravity_force: float = 1.0 # (1.2)
 @export var remove_air_penalty_offset: bool = false
 @export_range(0, 4, 0.1) var air_penalty: float = 1.0
-@export_range(0, 10) var jump_velocity: float = 4.7 # (4.5)
+@export_range(0, 10, 0.1) var jump_velocity: float = 4.6 # (4.5)
 var air_penalty_offset: float = 12 # (17) Maybe disponibilize this for edits
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var has_jumped: bool = false
@@ -65,7 +65,7 @@ var slide_direction = Vector3.ZERO
 
 # Ramp vars
 @export_category("Ramp Vars")
-@export_range(0, 30, 1) var MAX_ANGLE_VARIANCE: float = 15.0
+@export_range(0, 30, 0.5) var MAX_ANGLE_VARIANCE: float = 15.0
 var TOLERANCE: float = 0.1 # Tolerance for angle checking
 var is_on_ramp: bool
 var is_looking_down_ramp: bool
@@ -134,7 +134,7 @@ func _process(_delta):
 @onready var standing_view = $StandingView
 @onready var inside_object = $InsideObject
 @onready var neck = $Neck
-@onready var interact = $Neck/Interact
+@onready var interact = $Neck/Eyes/Camera3D/Interact
 @onready var eyes = $Neck/Eyes
 @onready var camera = $Neck/Eyes/Camera3D
 @onready var pause_menu = $PauseMenu

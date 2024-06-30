@@ -16,7 +16,6 @@ func _ready():
 	Exit.button_down.connect(get_tree().quit)
 
 func _process(delta):
-	print(pause_timer)
 	pause_timer -= delta
 	if pause_timer <= -1.0:
 		pause_timer = -1.0
