@@ -9,58 +9,24 @@ const RUNS_FILE_PATH = "user://runs.save"
 var config_debug_default = ConfigFile.new()
 const DEBUG_DEFAULT_FILE_PATH = "user://debug_default.save"
 
+var config_version = ConfigFile.new()
+const VERSION_PATH = "user://version_setting.save"
+
 func _ready():
+	
+	if !FileAccess.file_exists(VERSION_PATH):
+		config_version.set_value("version", "version", Global.game_version)
+		write_settings()
+		
+		config_version.save(VERSION_PATH)
+	else:
+		config.load(SETTINGS_FILE_PATH)
+		var version = config_version.get_value("version", "version")
+		if version != Global.game_version:
+			write_settings()
+			
 	if !FileAccess.file_exists(SETTINGS_FILE_PATH):
-		config.set_value("Keybinding","forward", "W")
-		config.set_value("Keybinding","back", "S")
-		config.set_value("Keybinding","left", "A")
-		config.set_value("Keybinding","right", "D")
-		config.set_value("Keybinding","Sprint", "Shift")
-		config.set_value("Keybinding","Crouch", "Ctrl")
-		config.set_value("Keybinding","Jump", "Space")
-		config.set_value("Keybinding","Reset", "R")
-		config.set_value("Keybinding","Return", "Delete")
-		config.set_value("Keybinding","LastCheckpoint", "Backspace")
-		config.set_value("Keybinding","ToggleTimer", "T")
-		
-		config.set_value("Last_scene","path", "res://nodes/levels/Tutorial.tscn")		
-		
-		config.set_value("debug", "walk_speed", 5.0)
-		config.set_value("debug", "crouch_speed", 3.0)
-		config.set_value("debug", "run_speed", 7.0)
-		config.set_value("debug", "air_speed_penalty", false)
-		config.set_value("debug", "gravity_force", 1.0)
-		config.set_value("debug", "air_penalty_offset", false)
-		config.set_value("debug", "air_move_penalty", 1.0)
-		config.set_value("debug", "jump_velocity", 4.6)
-		config.set_value("debug", "coyote_timer", 0.2)
-		config.set_value("debug", "jump_buffer_timer", 0.2)
-		config.set_value("debug", "wall_jump_timer", 0.21)
-		config.set_value("debug", "speed_lerp_factor", 2.0)
-		config.set_value("debug", "crouch_lerp_factor", 3.0)
-		config.set_value("debug", "slide_timer", 1.0)
-		config.set_value("debug", "slide_speed", 5.0)
-		config.set_value("debug", "ramp_look_angle", 15.0)
-		config.set_value("debug", "ramp_modifier_base", 0.5)
-		config.set_value("debug", "hb_sprint_speed", 22.0)
-		config.set_value("debug", "hb_sprint_intensity", 0.4)
-		config.set_value("debug", "hb_walk_intensity", 0.2)
-		config.set_value("debug", "hb_walk_speed", 14.0)
-		config.set_value("debug", "hb_crouch_speed", 10.0)
-		config.set_value("debug", "hb_crouch_intensity", 0.1)
-		config.set_value("debug", "jump_again_timer", 0.3)
-		config.set_value("debug", "air_speed_penalty_amount", 0.9)
-		config.set_value("debug", "use_jbuff", true)
-		
-		config.set_value("Settings", "enable", false)
-		config.set_value("Settings", "sensitivity", 0.1)
-		config.set_value("Settings", "enable_run_name", true)
-		config.set_value("Settings", "enable_splits", true)
-		config.set_value("Settings", "enable_stats", true)
-		config.set_value("Settings", "enable_personal_best", true)
-		config.set_value("Settings", "enable_debug_stats", true)
-		
-		config.save(SETTINGS_FILE_PATH)
+		write_settings()		
 	else:
 		config.load(SETTINGS_FILE_PATH)
 	
@@ -68,7 +34,6 @@ func _ready():
 		configruns.load(RUNS_FILE_PATH)
 		
 	if !FileAccess.file_exists(DEBUG_DEFAULT_FILE_PATH):
-		
 		config_debug_default.set_value("debug", "walk_speed", 5.0)
 		config_debug_default.set_value("debug", "crouch_speed", 3.0)
 		config_debug_default.set_value("debug", "run_speed", 7.0)
@@ -99,6 +64,58 @@ func _ready():
 		config_debug_default.save(DEBUG_DEFAULT_FILE_PATH)
 	else:
 		config_debug_default.load(DEBUG_DEFAULT_FILE_PATH)
+
+func write_settings():
+	config.set_value("Keybinding","forward", "W")
+	config.set_value("Keybinding","back", "S")
+	config.set_value("Keybinding","left", "A")
+	config.set_value("Keybinding","right", "D")
+	config.set_value("Keybinding","Sprint", "Shift")
+	config.set_value("Keybinding","Crouch", "Ctrl")
+	config.set_value("Keybinding","Jump", "Space")
+	config.set_value("Keybinding","Reset", "R")
+	config.set_value("Keybinding","Return", "Delete")
+	config.set_value("Keybinding","LastCheckpoint", "Backspace")
+	config.set_value("Keybinding","ToggleTimer", "T")
+	
+	config.set_value("Last_scene","path", "res://nodes/levels/Tutorial.tscn")		
+	
+	config.set_value("debug", "walk_speed", 5.0)
+	config.set_value("debug", "crouch_speed", 3.0)
+	config.set_value("debug", "run_speed", 7.0)
+	config.set_value("debug", "air_speed_penalty", false)
+	config.set_value("debug", "gravity_force", 1.0)
+	config.set_value("debug", "air_penalty_offset", false)
+	config.set_value("debug", "air_move_penalty", 1.0)
+	config.set_value("debug", "jump_velocity", 4.6)
+	config.set_value("debug", "coyote_timer", 0.2)
+	config.set_value("debug", "jump_buffer_timer", 0.2)
+	config.set_value("debug", "wall_jump_timer", 0.21)
+	config.set_value("debug", "speed_lerp_factor", 2.0)
+	config.set_value("debug", "crouch_lerp_factor", 3.0)
+	config.set_value("debug", "slide_timer", 1.0)
+	config.set_value("debug", "slide_speed", 5.0)
+	config.set_value("debug", "ramp_look_angle", 15.0)
+	config.set_value("debug", "ramp_modifier_base", 0.5)
+	config.set_value("debug", "hb_sprint_speed", 22.0)
+	config.set_value("debug", "hb_sprint_intensity", 0.4)
+	config.set_value("debug", "hb_walk_intensity", 0.2)
+	config.set_value("debug", "hb_walk_speed", 14.0)
+	config.set_value("debug", "hb_crouch_speed", 10.0)
+	config.set_value("debug", "hb_crouch_intensity", 0.1)
+	config.set_value("debug", "jump_again_timer", 0.3)
+	config.set_value("debug", "air_speed_penalty_amount", 0.9)
+	config.set_value("debug", "use_jbuff", true)
+	
+	config.set_value("Settings", "enable", false)
+	config.set_value("Settings", "sensitivity", 0.1)
+	config.set_value("Settings", "enable_run_name", true)
+	config.set_value("Settings", "enable_splits", true)
+	config.set_value("Settings", "enable_stats", true)
+	config.set_value("Settings", "enable_personal_best", true)
+	config.set_value("Settings", "enable_debug_stats", false)
+	
+	config.save(SETTINGS_FILE_PATH)
 		
 func save_keybinding(action: StringName, event: InputEvent):
 	var event_str
