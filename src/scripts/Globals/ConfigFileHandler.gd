@@ -14,7 +14,10 @@ func _ready():
 		config.set_value("Keybinding","Sprint", "Shift")
 		config.set_value("Keybinding","Crouch", "Ctrl")
 		config.set_value("Keybinding","Jump", "Space")
-		config.set_value("Keybinding","Reset", "R")		
+		config.set_value("Keybinding","Reset", "R")
+		config.set_value("Keybinding","Return", "Delete")
+		config.set_value("Keybinding","LastCheckpoint", "Backspace")
+		config.set_value("Keybinding","ToggleTimer", "T")
 		
 		config.set_value("Last_scene","path", "res://nodes/levels/Tutorial.tscn")		
 		
@@ -38,6 +41,9 @@ func save_keybinding(action: StringName, event: InputEvent):
 	config.set_value("Keybinding", action, event_str)
 	config.save(SETTINGS_FILE_PATH)
 	
+func save_settings(section_name: StringName, value):
+	config.set_value("Settings", section_name, value)
+	config.save(SETTINGS_FILE_PATH)
 
 func load_keybindings():
 	var keybindings = {}
@@ -55,7 +61,14 @@ func load_keybindings():
 		
 		keybindings[key] = input_event
 	return keybindings
-
+	
+func load_settings():
+	var settings_value = {}
+	var settings = config.get_section_keys("Settings")
+	for key in settings:
+		settings_value[key] = config.get_value("Settings", key)
+	return settings_value
+	
 func save_scene(scene: StringName):
 	config.set_value("Last_scene", "path", scene)
 	config.save(SETTINGS_FILE_PATH)
