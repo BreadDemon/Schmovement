@@ -69,12 +69,20 @@ func retrieve_last_scene() -> String:
 func save_runs(run_name: StringName, personal_best: float):
 	configruns.set_value("RunName", run_name, personal_best)
 	configruns.save(RUNS_FILE_PATH)
+
+func save_attempts(run_name: StringName, attempts: int):
+	configruns.set_value("RunAttempts", run_name, attempts)
+	configruns.save(RUNS_FILE_PATH)
 	
 func load_runs(runs):
 	var run_names = configruns.get_section_keys("RunName")
 	for run_name in run_names:
 		if runs.run_name == run_name:
 			runs.PB = configruns.get_value("RunName", run_name)
+	var run_attemps = configruns.get_section_keys("RunAttempts")
+	for run_name in run_attemps:
+		if runs.run_name == run_name:
+			runs.attempts = configruns.get_value("RunAttempts", run_name)
 
 func save_debug(config_name: String, value):
 	config.set_value("debug", config_name, value)

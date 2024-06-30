@@ -46,7 +46,7 @@ func _process(delta):
 		start_timer = 0.0
 func get_vars(body):
 	timer = body.get_node("TimerV2")
-	container = timer.get_node("Panel/Container")
+	container = timer.get_node("PanelContainer/Panel/Container")
 	
 	timer_run_name = container.get_node("Name_Attempts/Name")
 	
@@ -109,6 +109,7 @@ func _on_body_entered(body):
 			timer_dt.add_theme_color_override("font_color", Color(0, 1, 0))
 		if node_type == _type.START and !timer.running and start_timer <= 0.0:
 			attempts += 1
+			ConfigFileHandler.save_attempts(run_name, attempts)
 			clear_checkpoint_pb()
 			timer_attempts.text = str(attempts)
 			self.visible = false

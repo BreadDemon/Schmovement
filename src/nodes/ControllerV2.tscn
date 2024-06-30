@@ -50,6 +50,7 @@ target_position = Vector3(0, 0, -1.5)
 [node name="PauseMenu" parent="." instance=ExtResource("2_1avvc")]
 
 [node name="Debug" parent="." instance=ExtResource("4_1jnl2")]
+visible = false
 
 [node name="TimerV2" parent="." instance=ExtResource("4_2nt6k")]
 
