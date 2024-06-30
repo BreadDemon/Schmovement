@@ -50,4 +50,3 @@ func _on_body_entered(body):
 		else:
 			checkpoint_pb = time_since_last_checkpoint
 			checkpoint_time.text = str(time_since_last_checkpoint)
-		print("You collected me!")

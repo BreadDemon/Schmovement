@@ -12,6 +12,7 @@ var start_timer: float = 0.0
 var last_collected_checkpoint: Checkpoint
 var PB: float
 var attempts: int
+@export var show_end: bool = true
 
 enum _type { START, END }
 @export var node_type: _type
@@ -67,14 +68,12 @@ func set_vars():
 	timer.running = true
 func hide_other_runs():
 	var runs = get_parent().get_parent().get_children()
-	print("Hide me!")
 	for run in runs:
 		if run.get_node("start").run_name != run_name:
 			run.get_node("start").visible = false
 			run.get_node("end").visible = false
 func show_other_runs():
 	var runs = get_parent().get_parent().get_children()
-	print("Show me!")
 	for run in runs:
 		run.get_node("start").visible = true
 func collected_all_checkpoints() -> bool:
@@ -84,8 +83,6 @@ func collected_all_checkpoints() -> bool:
 	return true
 func reset_all_checkpoints():
 	for checkpoint in checkpoints:
-		print(checkpoint.time_by_checkpoint)
-		print(checkpoint.time_since_last_checkpoint)
 		checkpoint.is_collected = false
 func show_my_checkpoints():
 	for checkpoint in get_parent().get_node("checkpoints").get_children():
@@ -113,7 +110,8 @@ func _on_body_entered(body):
 			timer_attempts.text = str(attempts)
 			self.visible = false
 			show_my_checkpoints()
-			other_node.visible = true
+			if show_end:
+				other_node.visible = true
 			set_vars()
 			hide_other_runs()
 			last_collected_checkpoint = null
