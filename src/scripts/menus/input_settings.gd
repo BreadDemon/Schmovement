@@ -7,7 +7,8 @@ extends Control
 
 ## Speed Variables
 @onready var debug_settings = $PanelContainer/MarginContainer/VBoxContainer/TabContainer
-@onready var debug_check = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/EnableDebug/CheckButton
+@onready var debug_check = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/EnableDebug/Enable_debug
+@onready var enable_debug_stats = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/EnableDebug/Enable_debug_stats
 
 @onready var walk_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox/walk_speed_slider
 @onready var walk_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/WalkSpeedHbox/WalkSpeedValue
@@ -171,3 +172,20 @@ func _on_stats_button_toggled(toggled_on):
 func _on_personal_best_button_toggled(toggled_on):
 	if (!toggled_on || toggled_on) and ingame:
 		player.timer.switch_pb(toggled_on)
+
+func _on_enable_debug_stats_toggled(toggled_on):
+	if ingame:
+		player.debug.visible = toggled_on
+
+
+func _on_option_button_item_selected(index):
+	if ingame:
+		match index:
+			2: 
+				print("Top Left")
+				player.timer.get_child(0).set_anchor(SIDE_LEFT, 0.0)
+				player.timer.get_child(0).set_anchor(SIDE_TOP, 0.0)
+				player.timer.get_child(0).set_anchor(SIDE_RIGHT, 0.0)
+				player.timer.get_child(0).set_anchor(SIDE_BOTTOM, 0.0)
+				#player.timer.get_child(0).set_margin(SIDE_LEFT, 10)
+				#player.timer.get_child(0).set_margin(SIDE_TOP, 10)

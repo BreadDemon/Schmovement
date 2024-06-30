@@ -14,8 +14,8 @@ func _ready():
 
 func _on_body_entered(body):
 	var timer = body.get_node("TimerV2")
-	var checkpoint_diff = body.get_node("TimerV2/Panel/Container/Checkpoint/Checkpoint_Diff")
-	var checkpoint_time = body.get_node("TimerV2/Panel/Container/Checkpoint/Checkpoint_Time")
+	var checkpoint_diff = body.get_node("TimerV2/PanelContainer/Panel/Container/Checkpoint/Checkpoint_Diff")
+	var checkpoint_time = body.get_node("TimerV2/PanelContainer/Panel/Container/Checkpoint/Checkpoint_Time")
 	if body is Player and timer.running and Global.run == mother_run and !is_collected:
 		is_collected = true
 		visible = false
