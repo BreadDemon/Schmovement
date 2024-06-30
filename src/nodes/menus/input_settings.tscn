@@ -99,7 +99,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Settings" type="TabBar" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings"]
@@ -269,6 +268,7 @@ focus_mode = 0
 text = "Reset to default"
 
 [node name="Debug" type="TabBar" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug"]

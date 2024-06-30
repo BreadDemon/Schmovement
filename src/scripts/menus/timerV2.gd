@@ -55,6 +55,10 @@ func reset_timer():
 
 #TODO: make the save again, make it save floats
 func set_pb(start_course):
+	if Global.debug:
+		print("Can't set PB with debug")
+		return
+
 	if float(Global.pb) == 0.0:
 		var personal_best = get_node("PanelContainer/Panel/Container/DT/PersonalBest")
 		Global.pb = Global.time
