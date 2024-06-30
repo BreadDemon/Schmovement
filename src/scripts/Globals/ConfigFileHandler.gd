@@ -17,16 +17,21 @@ func _ready():
 	if !FileAccess.file_exists(VERSION_PATH):
 		config_version.set_value("version", "version", Global.game_version)
 		write_settings()
-		
+		print("Doesn't have a version")
 		config_version.save(VERSION_PATH)
 	else:
-		config.load(SETTINGS_FILE_PATH)
+		config_version.load(VERSION_PATH)
 		var version = config_version.get_value("version", "version")
 		if version != Global.game_version:
+			print("Doesn't have the right version")
+			print(Global.game_version)
+			print(version)
 			write_settings()
+		config.load(SETTINGS_FILE_PATH)
 			
 	if !FileAccess.file_exists(SETTINGS_FILE_PATH):
-		write_settings()		
+		print("Doesn't have the settings")
+		write_settings()
 	else:
 		config.load(SETTINGS_FILE_PATH)
 	

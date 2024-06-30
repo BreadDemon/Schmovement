@@ -534,6 +534,12 @@ text = "Orange boxes are respanwnable
 checkpoints, click Backspace to return
 "
 
+[node name="Label3D14" type="Label3D" parent="Text"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.47741, 27.1967, -7.50021)
+text = "You can use R to restart a run
+and Delete to go back to  the world origin
+"
+
 [node name="Runs" type="Node3D" parent="."]
 
 [node name="Tutorial" type="Node3D" parent="Runs"]
