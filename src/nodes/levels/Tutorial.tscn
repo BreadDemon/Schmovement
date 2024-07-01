@@ -610,7 +610,7 @@ transform = Transform3D(-1.5, 0, 1.31134e-07, 0, 1.5, 0, -1.31134e-07, 0, -1.5, 
 [node name="Loading Zone" parent="Objects" instance=ExtResource("11_pp1s8")]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 45, 0)
 visible = false
-PathScene = "res://nodes/levels/City.tscn"
+PathScene = "res://nodes/levels/cc.tscn"
 
 [node name="Jump_Pad3" parent="Objects" instance=ExtResource("7_rahh1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 27.5, 0)
