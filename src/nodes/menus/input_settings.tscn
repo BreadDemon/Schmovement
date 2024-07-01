@@ -99,6 +99,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Settings" type="TabBar" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings"]
@@ -268,7 +269,6 @@ focus_mode = 0
 text = "Reset to default"
 
 [node name="Debug" type="TabBar" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug"]
@@ -845,6 +845,10 @@ size_flags_vertical = 8
 layout_mode = 2
 text = "Close Settings"
 
+[node name="ResetDefaults" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/closedebug"]
+layout_mode = 2
+text = "Reset Defaults"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_n7wt6")
@@ -913,3 +917,4 @@ libraries = {
 [connection signal="value_changed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HeadbobCrouchIntensity/HeadbobCrouchIntensitySlider" to="." method="_on_headbob_crouch_intensity_slider_value_changed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/HBoxContainer2/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/closedebug/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/closedebug/ResetDefaults" to="." method="_on_reset_defaults_pressed"]

@@ -74,6 +74,7 @@ func _load_settings_from_file():
 	stats_button.button_pressed = settings_load.enable_stats
 	personal_best_button.button_pressed = settings_load.enable_personal_best
 	enable_debug_stats.button_pressed = settings_load.enable_debug_stats
+	load_debug_from_file()
 	
 func _load_keybindings_from_settings():
 	var keybindings = ConfigFileHandler.load_keybindings()
@@ -231,6 +232,12 @@ func _on_option_button_item_selected(index):
 func _on_enable_air_speed_penalty_toggled(toggled_on):
 	ConfigFileHandler.save_debug("air_speed_penalty", toggled_on)
 	
+func _on_air_penalty_offset_toggled(toggled_on):
+	ConfigFileHandler.save_debug("air_penalty_offset", toggled_on)
+
+func _on_use_jump_buffer_for_wall_jump_toggled(toggled_on):
+	ConfigFileHandler.save_debug("use_jbuff", toggled_on)
+
 @onready var air_speed_penalty_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox/air_speed_penalty_slider
 @onready var air_speed_penalty_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirSpeedPenaltyAmountHbox/AirSpeedPenaltyValue
 func _on_air_speed_penalty_slider_drag_ended(value_changed):
@@ -246,9 +253,6 @@ func _on_gravity_force_slider_drag_ended(value_changed):
 		ConfigFileHandler.save_debug("gravity_force", gravity_force_slider.value)
 func _on_gravity_force_slider_value_changed(value):
 	gravity_force_value.text = str(gravity_force_slider.value)
-
-func _on_air_penalty_offset_toggled(toggled_on):
-	ConfigFileHandler.save_debug("air_penalty_offset", toggled_on)
 
 @onready var air_move_penalty_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirMovePenalty/AirMovePenaltySlider
 @onready var air_move_penalty_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirMovePenalty/AirMovePenaltyValue
@@ -289,9 +293,6 @@ func _on_wall_jump_timer_slider_drag_ended(value_changed):
 		ConfigFileHandler.save_debug("wall_jump_timer", wall_jump_timer_slider.value)
 func _on_wall_jump_timer_slider_value_changed(value):
 	wall_jump_timer_value.text = str(wall_jump_timer_slider.value)
-
-func _on_use_jump_buffer_for_wall_jump_toggled(toggled_on):
-	ConfigFileHandler.save_debug("use_jbuff", toggled_on)
 
 @onready var jump_again_timer_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/JumpAgainTimer/JumpAgainTimerSlider
 @onready var jump_again_timer_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/JumpAgainTimer/JumpAgainTimerValue
@@ -396,3 +397,42 @@ func _on_headbob_crouch_intensity_slider_drag_ended(value_changed):
 		ConfigFileHandler.save_debug("hb_crouch_intensity", headbob_crouch_intensity_slider.value)
 func _on_headbob_crouch_intensity_slider_value_changed(value):
 	headbob_crouch_intensity_value.text = str(headbob_crouch_intensity_slider.value)
+
+@onready var enable_air_speed_penalty = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/EnableAirSpeedPenalty
+@onready var air_penalty_offset = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/AirPenaltyOffset
+@onready var use_jump_buffer_for_wall_jump = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/UseJumpBufferForWallJump
+
+
+func load_debug_from_file():
+	var enabled_debug = ConfigFileHandler.load_settings()
+	var debug_load = ConfigFileHandler.load_debug(enabled_debug.enable)
+	air_penalty_offset.button_pressed = debug_load.air_penalty_offset
+	enable_air_speed_penalty.button_pressed = debug_load.air_speed_penalty
+	gravity_force_slider.value = debug_load.gravity_force
+	air_move_penalty_slider.value = debug_load.air_move_penalty
+	jump_velocity_slider.value = debug_load.jump_velocity
+	coyote_timer_max_slider.value = debug_load.coyote_timer
+	jump_buffer_timer_max_slider.value = debug_load.jump_buffer_timer
+	wall_jump_timer_slider.value = debug_load.wall_jump_timer
+	jump_again_timer_slider.value = debug_load.jump_again_timer
+	crouch_speed_slider.value = debug_load.crouch_speed
+	walk_speed_slider.value = debug_load.walk_speed
+	run_speed_slider.value = debug_load.run_speed
+	air_speed_penalty_slider.value = debug_load.air_speed_penalty_amount
+	speed_lerp_factor_slider.value = debug_load.speed_lerp_factor
+	crouch_lerp_speed_slider.value = debug_load.crouch_lerp_factor
+	slide_timer_max_slider.value = debug_load.slide_timer
+	slide_speed_slider.value = debug_load.slide_speed
+	ramp_down_look_angle_slider.value = debug_load.ramp_look_angle
+	ramp_modifier_base_slider.value = debug_load.ramp_modifier_base
+	headbob_crouch_speed_slider.value = debug_load.hb_crouch_speed
+	headbob_crouch_intensity_slider.value = debug_load.hb_crouch_intensity
+	headbob_sprint_speed_slider.value = debug_load.hb_sprint_speed
+	headbob_sprint_intensity_slider.value = debug_load.hb_sprint_intensity
+	headbob_walk_speed_slider.value = debug_load.hb_walk_speed
+	headbob_walk_intensity_slider.value = debug_load.hb_walk_intensity
+	use_jump_buffer_for_wall_jump.button_pressed = debug_load.use_jbuff
+
+func _on_reset_defaults_pressed():
+	ConfigFileHandler.reset_debug()
+	load_debug_from_file()

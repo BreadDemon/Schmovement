@@ -15,7 +15,13 @@ func _ready():
 	var Exit = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExitButton
 	Exit.button_down.connect(get_tree().quit)
 
+@onready var debug_warning = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DebugWarning
 func _process(delta):
+	if Global.debug:
+		debug_warning.visible = true
+	else:
+		debug_warning.visible = false
+
 	pause_timer -= delta
 	if pause_timer <= -1.0:
 		pause_timer = -1.0

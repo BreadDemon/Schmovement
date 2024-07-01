@@ -12,6 +12,34 @@ const DEBUG_DEFAULT_FILE_PATH = "user://debug_default.save"
 var config_version = ConfigFile.new()
 const VERSION_PATH = "user://version_setting.save"
 
+func reset_debug():
+	config.set_value("debug", "walk_speed", 5.0)
+	config.set_value("debug", "crouch_speed", 3.0)
+	config.set_value("debug", "run_speed", 7.0)
+	config.set_value("debug", "air_speed_penalty", false)
+	config.set_value("debug", "gravity_force", 1.0)
+	config.set_value("debug", "air_penalty_offset", false)
+	config.set_value("debug", "air_move_penalty", 1.0)
+	config.set_value("debug", "jump_velocity", 4.6)
+	config.set_value("debug", "coyote_timer", 0.2)
+	config.set_value("debug", "jump_buffer_timer", 0.2)
+	config.set_value("debug", "wall_jump_timer", 0.21)
+	config.set_value("debug", "speed_lerp_factor", 2.0)
+	config.set_value("debug", "crouch_lerp_factor", 3.0)
+	config.set_value("debug", "slide_timer", 1.0)
+	config.set_value("debug", "slide_speed", 5.0)
+	config.set_value("debug", "ramp_look_angle", 15.0)
+	config.set_value("debug", "ramp_modifier_base", 0.5)
+	config.set_value("debug", "hb_sprint_speed", 22.0)
+	config.set_value("debug", "hb_sprint_intensity", 0.4)
+	config.set_value("debug", "hb_walk_intensity", 0.2)
+	config.set_value("debug", "hb_walk_speed", 14.0)
+	config.set_value("debug", "hb_crouch_speed", 10.0)
+	config.set_value("debug", "hb_crouch_intensity", 0.1)
+	config.set_value("debug", "jump_again_timer", 0.3)
+	config.set_value("debug", "air_speed_penalty_amount", 0.9)
+	config.set_value("debug", "use_jbuff", true)
+
 func _ready():
 	
 	if !FileAccess.file_exists(VERSION_PATH):
