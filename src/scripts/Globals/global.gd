@@ -11,4 +11,6 @@ var origin_point = Vector3(0, 3, 0)
 
 var debug: bool
 
+var coming_from: String
+
 var game_version = "0.0.2"

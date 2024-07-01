@@ -147,6 +147,7 @@ func write_settings():
 	config.set_value("Settings", "enable_stats", true)
 	config.set_value("Settings", "enable_personal_best", true)
 	config.set_value("Settings", "enable_debug_stats", false)
+	config.set_value("Settings", "always_run", false)
 	
 	config.save(SETTINGS_FILE_PATH)
 		

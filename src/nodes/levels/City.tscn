@@ -221,7 +221,8 @@ material = ExtResource("11_nw7jb")
 
 [node name="SewersLZ" parent="Map/Section1/Geometry/SewersLZ" instance=ExtResource("13_t4ahx")]
 transform = Transform3D(5.96963, 0, 0, 0, 4.83639, 0, 0, 0, 1, -12.8474, 2.21079, 7.26272)
-PathScene = "res://nodes/levels/test_map.tscn"
+PathScene = "res://nodes/levels/cc.tscn"
+coming_from = "City"
 
 [node name="Hallway" type="CSGBox3D" parent="Map/Section1/Geometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 10.56, -9.5)

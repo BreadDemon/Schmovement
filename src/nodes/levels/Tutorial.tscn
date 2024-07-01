@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bruvdcd07pu8s"]
+[gd_scene load_steps=11 format=3 uid="uid://bruvdcd07pu8s"]
 
+[ext_resource type="Script" path="res://scripts/tutorial.gd" id="1_32p00"]
 [ext_resource type="Material" uid="uid://bnbfqom1wyvcs" path="res://assets/Textures/Dark_texture.tres" id="1_vmfpb"]
 [ext_resource type="PackedScene" uid="uid://csuokjcklu0d7" path="res://nodes/world_environment.tscn" id="2_7u8kc"]
 [ext_resource type="PackedScene" uid="uid://b5aaqwp8l466r" path="res://nodes/features/Running/checkpoint.tscn" id="2_svnge"]
@@ -11,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://j43cqowhjsf6" path="res://nodes/ControllerV2.tscn" id="11_q4udr"]
 
 [node name="Tutorial" type="Node3D"]
+script = ExtResource("1_32p00")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.300925, -0.505448, 0.808682, -0.137653, 0.86213, 0.487631, -0.943661, 0.0354224, -0.329013, 10.3086, 20.1411, 0)
@@ -456,8 +458,12 @@ material = ExtResource("1_vmfpb")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_7u8kc")]
 
-[node name="ControllerV2" parent="." instance=ExtResource("11_q4udr")]
+[node name="Return_node" parent="." instance=ExtResource("10_gyn5w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 2.92864, 0)
+
+[node name="ControllerV2" parent="." node_paths=PackedStringArray("scene_return") instance=ExtResource("11_q4udr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 2.92864, 0)
+scene_return = NodePath("../Return_node")
 
 [node name="Text" type="Node3D" parent="."]
 

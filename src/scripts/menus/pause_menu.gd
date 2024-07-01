@@ -4,7 +4,7 @@ extends ColorRect
 @export var input_settings: PackedScene
 
 var pause_timer: float = 0.0
-var pause_timer_max: float = 0.1
+var pause_timer_max: float = 0.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

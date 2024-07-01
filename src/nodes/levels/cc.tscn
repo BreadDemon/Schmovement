@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ba4t5hqtndstw"]
+[gd_scene load_steps=9 format=3 uid="uid://ba4t5hqtndstw"]
 
 [ext_resource type="Script" path="res://scripts/cc.gd" id="1_ekdi0"]
 [ext_resource type="Material" uid="uid://co3y5acwsyhdq" path="res://assets/Textures/green.tres" id="3_vpui0"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://j43cqowhjsf6" path="res://nodes/ControllerV2.tscn" id="6_j44o1"]
 [ext_resource type="PackedScene" uid="uid://csuokjcklu0d7" path="res://nodes/world_environment.tscn" id="7_dpdn8"]
 [ext_resource type="PackedScene" uid="uid://cbjmtxba73jo0" path="res://nodes/features/loading_zone.tscn" id="7_l4jk3"]
+[ext_resource type="PackedScene" uid="uid://r3w3ughotgmt" path="res://nodes/features/Running/return_node.tscn" id="8_5wdor"]
 
 [node name="Cc" type="Node3D"]
 script = ExtResource("1_ekdi0")
@@ -131,3 +132,9 @@ PathScene = "res://nodes/levels/Tutorial.tscn"
 [node name="Loading Zone2" parent="." instance=ExtResource("7_l4jk3")]
 transform = Transform3D(0.996424, 0, 0, 0, 10.1512, 0, 0, 0, 7.63399, -196.263, 9.5514, 26.2675)
 PathScene = "res://nodes/levels/City.tscn"
+
+[node name="CityEntrance" parent="." instance=ExtResource("8_5wdor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -194.141, 10.9799, 26.7103)
+
+[node name="tutorialReturn" parent="." instance=ExtResource("8_5wdor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.4695, 13.5862, -19.0243)

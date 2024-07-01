@@ -23,6 +23,7 @@ extends Control
 @onready var run_speed_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RunSpeedHbox/run_speed_slider
 @onready var run_speed_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/RunSpeedHbox/RunSpeedValue
 @onready var enable_air_penalty = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Debug/MarginContainer/DebugSettings/ScrollContainer/VBoxContainer/EnableAirPenalty
+@onready var always_run = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/SpeedrunTimer/Ancor/AlwaysRun
 
 @onready var sensitivity_slider = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/Sensitivity/SensitivitySlider
 @onready var sensitivity_value = $PanelContainer/MarginContainer/VBoxContainer/TabContainer/Settings/MarginContainer/Settings/Sensitivity/SensitivityValue
@@ -74,6 +75,8 @@ func _load_settings_from_file():
 	stats_button.button_pressed = settings_load.enable_stats
 	personal_best_button.button_pressed = settings_load.enable_personal_best
 	enable_debug_stats.button_pressed = settings_load.enable_debug_stats
+	always_run.button_pressed = settings_load.always_run
+	
 	load_debug_from_file()
 	
 func _load_keybindings_from_settings():
@@ -216,18 +219,10 @@ func _on_enable_debug_stats_toggled(toggled_on):
 	if ingame:
 		player.debug.visible = toggled_on
 
-func _on_option_button_item_selected(index):
+func _on_always_run_toggled(toggled_on):
+	ConfigFileHandler.save_settings("always_run", toggled_on)
 	if ingame:
-		match index:
-			2: 
-				print("Top Left")
-				player.timer.get_child(0).set_anchor(SIDE_LEFT, 0.0)
-				player.timer.get_child(0).set_anchor(SIDE_TOP, 0.0)
-				player.timer.get_child(0).set_anchor(SIDE_RIGHT, 0.0)
-				player.timer.get_child(0).set_anchor(SIDE_BOTTOM, 0.0)
-				#player.timer.get_child(0).set_margin(SIDE_LEFT, 10)
-				#player.timer.get_child(0).set_margin(SIDE_TOP, 10)
-
+		player.always_run = toggled_on
 
 func _on_enable_air_speed_penalty_toggled(toggled_on):
 	ConfigFileHandler.save_debug("air_speed_penalty", toggled_on)
@@ -436,3 +431,5 @@ func load_debug_from_file():
 func _on_reset_defaults_pressed():
 	ConfigFileHandler.reset_debug()
 	load_debug_from_file()
+
+

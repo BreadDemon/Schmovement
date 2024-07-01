@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://rkwqb85fyt33"]
+[gd_scene load_steps=3 format=3 uid="uid://rkwqb85fyt33"]
 
 [ext_resource type="Script" path="res://scripts/menus/Control.gd" id="1_d72yk"]
+[ext_resource type="Texture2D" uid="uid://b2q2yidl3xdag" path="res://assets/city.png" id="2_ylqcp"]
 
 [node name="GameMenu" type="Control"]
 layout_mode = 3
@@ -82,3 +83,8 @@ text = "Settings"
 layout_mode = 2
 size_flags_vertical = 3
 text = "Exit"
+
+[node name="City" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(601, 336)
+texture = ExtResource("2_ylqcp")

@@ -33,6 +33,7 @@ var grounded: bool
 var current_speed:float = walk_speed
 @export var air_speed_penalty: bool = false
 @export_range(0, 1, 0.01) var air_speed_penalty_amount: float = 0.9
+var always_run: bool = false
 
 @export_category("Controller settings")
 # Controller States
@@ -192,6 +193,7 @@ func _ready():
 	timer.switch_stats(settings_load.enable_stats)
 	timer.switch_pb(settings_load.enable_personal_best)
 	debug.visible = settings_load.enable_debug_stats
+	always_run = settings_load.always_run
 	load_debug_vars()
 	
 func handle_timers(delta):
@@ -233,11 +235,13 @@ func keep_sliding() -> bool:
 	return still_sliding and still_crouching and is_on_floor() and slide_state
 func can_sprint() -> bool:
 	var tried_running: bool = Input.is_action_pressed("Sprint") 
-	var is_crouching: bool = current_state != States.CROUCHING 
-	var is_sliding: bool = current_state != States.SLIDING
+	var is_crouching: bool = current_state == States.CROUCHING 
+	var is_sliding: bool = current_state == States.SLIDING
 	var is_moving = input_dir != Vector2.ZERO
 	var is_going_back = Input.is_action_pressed("back")
-	return tried_running and is_crouching and is_sliding and is_moving and !is_going_back
+	var not_always: bool = tried_running and !is_crouching and !is_sliding and is_moving and !is_going_back
+	var always: bool = !is_crouching and !is_sliding and is_moving and !is_going_back and always_run
+	return not_always or always
 func switch_state(state: States):
 	previous_state = current_state
 	current_state = state
