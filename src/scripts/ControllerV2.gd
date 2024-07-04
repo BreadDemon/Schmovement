@@ -126,7 +126,10 @@ func _process(_delta):
 	debug_vars.text = text
 	
 	if position.y < -100:
-		transform.origin = scene_return.transform.origin
+		if scene_return == null:
+			transform.origin = Vector3(0, 3, 0)
+		else:
+			transform.origin = scene_return.transform.origin
 
 # Controller parts
 @onready var standing_cylinder = $StandingCylinder
@@ -460,7 +463,15 @@ func reset():
 	checkpoint_timer.get_node("Checkpoint_Diff").text = ""
 	checkpoint_timer.get_node("Checkpoint_Time").text = ""
 	reset_timer.reset_timer()
-	transform.origin = Global.origin_point
+	if Global.origin_point == Vector3.ZERO:
+		if scene_return == null:
+			transform.origin = Vector3(0, 3, 0)
+			print("NULL")
+		else:
+			transform.origin = scene_return.transform.origin
+			print("NOT NULL")
+	else:
+		transform.origin = Global.origin_point
 	if Global.run != null:
 		Global.run.visible = true
 		Global.run.show_other_runs()

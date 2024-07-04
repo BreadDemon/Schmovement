@@ -100,7 +100,9 @@ func _on_body_entered(body):
 		if node_type == _type.START and !timer.running and start_timer <= 0.0:
 			if PB < dev_time and PB != 0.0:
 				timer_pb.add_theme_color_override("font_color", Color(1, 1, 0))
+				print("dt, PB %f.2f DT %f.2f" % [PB, dev_time])
 			else:
+				print("Not dt, PB %f.2f DT %f.2f" % [PB, dev_time])
 				timer_pb.add_theme_color_override("font_color", Color(0, 1, 0))
 			attempts += 1
 			ConfigFileHandler.save_attempts(run_name, attempts)
@@ -126,4 +128,6 @@ func _on_body_entered(body):
 			timer.set_pb(other_node)
 			reset_all_checkpoints()
 			show_other_runs()
+			if PB < dev_time and PB != 0.0:
+				timer_pb.add_theme_color_override("font_color", Color(1, 1, 0))
 			self.visible = false

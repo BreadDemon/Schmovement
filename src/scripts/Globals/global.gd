@@ -7,7 +7,7 @@ var checkpoint_respawn: ReturnNode
 
 var start_course
 
-var origin_point = Vector3(0, 3, 0)
+var origin_point: Vector3 = Vector3.ZERO
 
 var debug: bool
 

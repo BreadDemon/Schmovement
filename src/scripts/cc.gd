@@ -4,8 +4,11 @@ extends Node3D
 @onready var city_entrance = $CityEntrance
 @onready var tutorial_return = $tutorialReturn
 
+var path = "res://nodes/levels/cc.tscn"
+
 func _ready():
 	print(tutorial_return.transform.origin)
+	ConfigFileHandler.save_scene(path)
 	print(Global.coming_from)
 	if Global.coming_from == "Tutorial":
 		controller_v_2.velocity.y = 5.0
