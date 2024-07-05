@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://icrg643qftky"]
+
+[ext_resource type="Material" uid="uid://dyt6kwwaxc158" path="res://assets/Textures/orange.tres" id="1_tp0iv"]
+[ext_resource type="Material" uid="uid://co3y5acwsyhdq" path="res://assets/Textures/green.tres" id="2_801sm"]
+
+[node name="tree" type="Node3D"]
+
+[node name="tree" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="tree"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("1_tp0iv")
+material_overlay = ExtResource("1_tp0iv")
+radius = 0.276058
+material = ExtResource("1_tp0iv")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="tree"]
+transform = Transform3D(0.992798, 0.109558, -0.0484665, -0.0942352, 0.963978, 0.24873, 0.073971, -0.242371, 0.96736, 0.0741467, 2.62255, -0.199484)
+material_override = ExtResource("1_tp0iv")
+material_overlay = ExtResource("1_tp0iv")
+radius = 0.276058
+material = ExtResource("1_tp0iv")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199857, 4, 1.38126)
+radius = 1.0
+material = ExtResource("2_801sm")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72699, 2.95298, -0.851013)
+radius = 1.0
+material = ExtResource("2_801sm")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.159676, 4.89255, -0.294518)
+radius = 1.0
+material = ExtResource("2_801sm")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.58528, 3.32997, -0.679624)
+radius = 1.0
+material = ExtResource("2_801sm")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.268075, 3.6227, -0.0875387)
+radius = 2.0
+material = ExtResource("2_801sm")

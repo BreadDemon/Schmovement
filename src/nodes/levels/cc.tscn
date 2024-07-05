@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ba4t5hqtndstw"]
+[gd_scene load_steps=16 format=3 uid="uid://ba4t5hqtndstw"]
 
 [ext_resource type="Script" path="res://scripts/cc.gd" id="1_ekdi0"]
 [ext_resource type="Material" uid="uid://co3y5acwsyhdq" path="res://assets/Textures/green.tres" id="3_vpui0"]
@@ -11,6 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://r3w3ughotgmt" path="res://nodes/features/Running/return_node.tscn" id="8_5wdor"]
 [ext_resource type="PackedScene" uid="uid://dth5eq8xdowfn" path="res://nodes/features/Running/speedrunV2.tscn" id="10_xvfda"]
 [ext_resource type="PackedScene" uid="uid://b5aaqwp8l466r" path="res://nodes/features/Running/checkpoint.tscn" id="11_3lgdr"]
+[ext_resource type="Texture2D" uid="uid://wmnx4ah3a7af" path="res://assets/beach.jpg" id="12_tg8y5"]
+[ext_resource type="PackedScene" uid="uid://c0h6pl467n324" path="res://nodes/features/refresh_wall.tscn" id="13_grex1"]
+[ext_resource type="PackedScene" uid="uid://kijqmr1af16g" path="res://nodes/objects/house.tscn" id="14_cvy65"]
+[ext_resource type="PackedScene" uid="uid://icrg643qftky" path="res://nodes/objects/tree.tscn" id="15_7xeel"]
 
 [node name="Cc" type="Node3D"]
 script = ExtResource("1_ekdi0")
@@ -321,3 +325,380 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76, 11.5, 13)
 [node name="Checkpoint" parent="Runs/The Tower/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
 transform = Transform3D(0.928596, 0, 0.371092, 0, 1, 0, -0.371092, 0, 0.928596, -82.7463, 45, 11.6902)
 mother_run = NodePath("../../start")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-9.2, 0, 8.74228e-08, 0, 7.5, 0, -8.0429e-07, 0, -1, -94.8624, 57.0275, 106)
+texture = ExtResource("12_tg8y5")
+
+[node name="Bakery" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -177, 11, -41)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Bakery"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_overlay = ExtResource("5_ovxex")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 1.14644, 3.5, -3.14645)
+size = Vector3(16, 8, 19)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 1.14645, 7, -3.14645)
+operation = 2
+size = Vector3(14, 1, 17)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 11.3995, 3.5, -19.7635)
+size = Vector3(7, 8, 19)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 9.98529, 7, -18.3492)
+operation = 2
+size = Vector3(5, 1, 17)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 1.14644, 2.5, -3.14645)
+operation = 2
+size = Vector3(14, 6, 17)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 5.74263, 1, 1.74265)
+operation = 2
+size = Vector3(4, 3, 4)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -8.75308, 1, -0.732227)
+operation = 2
+size = Vector3(2, 3, 3)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, -18.5)
+size = Vector3(3, 1, 4)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.433706, 0, -0.901054, 0, 1, 0, 0.901054, 0, 0.433706, 5.51299, 6, -19.4581)
+size = Vector3(2, 1, 2)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.343237, 0, 0, 0, 1, 0, 0, 0, 0.306519, -3, 7.38984, -6)
+size = Vector3(1, 3, 1)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.961516, -0.141046, -0.23578, 0.242363, 0.839634, 0.486081, 0.12941, -0.524519, 0.841506, -3.02188, 8.91716, -6.06541)
+size = Vector3(2, 0.161633, 2)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.919025, 0, -0.394199, 0, 1, 0, 0.394199, 0, 0.919025, -2.21503, 10, 3.32328)
+size = Vector3(1, 1, 3)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(0.794785, 0, -0.60689, 0, 1, 0, 0.60689, 0, 0.794785, -8.10747, 11.5111, 1.33314)
+size = Vector3(1, 1, 3.875)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(-0.433864, 0, -0.900979, 0, 1, 0, 0.900979, 0, -0.433864, -11.2475, 12.2803, -6.82842)
+size = Vector3(1, 1, 3.875)
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(-0.969702, 0, -0.244292, 0, 1, 0, 0.244292, 0, -0.969702, -8.38248, 13.7571, -15.3405)
+size = Vector3(1, 1, 3.875)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Bakery/CSGCombiner3D"]
+transform = Transform3D(-0.969702, 0, -0.244292, 0, 1, 0, 0.244292, 0, -0.969702, -3.05965, 14.8435, -17.6462)
+size = Vector3(3, 1, 3.875)
+
+[node name="RefreshWall" parent="Bakery" instance=ExtResource("13_grex1")]
+transform = Transform3D(0.138367, 0, 0.997808, 0, 2.01051, 0, -2.08596, 0, 0.066187, -12.0531, 1.59302, -9.75379)
+
+[node name="RefreshWall2" parent="Bakery" instance=ExtResource("13_grex1")]
+transform = Transform3D(1.95493, 0, 0.354308, 0, 2.01051, 0, -0.740696, 0, 0.93513, -9.78404, 2.189, -15.1851)
+
+[node name="RefreshWall3" parent="Bakery" instance=ExtResource("13_grex1")]
+transform = Transform3D(1.95493, 0, 0.354308, 0, 2.01051, 0, -0.740696, 0, 0.93513, -4.45583, 3.43467, -17.2039)
+
+[node name="RefreshWall4" parent="Bakery" instance=ExtResource("13_grex1")]
+transform = Transform3D(1.95493, 0, 0.354308, 0, 2.01051, 0, -0.740696, 0, 0.93513, 0.958389, 4.92377, -19.2351)
+
+[node name="Houses" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 11, 0)
+
+[node name="House" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.835602, 16)
+use_collision = true
+
+[node name="House2" type="CSGCombiner3D" parent="Houses"]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -2, -0.835602, 24)
+material_overlay = ExtResource("5_ovxex")
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Houses/House2"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 2.55956, 4.51551, -3)
+size = Vector3(5, 5, 7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Houses/House2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+operation = 2
+size = Vector3(10, 5, 7)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Houses/House2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+size = Vector3(6, 5, 7)
+
+[node name="House3" type="CSGCombiner3D" parent="Houses"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -6.13397, -0.835602, 31.0359)
+material_overlay = ExtResource("5_ovxex")
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Houses/House3"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 2.55957, 4.51551, -3)
+size = Vector3(5, 5, 7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Houses/House3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+operation = 2
+size = Vector3(10, 5, 7)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Houses/House3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+size = Vector3(6, 5, 7)
+
+[node name="House4" type="CSGCombiner3D" parent="Houses"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -11.866, -0.835602, 36.9641)
+material_overlay = ExtResource("5_ovxex")
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Houses/House4"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 2.55956, 4.51551, -3)
+size = Vector3(5, 5, 7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Houses/House4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+operation = 2
+size = Vector3(10, 5, 7)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Houses/House4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+size = Vector3(6, 5, 7)
+
+[node name="House11" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -2.68629, -1, 47.7574)
+use_collision = true
+
+[node name="House12" type="CSGCombiner3D" parent="Houses"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -9.75736, -1, 52)
+material_overlay = ExtResource("5_ovxex")
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Houses/House12"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 2.55956, 4.51551, -3)
+size = Vector3(5, 5, 7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Houses/House12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+operation = 2
+size = Vector3(10, 5, 7)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Houses/House12"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+size = Vector3(6, 5, 7)
+
+[node name="House13" type="CSGCombiner3D" parent="Houses"]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -17.6557, -1, 54.052)
+material_overlay = ExtResource("5_ovxex")
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Houses/House13"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 2.55956, 4.51551, -3)
+size = Vector3(5, 5, 7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Houses/House13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+operation = 2
+size = Vector3(10, 5, 7)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Houses/House13"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+size = Vector3(6, 5, 7)
+
+[node name="House14" type="CSGCombiner3D" parent="Houses"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -25.9007, -1, 54.1907)
+material_overlay = ExtResource("5_ovxex")
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Houses/House14"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 2.55956, 4.51551, -3)
+size = Vector3(5, 5, 7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Houses/House14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+operation = 2
+size = Vector3(10, 5, 7)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Houses/House14"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+size = Vector3(6, 5, 7)
+
+[node name="House5" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -94, 15, -62)
+use_collision = true
+
+[node name="House6" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -104, 15, -64)
+use_collision = true
+
+[node name="House7" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -113, 15, -66)
+use_collision = true
+
+[node name="House8" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -71, 15, -54)
+use_collision = true
+
+[node name="House9" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -63, 15, -60)
+use_collision = true
+
+[node name="House10" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -54, 15, -66)
+use_collision = true
+
+[node name="House15" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -18.4763, 15, -61.111)
+use_collision = true
+
+[node name="House16" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -25.1808, 15, -62.9112)
+use_collision = true
+
+[node name="House18" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -31.6162, 15, -60.5432)
+use_collision = true
+
+[node name="House17" parent="Houses" instance=ExtResource("14_cvy65")]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -31.9014, 15, -64.704)
+use_collision = true
+
+[node name="Nature" type="Node3D" parent="."]
+
+[node name="tree" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -133, 26.689, -51)
+
+[node name="tree2" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -123.094, 26.689, -55.4167)
+
+[node name="tree3" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -106.905, 26.689, -70.5689)
+
+[node name="tree4" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -121.266, 26.689, -75.3236)
+
+[node name="tree5" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -122.998, 26.689, -81.4484)
+
+[node name="tree6" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -127.083, 26.689, -77.4599)
+
+[node name="tree7" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -131.249, 26.689, -68.6824)
+
+[node name="tree8" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138.453, 26.689, -66.0044)
+
+[node name="tree9" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -145.768, 26.689, -72.4655)
+
+[node name="tree10" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -136.499, 26.689, -84.8359)
+
+[node name="tree11" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -149.9, 26.689, -83.7572)
+
+[node name="tree12" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -160.845, 26.689, -76.9884)
+
+[node name="tree13" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -163.798, 26.689, -92.1362)
+
+[node name="tree14" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175.448, 26.689, -88.2742)
+
+[node name="tree15" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -193.438, 26.689, -86.8913)
+
+[node name="tree16" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -182.86, 26.689, -81.4509)
+
+[node name="tree17" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -182.402, 26.689, -72.9553)
+
+[node name="tree18" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -196.331, 26.689, -75.8142)
+
+[node name="tree19" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -189.331, 26.689, -65.8142)
+
+[node name="tree20" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -179.619, 26.689, -65.301)
+
+[node name="tree21" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -157.915, 9.68901, -36.264)
+
+[node name="tree22" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -169.915, 9.68901, -31.264)
+
+[node name="tree23" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -164.03, 9.68901, -50.0461)
+
+[node name="tree24" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -156.385, 9.68901, -50.2716)
+
+[node name="tree25" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -162.385, 9.68901, -30.2716)
+
+[node name="tree26" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -166.385, 9.68901, -25.2716)
+
+[node name="tree27" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.2654, 9.68901, 33.2968)
+
+[node name="tree28" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.9562, 9.68901, 31.0664)
+
+[node name="tree29" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.7278, 9.68901, 40.207)
+
+[node name="tree30" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63.9646, 9.68901, 40.5116)
+
+[node name="tree31" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.7469, 9.68901, 40.182)
+
+[node name="tree32" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.7469, 9.78235, 27.7101)
+
+[node name="tree33" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.6357, 9.78535, 12.6163)
+
+[node name="tree34" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.6357, 9.78535, 24.6163)
+
+[node name="tree35" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(0.976593, -0.0556702, -0.207764, 0, 0.965926, -0.258819, 0.215093, 0.252761, 0.943317, -91.3193, 45.4061, 25.1984)
+
+[node name="tree36" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(0.674573, 0.191062, 0.713054, 3.20514e-09, 0.965926, -0.258819, -0.738208, 0.174592, 0.651587, -77.6009, 44.3197, 15.1984)
+
+[node name="tree37" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(-0.66279, 0.193805, 0.72329, 3.20514e-09, 0.965926, -0.258819, -0.748805, -0.171543, -0.640206, -90.2092, 43.8194, 3.75003)
+
+[node name="tree38" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(-0.887647, 0.119193, 0.444833, -0.180496, 0.798601, -0.574158, -0.42368, -0.58994, -0.687362, -90.3335, 50.3197, 19.4749)
+
+[node name="tree39" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(-0.887647, 0.119193, 0.444833, 0.185578, 0.976606, 0.108633, -0.421479, 0.178978, -0.889001, -87.1331, 60.3197, 20.0467)
+
+[node name="tree40" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(0.0634736, -0.122236, 0.99047, 0.185578, 0.976607, 0.108633, -0.980577, 0.176914, 0.0846728, -96.0026, 60.3197, 13.7811)
+
+[node name="tree41" parent="Nature" instance=ExtResource("15_7xeel")]
+transform = Transform3D(1.20186, 0, 0, 0, 1.41964, 0, 0, 0, 1.18483, -89.0126, 15.4936, 16.7096)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://kijqmr1af16g"]
+
+[ext_resource type="Material" uid="uid://dyt6kwwaxc158" path="res://assets/Textures/orange.tres" id="1_aa081"]
+
+[node name="House" type="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+material_overlay = ExtResource("1_aa081")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 2.55956, 4.51551, -3)
+size = Vector3(5, 5, 7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+operation = 2
+size = Vector3(10, 5, 7)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -3)
+size = Vector3(6, 5, 7)
