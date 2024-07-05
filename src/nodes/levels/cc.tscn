@@ -92,6 +92,118 @@ transform = Transform3D(-2.07794e-07, 0, -1.40836, 0, 0.950754, 0, 0.950754, 0, 
 polygon = PackedVector2Array(-3.19827, 0.125613, -2, 1, 1, 1, 1, 0, -2, 0, -2.58522, -0.695096, -2.88406, -1.95074, -2.87263, -5.0573, -3.85661, -5.00761, -4.09154, -5.21601, -4.0633, -3.67095, -3.83788, -0.814103)
 material = ExtResource("4_wj0fa")
 
+[node name="CSGBox3D5" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -192.56, 10, 51)
+size = Vector3(2, 1, 3)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -183.56, 11.5, 60.5)
+size = Vector3(2, 4, 2)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.970464, 0, 0.241245, 0, 1, 0, -0.241245, 0, 0.970464, -183.62, 15, 76.669)
+size = Vector3(1, 11, 3)
+material = ExtResource("4_wj0fa")
+
+[node name="RefreshWall" parent="Geometry/CSGCombiner3D/CSGBox3D16" instance=ExtResource("13_grex1")]
+transform = Transform3D(-4.47035e-08, 0, -1, 0, 1, 0, 1, 0, -4.47035e-08, -0.502975, 2.53133, 0.0250664)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.970464, 0, 0.241245, 0, 1, 0, -0.241245, 0, 0.970464, -182.164, 19, 76.3072)
+size = Vector3(2, 1, 3)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.856808, 0, -0.515636, 0, 1, 0, 0.515636, 0, 0.856808, -177.844, 13.1022, 83.7889)
+size = Vector3(2, 7, 3)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.856808, 0, -0.515636, 0, 1, 0, 0.515636, 0, 0.856808, -176.102, 13.6022, 84.2173)
+size = Vector3(2, 8, 4)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.856808, 0, -0.515636, 0, 1, 0, 0.515636, 0, 0.856808, -176.844, 14.1022, 81.7889)
+size = Vector3(2, 9, 3)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.970464, 0, 0.241245, 0, 1, 0, -0.241245, 0, 0.970464, -186.531, 11.5, 77.3928)
+size = Vector3(5, 4, 3)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -192.06, 12, 56)
+size = Vector3(3, 1, 1)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -191.56, 20, 62)
+size = Vector3(4, 1, 3)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -190.06, 23, 70)
+size = Vector3(3, 1, 3)
+material = ExtResource("4_wj0fa")
+
+[node name="Jump_Pad" parent="Geometry/CSGCombiner3D/CSGBox3D23" instance=ExtResource("7_1j57f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.827057, 0.472351, 0.810539)
+power = 8
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -190.06, 22, 69.8745)
+size = Vector3(3, 1, 3.25098)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.969007, 0, 0.247033, 0, 1, 0, -0.247033, 0, 0.969007, -191.796, 14.862, 63.2269)
+operation = 2
+size = Vector3(2, 1.48145, 2)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.969007, 0, 0.247033, 0, 1, 0, -0.247033, 0, 0.969007, -193.215, 10.5796, 61.4532)
+operation = 2
+size = Vector3(3.78564, 1.48145, 2)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.969007, 0, 0.247033, 0, 1, 0, -0.247033, 0, 0.969007, -189.554, 18.0159, 70.9197)
+operation = 2
+size = Vector3(3.78564, 3, 2)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.969007, 0, 0.247033, 0, 1, 0, -0.247033, 0, 0.969007, -196.334, 13.1027, 67.4428)
+operation = 2
+size = Vector3(9.00146, 5, 12)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.969007, 0, 0.247033, 0, 1, 0, -0.247033, 0, 0.969007, -196.125, 17.5654, 69.4805)
+operation = 2
+size = Vector3(9.00146, 5, 7.94983)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.969007, 0, 0.247033, 0, 1, 0, -0.247033, 0, 0.969007, -193.718, 11.6213, 64.2372)
+size = Vector3(2.58398, 3, 3.64465)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.969007, 0, 0.247033, 0, 1, 0, -0.247033, 0, 0.969007, -198.974, 11.6213, 72.8836)
+size = Vector3(2, 3, 3)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.969007, 0, 0.247033, 0, 1, 0, -0.247033, 0, 0.969007, -191.51, 15.3144, 71.1931)
+size = Vector3(2, 0.847168, 3)
+material = ExtResource("4_wj0fa")
+
 [node name="ControllerV2" parent="." instance=ExtResource("6_j44o1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 15, -8)
 
@@ -325,6 +437,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76, 11.5, 13)
 [node name="Checkpoint" parent="Runs/The Tower/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
 transform = Transform3D(0.928596, 0, 0.371092, 0, 1, 0, -0.371092, 0, 0.928596, -82.7463, 45, 11.6902)
 mother_run = NodePath("../../start")
+
+[node name="Rock Climbing" type="Node3D" parent="Runs"]
+
+[node name="start" parent="Runs/Rock Climbing" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("10_xvfda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -192.468, 10.9635, 51)
+run_name = "Rock Climbing"
+dev_time = 11.392
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+
+[node name="end" parent="Runs/Rock Climbing" node_paths=PackedStringArray("other_node") instance=ExtResource("10_xvfda")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -197, 27.2104, 73)
+other_node = NodePath("../start")
+node_type = 1
+
+[node name="Return_node" parent="Runs/Rock Climbing" instance=ExtResource("8_5wdor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -192, 11, 45)
+
+[node name="checkpoints" type="Node3D" parent="Runs/Rock Climbing"]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-9.2, 0, 8.74228e-08, 0, 7.5, 0, -8.0429e-07, 0, -1, -94.8624, 57.0275, 106)
@@ -702,3 +833,9 @@ transform = Transform3D(0.0634736, -0.122236, 0.99047, 0.185578, 0.976607, 0.108
 
 [node name="tree41" parent="Nature" instance=ExtResource("15_7xeel")]
 transform = Transform3D(1.20186, 0, 0, 0, 1.41964, 0, 0, 0, 1.18483, -89.0126, 15.4936, 16.7096)
+
+[node name="RefreshWall" parent="." instance=ExtResource("13_grex1")]
+transform = Transform3D(-0.969616, 0, -0.244631, 0, 1, 0, 0.244631, 0, -0.969616, -196.062, 14.6415, 73.5577)
+
+[node name="RefreshWall2" parent="." instance=ExtResource("13_grex1")]
+transform = Transform3D(-0.969616, 0, -0.244631, 0, 1, 0, 0.244631, 0, -0.969616, -193.678, 16.0214, 72.9475)
