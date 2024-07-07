@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ba4t5hqtndstw"]
+[gd_scene load_steps=17 format=3 uid="uid://ba4t5hqtndstw"]
 
 [ext_resource type="Script" path="res://scripts/cc.gd" id="1_ekdi0"]
 [ext_resource type="Material" uid="uid://co3y5acwsyhdq" path="res://assets/Textures/green.tres" id="3_vpui0"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bpk6w56a4l3uy" path="res://nodes/features/jump_pad.tscn" id="7_1j57f"]
 [ext_resource type="PackedScene" uid="uid://csuokjcklu0d7" path="res://nodes/world_environment.tscn" id="7_dpdn8"]
 [ext_resource type="PackedScene" uid="uid://cbjmtxba73jo0" path="res://nodes/features/loading_zone.tscn" id="7_l4jk3"]
+[ext_resource type="Texture2D" uid="uid://b71bi8qhgcy5v" path="res://assets/grunge-top-secret-word-rubber-stamp-top-secret-red-sticker-set-grunge-vintage-square-label-illustration-isolated-on-white-background-vector-3298021134.jpg" id="7_u7gf3"]
 [ext_resource type="PackedScene" uid="uid://r3w3ughotgmt" path="res://nodes/features/Running/return_node.tscn" id="8_5wdor"]
 [ext_resource type="PackedScene" uid="uid://dth5eq8xdowfn" path="res://nodes/features/Running/speedrunV2.tscn" id="10_xvfda"]
 [ext_resource type="PackedScene" uid="uid://b5aaqwp8l466r" path="res://nodes/features/Running/checkpoint.tscn" id="11_3lgdr"]
@@ -20,7 +21,7 @@
 script = ExtResource("1_ekdi0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.356568, 0.805786, -0.472829, -0.743364, 0.0618698, 0.666019, 0.565923, 0.588966, 0.576932, 26.8466, 92.9992, -46.4993)
+transform = Transform3D(-0.0508572, 0.975173, 0.215526, -0.923223, -0.128209, 0.362245, 0.380884, -0.180556, 0.906823, 26.8466, 92.9992, -46.4993)
 shadow_enabled = true
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("7_dpdn8")]
@@ -38,7 +39,7 @@ material = ExtResource("3_vpui0")
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Geometry/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 36.78, 0, -1, -1.6077e-06, -11.7476, 46.619, 0.5)
 operation = 2
-polygon = PackedVector2Array(-168, 16, -161, 25, -167, 37, -178, 41, -177, 56, -162.005, 61.6084, -135.512, 55.4124, -122, 48, -92.6565, 67.9483, -87.4089, 57.1616, -73, 56, -17, 72, 6.75613, 55.1209, 2, 24, 5.00695, -14.847, 0, -61, -24, -79, -47.4689, -86.8555, -86.99, -79.7121, -136, -95, -176.199, -80.8782, -185.328, -28.7668, -181.246, -4.56956)
+polygon = PackedVector2Array(-168, 16, -161, 25, -167, 37, -178, 41, -177, 56, -162.005, 61.6084, -135.512, 55.4124, -122, 48, -92.6565, 67.9483, -87.4089, 57.1616, -73, 56, -17, 72, 6.75613, 55.1209, 2, 24, 5.00695, -14.847, 0, -61, -24, -79, -29.5086, -137.84, -76.4238, -129.664, -158.233, -134.659, -175.4, -90.4507, -185.328, -28.7668, -181.246, -4.56956)
 material = ExtResource("4_wj0fa")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
@@ -115,6 +116,22 @@ transform = Transform3D(0.970464, 0, 0.241245, 0, 1, 0, -0.241245, 0, 0.970464, 
 size = Vector3(2, 1, 3)
 material = ExtResource("4_wj0fa")
 
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(-3.20049e-08, -0.994087, 0.217179, 0.390951, 0.0155085, 0.283949, -0.0564135, 0.107476, 1.96779, -134, 26.4855, -42.3188)
+radius = 5.0
+sides = 14
+material = ExtResource("5_ovxex")
+
+[node name="Sprite3D" type="Sprite3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(-0.0026698, 0.000856529, 0.126262, 3.63012e-05, 0.0629942, -0.00171678, -0.024857, 0, -0.0135639, -137.378, 24.4855, -50.0621)
+texture = ExtResource("7_u7gf3")
+
+[node name="CSGBox3D26" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(-3.20049e-08, -0.994087, 0.217179, 0.390951, 0.0155085, 0.283949, -0.0564135, 0.107476, 1.96779, -133.891, 25.6501, -41.1939)
+operation = 2
+size = Vector3(6, 5, 10)
+material = ExtResource("4_wj0fa")
+
 [node name="CSGBox3D19" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
 transform = Transform3D(0.856808, 0, -0.515636, 0, 1, 0, 0.515636, 0, 0.856808, -177.844, 13.1022, 83.7889)
 size = Vector3(2, 7, 3)
@@ -152,7 +169,7 @@ material = ExtResource("4_wj0fa")
 
 [node name="Jump_Pad" parent="Geometry/CSGCombiner3D/CSGBox3D23" instance=ExtResource("7_1j57f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.827057, 0.472351, 0.810539)
-power = 8
+power = 9
 
 [node name="CSGBox3D24" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -190.06, 22, 69.8745)
@@ -189,6 +206,12 @@ operation = 2
 size = Vector3(9.00146, 5, 7.94983)
 material = ExtResource("4_wj0fa")
 
+[node name="CSGBox3D25" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(0.998832, 0, -0.0483266, 0.0102052, 0.977449, 0.210925, 0.0472368, -0.211171, 0.976307, -196.924, 24.0892, 96.3817)
+operation = 2
+size = Vector3(5, 3, 51)
+material = ExtResource("4_wj0fa")
+
 [node name="CSGBox3D11" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
 transform = Transform3D(0.969007, 0, 0.247033, 0, 1, 0, -0.247033, 0, 0.969007, -193.718, 11.6213, 64.2372)
 size = Vector3(2.58398, 3, 3.64465)
@@ -202,6 +225,11 @@ material = ExtResource("4_wj0fa")
 [node name="CSGBox3D15" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
 transform = Transform3D(0.969007, 0, 0.247033, 0, 1, 0, -0.247033, 0, 0.969007, -191.51, 15.3144, 71.1931)
 size = Vector3(2, 0.847168, 3)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGPolygon3D3" type="CSGPolygon3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 19, 0, -1, -8.30516e-07, -139, 28.8, -25)
+polygon = PackedVector2Array(6.71127, 11.4281, 0.391357, 5.8517, -9.77011, 5.35602, -12.992, -6.04463, -2.3349, -11.4971, 14.1465, -10.8775, 16.0053, 4.11682)
 material = ExtResource("4_wj0fa")
 
 [node name="ControllerV2" parent="." instance=ExtResource("6_j44o1")]
@@ -456,6 +484,130 @@ node_type = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -192, 11, 45)
 
 [node name="checkpoints" type="Node3D" parent="Runs/Rock Climbing"]
+
+[node name="Spice From the Cliff" type="Node3D" parent="Runs"]
+
+[node name="start" parent="Runs/Spice From the Cliff" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("10_xvfda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175, 10.3, -53)
+run_name = "Spice from the Cliff"
+dev_time = 27.275
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+
+[node name="end" parent="Runs/Spice From the Cliff" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("10_xvfda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175, 10.3, -53)
+other_node = NodePath("../start")
+checkpoints = [NodePath("../checkpoints/Checkpoint")]
+node_type = 1
+
+[node name="Return_node" parent="Runs/Spice From the Cliff" instance=ExtResource("8_5wdor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -175, 11.4, -49)
+
+[node name="checkpoints" type="Node3D" parent="Runs/Spice From the Cliff"]
+
+[node name="Checkpoint" parent="Runs/Spice From the Cliff/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -140, 29.3, -17)
+mother_run = NodePath("../../start")
+
+[node name="The Trees?" type="Node3D" parent="Runs"]
+
+[node name="start" parent="Runs/The Trees?" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("10_xvfda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -191.738, 27.2588, -64.3652)
+run_name = "THE TREES???"
+dev_time = 62.666
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+
+[node name="end" parent="Runs/The Trees?" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("10_xvfda")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -87.4753, 35, -66.1984)
+other_node = NodePath("../start")
+checkpoints = [NodePath("../checkpoints/added"), NodePath("../checkpoints/added2"), NodePath("../checkpoints/added3"), NodePath("../checkpoints/added4"), NodePath("../checkpoints/added5"), NodePath("../checkpoints/added6"), NodePath("../checkpoints/added7"), NodePath("../checkpoints/added8"), NodePath("../checkpoints/added9"), NodePath("../checkpoints/added10"), NodePath("../checkpoints/added11"), NodePath("../checkpoints/added12"), NodePath("../checkpoints/added13"), NodePath("../checkpoints/added14"), NodePath("../checkpoints/added15"), NodePath("../checkpoints/added16"), NodePath("../checkpoints/added17"), NodePath("../checkpoints/added18"), NodePath("../checkpoints/added19"), NodePath("../checkpoints/added20")]
+node_type = 1
+
+[node name="checkpoints" type="Node3D" parent="Runs/The Trees?"]
+
+[node name="added" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -189.351, 32.1861, -66.0942)
+mother_run = NodePath("../../start")
+
+[node name="added2" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -196.537, 32.1861, -76.0327)
+mother_run = NodePath("../../start")
+
+[node name="added3" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -193.621, 32.1861, -87.0833)
+mother_run = NodePath("../../start")
+
+[node name="added4" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -183.163, 32.1861, -81.7663)
+mother_run = NodePath("../../start")
+
+[node name="added5" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -182.571, 32.1861, -73.1861)
+mother_run = NodePath("../../start")
+
+[node name="added6" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -179.865, 32.1861, -65.5814)
+mother_run = NodePath("../../start")
+
+[node name="added7" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -175.698, 32.1861, -88.4966)
+mother_run = NodePath("../../start")
+
+[node name="added8" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -164.118, 32.1861, -92.3381)
+mother_run = NodePath("../../start")
+
+[node name="added9" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -161.115, 32.1861, -77.3195)
+mother_run = NodePath("../../start")
+
+[node name="added10" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -150.12, 32.1861, -83.969)
+mother_run = NodePath("../../start")
+
+[node name="added11" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -145.988, 32.1861, -72.827)
+mother_run = NodePath("../../start")
+
+[node name="added12" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -136.708, 32.1861, -85.1761)
+mother_run = NodePath("../../start")
+
+[node name="added13" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -138.692, 32.1861, -66.249)
+mother_run = NodePath("../../start")
+
+[node name="added14" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -135.644, 32.1861, -61.9547)
+mother_run = NodePath("../../start")
+
+[node name="added15" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -131.53, 32.1861, -68.9156)
+mother_run = NodePath("../../start")
+
+[node name="added16" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -127.259, 32.1861, -77.6775)
+mother_run = NodePath("../../start")
+
+[node name="added17" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -123.225, 32.1861, -81.6643)
+mother_run = NodePath("../../start")
+
+[node name="added18" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -121.531, 32.1861, -75.5589)
+mother_run = NodePath("../../start")
+
+[node name="added19" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -123.066, 32.1861, -55.8101)
+mother_run = NodePath("../../start")
+
+[node name="added20" parent="Runs/The Trees?/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -107.042, 32.1861, -70.838)
+mother_run = NodePath("../../start")
+
+[node name="Return_node" parent="Runs/The Trees?" instance=ExtResource("8_5wdor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -192, 28.6, -62)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-9.2, 0, 8.74228e-08, 0, 7.5, 0, -8.0429e-07, 0, -1, -94.8624, 57.0275, 106)
@@ -712,7 +864,7 @@ use_collision = true
 [node name="Nature" type="Node3D" parent="."]
 
 [node name="tree" parent="Nature" instance=ExtResource("15_7xeel")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -133, 26.689, -51)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -135.43, 26.689, -61.8313)
 
 [node name="tree2" parent="Nature" instance=ExtResource("15_7xeel")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -123.094, 26.689, -55.4167)
