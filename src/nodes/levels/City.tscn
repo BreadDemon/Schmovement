@@ -754,7 +754,7 @@ transform = Transform3D(1, 0, -1.74846e-07, 0, 3.98581, 0, 1.74846e-07, 0, 1, 5.
 [node name="start" parent="runs/An Apple for an Old Man" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 1, -14.2047)
 run_name = "An Apple for an Old Man"
-dev_time = 29.14
+dev_time = 25.825
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
 
@@ -785,6 +785,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 2.0422, -35)
 [node name="start" parent="runs/The Climb" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4, 1.3, -9)
 run_name = "The Climb"
+dev_time = 19.833
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
 
@@ -805,6 +806,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, -12)
 [node name="start" parent="runs/Lost Cigar" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 23.5, -15.5)
 run_name = "Lost Cigar"
+dev_time = 11.767
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
 
@@ -825,6 +827,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 24, -14)
 [node name="start" parent="runs/Creativity is Key" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 8, -24)
 run_name = "Creativity is Key"
+dev_time = 17.15
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
 
@@ -845,11 +848,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 9, -21)
 [node name="start" parent="runs/Cross Building 1" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 37, -10)
 run_name = "Cross Building 1"
+dev_time = 16.633
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
 
 [node name="end" parent="runs/Cross Building 1" node_paths=PackedStringArray("other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 39, -8)
+dev_time = 17.608
 other_node = NodePath("../start")
 node_type = 1
 
@@ -885,6 +890,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 40, -10)
 [node name="start" parent="runs/Hidden" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("19_nfcuf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.5, 1, -52.5)
 run_name = "Hidden"
+dev_time = 23.8
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
 
@@ -912,3 +918,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 9, -12)
 
 [node name="ControllerV2" parent="." instance=ExtResource("18_nk734")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 1.5, 3)
+
+[node name="Loading Zone" parent="." instance=ExtResource("13_t4ahx")]
+transform = Transform3D(3, 0, 0, 0, 2, 0, 0, 0, 1, -21, 10.5, -47.5)
+PathScene = "res://nodes/levels/test_map.tscn"

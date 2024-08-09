@@ -293,6 +293,11 @@ transform = Transform3D(0.396571, 0, -0.918004, -0.361626, 0.919142, -0.15622, 0
 size = Vector3(2, 1, 6)
 material = ExtResource("4_wj0fa")
 
+[node name="CSGBox3D31" type="CSGBox3D" parent="Buildings/Tower"]
+transform = Transform3D(-0.956596, 0.283457, -0.0676499, 0.286478, 0.957253, -0.0399599, 0.0534312, -0.0576054, -0.996909, -7.97118, 9.2449, 0.110477)
+size = Vector3(2, 1, 6)
+material = ExtResource("4_wj0fa")
+
 [node name="CSGBox3D4" type="CSGBox3D" parent="Buildings/Tower"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.500001, -1.5)
 size = Vector3(2, 2, 4)
@@ -335,12 +340,17 @@ material = ExtResource("4_wj0fa")
 transform = Transform3D(1, 0, -2.98023e-08, 3.72529e-09, 1, 7.45058e-09, 0, 7.45058e-09, 1, 0.0135651, 0.665886, -1.11363)
 
 [node name="CSGBox3D11" type="CSGBox3D" parent="Buildings/Tower"]
-transform = Transform3D(-0.441913, 0, 0.897058, -7.45058e-09, 1, -3.72529e-09, -0.897058, 0, -0.441913, 6.3365, 20.5535, -1.91239)
+transform = Transform3D(-0.441913, 0, 0.897058, -7.45058e-09, 1, -7.45058e-09, -0.897058, 0, -0.441913, 6.3365, 20.5535, -1.91239)
 size = Vector3(2, 1.36121, 4)
 material = ExtResource("4_wj0fa")
 
 [node name="Jump_Pad" parent="Buildings/Tower/CSGBox3D11" instance=ExtResource("7_1j57f")]
 transform = Transform3D(1, 0, -2.98023e-08, 7.45058e-09, 1, 0, 0, 0, 1, 0.0135651, 0.665886, -1.21363)
+
+[node name="CSGBox3D30" type="CSGBox3D" parent="Buildings/Tower"]
+transform = Transform3D(0.562198, 0.00993607, -0.826943, -0.122686, 0.989866, -0.0715143, 0.817852, 0.141659, 0.557719, -6.12244, 20.0551, 5.05472)
+size = Vector3(2, 1.36121, 4)
+material = ExtResource("4_wj0fa")
 
 [node name="CSGBox3D12" type="CSGBox3D" parent="Buildings/Tower"]
 transform = Transform3D(-4.37114e-08, -0.949283, 0.314423, 1, -2.42144e-08, 3.12924e-07, 0, 0.314423, 0.949287, 2.18981, 24.5032, 6.54952)
@@ -358,7 +368,12 @@ size = Vector3(1, 8, 1)
 material = ExtResource("4_wj0fa")
 
 [node name="CSGBox3D15" type="CSGBox3D" parent="Buildings/Tower"]
-transform = Transform3D(-0.960503, 0.0673952, -0.269986, 7.07805e-08, 0.970228, 0.242193, 0.278271, 0.232627, -0.931907, -0.188904, 30.8833, -5.52437)
+transform = Transform3D(-0.960503, 0.0673952, -0.269986, 7.26432e-08, 0.970228, 0.242193, 0.278271, 0.232627, -0.931907, -0.188904, 30.8833, -5.52437)
+size = Vector3(2, 1, 6)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D29" type="CSGBox3D" parent="Buildings/Tower"]
+transform = Transform3D(-0.639662, 0.14709, -0.754452, -0.0350253, 0.974923, 0.219769, 0.767859, 0.167003, -0.61847, -6.0359, 27.7979, -5.7451)
 size = Vector3(2, 1, 6)
 material = ExtResource("4_wj0fa")
 
@@ -408,6 +423,11 @@ material = ExtResource("4_wj0fa")
 [node name="CSGBox3D24" type="CSGBox3D" parent="Buildings/Tower"]
 transform = Transform3D(-0.744254, 0, -0.667899, 1.19209e-07, 1, -7.45058e-09, 0.667898, 0, -0.744257, 2.43728, 46.5138, -7.12199)
 size = Vector3(3, 3, 1)
+material = ExtResource("4_wj0fa")
+
+[node name="CSGBox3D28" type="CSGBox3D" parent="Buildings/Tower"]
+transform = Transform3D(-0.744254, 0, -0.667899, 4.58211e-07, 1, -7.45058e-09, 0.6679, 0, -0.744257, 3.57305, 45.3576, -6.47778)
+size = Vector3(3.83008, 0.687683, 3.47607)
 material = ExtResource("4_wj0fa")
 
 [node name="CSGBox3D25" type="CSGBox3D" parent="Buildings/Tower"]
@@ -608,6 +628,54 @@ mother_run = NodePath("../../start")
 
 [node name="Return_node" parent="Runs/The Trees?" instance=ExtResource("8_5wdor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -192, 28.6, -62)
+
+[node name="Spice from the tower" type="Node3D" parent="Runs"]
+
+[node name="start" parent="Runs/Spice from the tower" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("10_xvfda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -168, 10.3, -45)
+run_name = "Spice from the tower"
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+
+[node name="end" parent="Runs/Spice from the tower" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("10_xvfda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -168, 10.3, -45)
+dev_time = 76.075
+other_node = NodePath("../start")
+checkpoints = [NodePath("../checkpoints/Checkpoint"), NodePath("../checkpoints/Checkpoint2"), NodePath("../checkpoints/Checkpoint3"), NodePath("../checkpoints/Checkpoint4"), NodePath("../checkpoints/Checkpoint5"), NodePath("../checkpoints/Checkpoint6"), NodePath("../checkpoints/Checkpoint7")]
+node_type = 1
+
+[node name="Return_node" parent="Runs/Spice from the tower" instance=ExtResource("8_5wdor")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -168, 11.5, -47)
+
+[node name="checkpoints" type="Node3D" parent="Runs/Spice from the tower"]
+
+[node name="Checkpoint" parent="Runs/Spice from the tower/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -97.0706, 20.0543, 16.3762)
+mother_run = NodePath("../../start")
+
+[node name="Checkpoint2" parent="Runs/Spice from the tower/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -94.1802, 31.6, 19.8056)
+mother_run = NodePath("../../start")
+
+[node name="Checkpoint3" parent="Runs/Spice from the tower/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.546996, 0.203129, 0.812117, -0.0294876, 0.974188, -0.223806, -0.836616, 0.0984734, 0.538867, -94.1132, 38.0079, 10.1947)
+mother_run = NodePath("../../start")
+
+[node name="Checkpoint4" parent="Runs/Spice from the tower/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.780779, 0, 0.624807, 0, 1, 0, -0.624807, 0, 0.780779, -87.6387, 45.4814, 19.079)
+mother_run = NodePath("../../start")
+
+[node name="Checkpoint5" parent="Runs/Spice from the tower/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(1, 0, 0, 0, 0.996421, 0.08453, 0, -0.08453, 0.996421, -91.7902, 45.9982, 24.3533)
+mother_run = NodePath("../../start")
+
+[node name="Checkpoint6" parent="Runs/Spice from the tower/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.695975, 0, -0.718066, 0, 1, 0, 0.718066, 0, 0.695975, -85.0072, 55.5055, 6.67099)
+mother_run = NodePath("../../start")
+
+[node name="Checkpoint7" parent="Runs/Spice from the tower/checkpoints" node_paths=PackedStringArray("mother_run") instance=ExtResource("11_3lgdr")]
+transform = Transform3D(0.689935, 0, -0.723871, 0, 1, 0, 0.723871, 0, 0.689935, -94.1168, 61.2759, 18.4451)
+mother_run = NodePath("../../start")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-9.2, 0, 8.74228e-08, 0, 7.5, 0, -8.0429e-07, 0, -1, -94.8624, 57.0275, 106)

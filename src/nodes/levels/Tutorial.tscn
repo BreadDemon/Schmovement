@@ -553,6 +553,7 @@ and Delete to go back to  the world origin
 [node name="start" parent="Runs/Tutorial" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("4_2bp5y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 run_name = "Tutorial"
+dev_time = 21.317
 restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
 show_end = false

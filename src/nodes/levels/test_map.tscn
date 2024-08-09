@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c71cg8reelnrx"]
+[gd_scene load_steps=19 format=3 uid="uid://c71cg8reelnrx"]
 
 [ext_resource type="Texture2D" uid="uid://c7ax5ssske6bn" path="res://assets/HDRI/kloppenheim_06_puresky_8k.hdr" id="1_2ic7k"]
 [ext_resource type="Script" path="res://scripts/Levels/test_map.gd" id="1_kq41c"]
@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bpk6w56a4l3uy" path="res://nodes/features/jump_pad.tscn" id="3_rffr6"]
 [ext_resource type="PackedScene" uid="uid://po75jr6axkjl" path="res://nodes/features/Teleporter/teleporter.tscn" id="5_j3kf1"]
 [ext_resource type="PackedScene" uid="uid://cx7g5bussvmke" path="res://nodes/features/Teleporter/receptor.tscn" id="6_0g3fc"]
-[ext_resource type="PackedScene" uid="uid://b4hpx8unxlkoy" path="res://nodes/features/Running/start_course.tscn" id="7_ssrem"]
-[ext_resource type="PackedScene" uid="uid://bwk6svly34oyr" path="res://nodes/features/Running/end_course.tscn" id="8_kdxem"]
 [ext_resource type="PackedScene" uid="uid://r3w3ughotgmt" path="res://nodes/features/Running/return_node.tscn" id="9_k6fjs"]
+[ext_resource type="PackedScene" uid="uid://dth5eq8xdowfn" path="res://nodes/features/Running/speedrunV2.tscn" id="9_v2wyc"]
 [ext_resource type="PackedScene" uid="uid://cbjmtxba73jo0" path="res://nodes/features/loading_zone.tscn" id="11_cyk3g"]
 [ext_resource type="PackedScene" uid="uid://j43cqowhjsf6" path="res://nodes/ControllerV2.tscn" id="11_tmt8x"]
 
@@ -132,23 +131,34 @@ receptor = NodePath("../receptor2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0.849864)
 visible = false
 
-[node name="StartCourse" parent="." node_paths=PackedStringArray("origin_point") instance=ExtResource("7_ssrem")]
-transform = Transform3D(3.01563, 0, 0, 0, 3.01563, 0, 0, 0, 1.00521, 1.07665, 0.998873, -2.12691)
-visible = false
-run_name = "Training course"
-origin_point = NodePath("../Return_node")
-dev_time = 11.825
-
-[node name="EndCourse" parent="." node_paths=PackedStringArray("start_course") instance=ExtResource("8_kdxem")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 14.1715, -87)
-start_course = NodePath("../StartCourse")
-
-[node name="Return_node" parent="." instance=ExtResource("9_k6fjs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 1)
-
 [node name="Loading Zone" parent="." instance=ExtResource("11_cyk3g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3)
 PathScene = "res://nodes/levels/City.tscn"
 
 [node name="ControllerV2" parent="." instance=ExtResource("11_tmt8x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.5, 1)
+
+[node name="runs" type="Node3D" parent="."]
+
+[node name="test_run" type="Node3D" parent="runs"]
+
+[node name="start" parent="runs/test_run" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("9_v2wyc")]
+transform = Transform3D(9, 0, 0, 0, 3, 0, 0, 0, 1, 1, 1, -1)
+visible = false
+run_name = "test run"
+dev_time = 12.242
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+start_timer_max = 0.0
+
+[node name="end" parent="runs/test_run" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("9_v2wyc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7, 14.1504, -86.9)
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../start")
+start_timer_max = 0.0
+node_type = 1
+
+[node name="Return_node" parent="runs/test_run" instance=ExtResource("9_k6fjs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 1)
+
+[node name="checkpoints" type="Node3D" parent="runs/test_run"]
