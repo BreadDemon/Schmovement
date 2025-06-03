@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dth5eq8xdowfn"]
 
-[ext_resource type="Script" path="res://scripts/features/runs/speedrunV2.gd" id="1_1tevi"]
+[ext_resource type="Script" uid="uid://6vbj2a78e1cd" path="res://scripts/features/runs/speedrunV2.gd" id="1_1tevi"]
 [ext_resource type="Material" uid="uid://co3y5acwsyhdq" path="res://assets/Textures/green.tres" id="2_6tn5x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g0yyk"]

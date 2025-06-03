@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bruvdcd07pu8s"]
 
-[ext_resource type="Script" path="res://scripts/tutorial.gd" id="1_32p00"]
+[ext_resource type="Script" uid="uid://dp7kkc321jtbb" path="res://scripts/tutorial.gd" id="1_32p00"]
 [ext_resource type="Material" uid="uid://bnbfqom1wyvcs" path="res://assets/Textures/Dark_texture.tres" id="1_vmfpb"]
 [ext_resource type="PackedScene" uid="uid://csuokjcklu0d7" path="res://nodes/world_environment.tscn" id="2_7u8kc"]
 [ext_resource type="PackedScene" uid="uid://b5aaqwp8l466r" path="res://nodes/features/Running/checkpoint.tscn" id="2_svnge"]
@@ -195,7 +195,7 @@ size = Vector3(2, 5, 2)
 material = ExtResource("1_vmfpb")
 
 [node name="CSGBox3D32" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 11.5, -8.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.01469, 11.5321, -8.5175)
 size = Vector3(11, 2, 2)
 material = ExtResource("1_vmfpb")
 

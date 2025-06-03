@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://d1cdc6cilif2a"]
 
-[ext_resource type="Shader" path="res://shader/blur.gdshader" id="1_ra0gf"]
-[ext_resource type="Script" path="res://scripts/menus/pause_menu.gd" id="2_3qeef"]
+[ext_resource type="Shader" uid="uid://b6pte7fjrekyj" path="res://shader/blur.gdshader" id="1_ra0gf"]
+[ext_resource type="Script" uid="uid://dwdn68lpvkpim" path="res://scripts/menus/pause_menu.gd" id="2_3qeef"]
 [ext_resource type="PackedScene" uid="uid://cp8xo27u1vt3l" path="res://nodes/menus/input_settings.tscn" id="3_12rbm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jwo6d"]
 shader = ExtResource("1_ra0gf")
-shader_parameter/blur = null
+shader_parameter/blur = 0.0
 shader_parameter/brightness = 1.0
 
 [sub_resource type="Animation" id="Animation_rb2ks"]
@@ -198,11 +198,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2gyiy"]
 _data = {
-"Pause": SubResource("Animation_rb2ks"),
-"RESET": SubResource("Animation_rhhy6"),
-"Unpause": SubResource("Animation_y1ddt"),
-"hide_pause": SubResource("Animation_i8xpb"),
-"unhide_pause": SubResource("Animation_83wus")
+&"Pause": SubResource("Animation_rb2ks"),
+&"RESET": SubResource("Animation_rhhy6"),
+&"Unpause": SubResource("Animation_y1ddt"),
+&"hide_pause": SubResource("Animation_i8xpb"),
+&"unhide_pause": SubResource("Animation_83wus")
 }
 
 [node name="PauseMenu" type="ColorRect"]

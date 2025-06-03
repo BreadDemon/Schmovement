@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cp8xo27u1vt3l"]
 
 [ext_resource type="PackedScene" uid="uid://b68cpofe26anw" path="res://nodes/menus/input_button.tscn" id="1_bm2wr"]
-[ext_resource type="Script" path="res://scripts/menus/input_settings.gd" id="1_o3j5m"]
+[ext_resource type="Script" uid="uid://bk32khwmfxcet" path="res://scripts/menus/input_settings.gd" id="1_o3j5m"]
 
 [sub_resource type="Theme" id="Theme_dlowx"]
 
@@ -54,9 +54,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n7wt6"]
 _data = {
-"RESET": SubResource("Animation_7niio"),
-"close_ingame": SubResource("Animation_n4eoe"),
-"open_ingame": SubResource("Animation_gp4b0")
+&"RESET": SubResource("Animation_7niio"),
+&"close_ingame": SubResource("Animation_n4eoe"),
+&"open_ingame": SubResource("Animation_gp4b0")
 }
 
 [node name="InputSettings" type="Control"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://j43cqowhjsf6"]
 
-[ext_resource type="Script" path="res://scripts/ControllerV2.gd" id="1_ojey4"]
+[ext_resource type="Script" uid="uid://c2kelhvsgrtt0" path="res://scripts/ControllerV2.gd" id="1_ojey4"]
 [ext_resource type="PackedScene" uid="uid://d1cdc6cilif2a" path="res://nodes/menus/pause_menu.tscn" id="2_1avvc"]
 [ext_resource type="Texture2D" uid="uid://ckfmkdwj7aark" path="res://assets/vecteezy_geometric-design-element_21048718.png" id="2_sbjer"]
 [ext_resource type="PackedScene" uid="uid://dq15eqjrays08" path="res://nodes/menus/debug.tscn" id="4_1jnl2"]

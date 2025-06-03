@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dxllibo2xe04"]
 
-[ext_resource type="Script" path="res://scripts/features/Mili_seconds.gd" id="1_0wx5u"]
+[ext_resource type="Script" uid="uid://tv4e35wpigoa" path="res://scripts/features/Mili_seconds.gd" id="1_0wx5u"]
 
 [node name="Timer" type="CanvasLayer"]
 
