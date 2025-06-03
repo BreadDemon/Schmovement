@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=3 uid="uid://bfaoshjwhqlqq"]
+
+[ext_resource type="Material" uid="uid://bnbfqom1wyvcs" path="res://assets/Textures/Dark_texture.tres" id="1_wc12v"]
+[ext_resource type="PackedScene" uid="uid://j43cqowhjsf6" path="res://nodes/ControllerV2.tscn" id="2_tsa57"]
+[ext_resource type="PackedScene" uid="uid://bpk6w56a4l3uy" path="res://nodes/features/jump_pad.tscn" id="3_uf0dv"]
+[ext_resource type="PackedScene" uid="uid://dth5eq8xdowfn" path="res://nodes/features/Running/speedrunV2.tscn" id="4_2ofqx"]
+[ext_resource type="PackedScene" uid="uid://r3w3ughotgmt" path="res://nodes/features/Running/return_node.tscn" id="5_ftc7x"]
+[ext_resource type="PackedScene" uid="uid://b5aaqwp8l466r" path="res://nodes/features/Running/checkpoint.tscn" id="6_dlihh"]
+[ext_resource type="PackedScene" uid="uid://c0h6pl467n324" path="res://nodes/features/refresh_wall.tscn" id="7_0a7al"]
+[ext_resource type="PackedScene" uid="uid://po75jr6axkjl" path="res://nodes/features/Teleporter/teleporter.tscn" id="8_5jn8a"]
+[ext_resource type="PackedScene" uid="uid://cx7g5bussvmke" path="res://nodes/features/Teleporter/receptor.tscn" id="9_k2yf2"]
+[ext_resource type="PackedScene" uid="uid://csuokjcklu0d7" path="res://nodes/world_environment.tscn" id="10_k2yf2"]
+
+[node name="Bread" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77979, 0)
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Geometry"]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+size = Vector3(58, 3, 64)
+material = ExtResource("1_wc12v")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 7)
+size = Vector3(7, 8, 1)
+material = ExtResource("1_wc12v")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 6, 1)
+size = Vector3(7, 1, 4)
+material = ExtResource("1_wc12v")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Geometry/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.373826, 2.73761, -2.12387)
+polygon = PackedVector2Array(0, 0, -0.334798, 1.16301, 1, 0)
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="Geometry"]
+
+[node name="ControllerV2" parent="." instance=ExtResource("2_tsa57")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="Jump_Pad" parent="." instance=ExtResource("3_uf0dv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4)
+
+[node name="Runs" type="Node3D" parent="."]
+
+[node name="TestRun" type="Node3D" parent="Runs"]
+
+[node name="start" parent="Runs/TestRun" node_paths=PackedStringArray("restart_point", "other_node") instance=ExtResource("4_2ofqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2)
+run_name = "TestRun"
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../end")
+start_timer_max = 0.0
+
+[node name="end" parent="Runs/TestRun" node_paths=PackedStringArray("restart_point", "other_node", "checkpoints") instance=ExtResource("4_2ofqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+run_name = "TestRun"
+restart_point = NodePath("../Return_node")
+other_node = NodePath("../start")
+checkpoints = [NodePath("../checkpoints/Checkpoint")]
+node_type = 1
+
+[node name="Return_node" parent="Runs/TestRun" instance=ExtResource("5_ftc7x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = true
+
+[node name="checkpoints" type="Node3D" parent="Runs/TestRun"]
+
+[node name="Checkpoint" parent="Runs/TestRun/checkpoints" node_paths=PackedStringArray("respawn_point", "mother_run") instance=ExtResource("6_dlihh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 7, 2)
+is_respwanable = true
+respawn_point = NodePath("../../respawns/CP1")
+mother_run = NodePath("../../start")
+
+[node name="respawns" type="Node3D" parent="Runs/TestRun"]
+
+[node name="CP1" parent="Runs/TestRun/respawns" instance=ExtResource("5_ftc7x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 6.87928, 2)
+
+[node name="Level Features" type="Node3D" parent="."]
+
+[node name="RefreshWall" parent="Level Features" instance=ExtResource("7_0a7al")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 4, 6.49)
+
+[node name="Teleporter" parent="Level Features" node_paths=PackedStringArray("receptor") instance=ExtResource("8_5jn8a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6)
+receptor = NodePath("../receptor")
+
+[node name="receptor" parent="Level Features" instance=ExtResource("9_k2yf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -6)
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("10_k2yf2")]

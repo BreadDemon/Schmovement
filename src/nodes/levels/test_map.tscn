@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://c71cg8reelnrx"]
 
 [ext_resource type="Texture2D" uid="uid://c7ax5ssske6bn" path="res://assets/HDRI/kloppenheim_06_puresky_8k.hdr" id="1_2ic7k"]
-[ext_resource type="Script" path="res://scripts/Levels/test_map.gd" id="1_kq41c"]
+[ext_resource type="Script" uid="uid://dl4q0m6cleb3j" path="res://scripts/Levels/test_map.gd" id="1_kq41c"]
 [ext_resource type="Texture2D" uid="uid://2cq1pbfxclnj" path="res://assets/PrototypeTexture/PNG/Dark/texture_01.png" id="2_itlxt"]
 [ext_resource type="PackedScene" uid="uid://bpk6w56a4l3uy" path="res://nodes/features/jump_pad.tscn" id="3_rffr6"]
 [ext_resource type="PackedScene" uid="uid://po75jr6axkjl" path="res://nodes/features/Teleporter/teleporter.tscn" id="5_j3kf1"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b5aaqwp8l466r"]
 
-[ext_resource type="Script" path="res://scripts/features/runs/checkpoint.gd" id="1_o4e3n"]
+[ext_resource type="Script" uid="uid://s7qavxkxrjul" path="res://scripts/features/runs/checkpoint.gd" id="1_o4e3n"]
 [ext_resource type="Material" uid="uid://dvxjdqtpsrr25" path="res://assets/Textures/Purple_texture.tres" id="2_egu7e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uwqqf"]
