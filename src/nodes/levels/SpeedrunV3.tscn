@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bv6le5ag7tush"]
+[gd_scene load_steps=10 format=3 uid="uid://c218ue6vvhi26"]
 
 [ext_resource type="Material" uid="uid://bnbfqom1wyvcs" path="res://assets/Textures/Dark_texture.tres" id="1_b6dd1"]
 [ext_resource type="Texture2D" uid="uid://c7ax5ssske6bn" path="res://assets/HDRI/kloppenheim_06_puresky_8k.hdr" id="1_enjy0"]
