@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bfaoshjwhqlqq"]
+[gd_scene load_steps=11 format=3 uid="uid://caa5ytxfs6pvp"]
 
 [ext_resource type="Material" uid="uid://bnbfqom1wyvcs" path="res://assets/Textures/Dark_texture.tres" id="1_wc12v"]
 [ext_resource type="PackedScene" uid="uid://j43cqowhjsf6" path="res://nodes/ControllerV2.tscn" id="2_tsa57"]
