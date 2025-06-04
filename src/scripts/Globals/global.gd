@@ -14,3 +14,7 @@ var debug: bool
 var coming_from: String
 
 var game_version = "0.0.2"
+
+var RunStartV3: StartRunNodeV3
+var RunResetPoint: Vector3
+var RunReturnPoint: Vector3

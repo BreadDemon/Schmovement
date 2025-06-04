@@ -558,11 +558,10 @@ restart_point = NodePath("../Return_node")
 other_node = NodePath("../end")
 show_end = false
 
-[node name="end" parent="Runs/Tutorial" node_paths=PackedStringArray("other_node", "checkpoints") instance=ExtResource("4_2bp5y")]
+[node name="end" parent="Runs/Tutorial" node_paths=PackedStringArray("other_node") instance=ExtResource("4_2bp5y")]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 39, 0)
 visible = false
 other_node = NodePath("../start")
-checkpoints = [NodePath("../checkpoints/Checkpoint"), NodePath("../checkpoints/Checkpoint2"), NodePath("../checkpoints/Checkpoint4")]
 node_type = 1
 
 [node name="Return_node" parent="Runs/Tutorial" instance=ExtResource("10_gyn5w")]

@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://dryo50ngf5su"]
+
+[ext_resource type="Script" uid="uid://bwklvwiw6i2bl" path="res://scripts/ControllerV3.gd" id="1_1ypqb"]
+[ext_resource type="Texture2D" uid="uid://ckfmkdwj7aark" path="res://assets/vecteezy_geometric-design-element_21048718.png" id="2_gehoc"]
+[ext_resource type="PackedScene" uid="uid://d1cdc6cilif2a" path="res://nodes/menus/pause_menu.tscn" id="3_q5tem"]
+[ext_resource type="PackedScene" uid="uid://dq15eqjrays08" path="res://nodes/menus/debug.tscn" id="4_61gpq"]
+[ext_resource type="PackedScene" uid="uid://bb1835p4yp4ax" path="res://nodes/menus/timerV2.tscn" id="5_sb7a8"]
+[ext_resource type="PackedScene" uid="uid://b1m1vct8n06na" path="res://nodes/menus/version_tag.tscn" id="6_oja38"]
+[ext_resource type="PackedScene" uid="uid://kaeixhsvn7mh" path="res://nodes/particles/landing_particles.tscn" id="7_5v7b1"]
+[ext_resource type="AudioStream" uid="uid://cpb0ahnor718" path="res://assets/zapsplat_animals_cat_jump_onto_mattress_003_47476.mp3" id="8_1qn6u"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nq2yg"]
+height = 1.99137
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_c0ouk"]
+height = 0.96211
+
+[node name="ControllerV2" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+floor_constant_speed = true
+script = ExtResource("1_1ypqb")
+
+[node name="StandingCylinder" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.005, 0)
+shape = SubResource("CylinderShape3D_nq2yg")
+
+[node name="CrouchingCylinder" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.519, 0)
+shape = SubResource("CylinderShape3D_c0ouk")
+
+[node name="CrouchedView" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51, 0)
+
+[node name="StandingView" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="InsideObject" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99, 0)
+target_position = Vector3(0, 1.98, 0)
+
+[node name="RampCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, -1.5, 0)
+
+[node name="Neck" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.648, 0)
+
+[node name="Eyes" type="Node3D" parent="Neck"]
+
+[node name="Camera3D" type="Camera3D" parent="Neck/Eyes"]
+
+[node name="Interact" type="RayCast3D" parent="Neck/Eyes/Camera3D"]
+target_position = Vector3(0, 0, -2)
+
+[node name="TextureRect" type="TextureRect" parent="Neck/Eyes/Camera3D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gehoc")
+expand_mode = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_q5tem")]
+
+[node name="Debug" parent="." instance=ExtResource("4_61gpq")]
+visible = false
+
+[node name="TimerV2" parent="." instance=ExtResource("5_sb7a8")]
+
+[node name="VersionTag" parent="." instance=ExtResource("6_oja38")]
+
+[node name="LandingParticles" parent="." instance=ExtResource("7_5v7b1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_1qn6u")

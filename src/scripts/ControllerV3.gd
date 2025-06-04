@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Player
+
 
 # Airborne vars
 @export_category("Jump Settings")
@@ -472,10 +472,6 @@ func reset():
 			print("NOT NULL")
 	else:
 		transform.origin = Global.origin_point
-	if Global.RunStartV3 != null:
-		transform.origin = Global.RunResetPoint
-		Global.RunStartV3.start_run_buffer_timer = 0.5
-		Global.RunStartV3.reset_run()
 	if Global.run != null:
 		Global.run.visible = true
 		Global.run.show_other_runs()
@@ -489,21 +485,12 @@ func reset():
 	velocity.y = 0
 	velocity.z = 0
 func last_checkpoint():
-	if Global.run != null:
-		if Global.checkpoint_respawn != null and timer.running:
-			transform.origin = Global.checkpoint_respawn.global_transform.origin
-			current_speed = 0
-			slide_timer = 0
-			velocity.x = 0
-			velocity.y = 0
-			velocity.z = 0
-		else:
-			print("Can't respawn")
-	elif Global.RunStartV3 != null:
-		transform.origin = Global.RunReturnPoint
-		Global.RunStartV3.start_run_buffer_timer = 0.5
+	if Global.checkpoint_respawn != null and timer.running:
+		transform.origin = Global.checkpoint_respawn.transform.origin
 		current_speed = 0
 		slide_timer = 0
 		velocity.x = 0
 		velocity.y = 0
 		velocity.z = 0
+	else:
+		print("Can't respawn")

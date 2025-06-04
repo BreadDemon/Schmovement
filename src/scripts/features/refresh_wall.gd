@@ -4,7 +4,7 @@ var player: Player = null
 var had_wall_jump: bool = false
 var gave_wall_jump: bool = false
 
-func _process(delta):
+func _process(_delta):
 	if player != null:
 		if player.has_wall_jump:
 			had_wall_jump = true
